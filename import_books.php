@@ -17,7 +17,7 @@ function fetchData($url) {
     curl_setopt($ch, CURLOPT_TIMEOUT, 10);
 
     $response = curl_exec($ch);
-
+    
     if (curl_errno($ch)) {
         die("cURL error: " . curl_error($ch));
     }
