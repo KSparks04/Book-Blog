@@ -1,0 +1,27 @@
+#header{
+    display: flex;
+}
+#header #title{
+    margin:10px;
+}
+
+#nav-bar ul{
+    display: flex;
+    background-color: #a00035;
+    border-radius: 15px;
+    
+}
+
+#nav-bar ul li{
+    list-style-type: none;
+}
+#nav-bar ul li a{
+    text-decoration: none;
+}
+
+.nav-button{
+    margin:10px;
+}
+.hide{
+    display:none;
+}
