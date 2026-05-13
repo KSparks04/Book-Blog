@@ -1,0 +1,33 @@
+#cr-board{
+    margin: 5px;
+}
+#cr-b-title-create{
+    display: flex;
+    margin:5px;
+    margin-bottom: 20px;
+}
+#b-title{
+    display: flex;
+    flex-direction: column;
+    width:300px;
+    margin-right:30px;
+
+}
+#board-title{
+    border:0px; 
+    border-bottom: 1px solid black;
+
+}
+#background-img-b{
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+    
+}
+#b-tags{
+    display: flex;
+    flex-direction: column;
+}
+#b-tags #board-tags{
+    width:300px;
+}

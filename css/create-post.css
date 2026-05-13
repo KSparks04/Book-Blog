@@ -1,0 +1,37 @@
+#post-page{
+    display: flex;
+}
+
+.post-base{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.post-base #post-title{
+    width:300px;
+    border:0px;
+    border-bottom:1px solid black;
+} 
+#book-mentioned img{
+    width: 100px;
+}
+.card-cont{
+    display: flex;
+}
+.caro-card{
+    width:150px;
+    max-width: 100%;
+    padding: 5px;
+}
+.card-add-btn{
+    margin-top: 50px;
+    margin-left: 10px;
+}
+
+.card-content .add-btn{
+    color:#EDD9BE;
+   
+    background: none;
+    border: none;
+}

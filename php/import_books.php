@@ -121,4 +121,14 @@ foreach ($data['docs'] as $book) {
 
 
 echo "Imported $count books successfully!";
+// DELETE FROM book_genres;
+// DELETE FROM reviews;
+// DELETE FROM books;
+// DELETE FROM genres;
+
+// ALTER TABLE book_genres AUTO_INCREMENT = 1;
+// ALTER TABLE reviews AUTO_INCREMENT = 1;
+// ALTER TABLE books AUTO_INCREMENT = 1;
+// ALTER TABLE genres AUTO_INCREMENT = 1;
 ?>
+

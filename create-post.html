@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="css/base.css" rel="stylesheet">
+    <link href="css/create-post.css" rel="stylesheet">
+    <title></title>
+</head>
+
+<body>
+    <header id="header">
+
+        <div id="title">
+            <h1>TITLE</h1>
+        </div>
+        <nav id="nav-bar">
+            <ul>
+                <li class="nav-button"><a id="home" href="home.html">Home</a></li>
+                <li class="nav-button"><a id="explore" href="explore.html">Browse</a></li>
+                <li class="nav-button hide"><a id="user-posts" href="user-posts.html">My Posts</a></li>
+            </ul>
+            <div id="user-create">
+                <a id="signup">Sign Up</a>
+                <a id="login">Login</a>
+            </div>
+
+        </nav>
+    </header>
+    <form method="post">
+        <div id="post-page">
+            <div id="post-main">
+
+
+                <div id="pst-title" class="post-base">
+                    <label for="post-title">Title</label>
+                    <input type="text" name="post-title" id="post-title">
+                </div>
+                <div id="post-nav">
+                    <!-- Todo: make toolbar -->
+                </div>
+                <div id="pst-details" class="post-base">
+                    <label for="post-details">Post Details</label>
+                    <textarea id="post-details">
+        </textarea>
+                </div>
+
+                <div id="book-mentioned">
+                    <input type="text" id="book-search" name="book-search" placeholder="Books mentioned in post">
+                    <div id="search-carousel">
+                        <div class="card caro-card">
+                            <div class="card-content">
+                                <img src="images/default_image.jpg">
+                                <div class="card-cont">
+                                    <div class="card-text">
+                                        <p class="card-title">Book Example</p>
+                                        <p class="card-details">By Author</p>
+
+                                    </div>
+                                    <div class="card-add-btn">
+                                        <button class="add-btn">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <aside>
+                <div id="post-setting">
+                    <h4>Post Settings</h4>
+                    <div id="tag-sel">
+                        <label for="board-tags">Tags</label>
+                        <input type="text" name="tags" id="board-tags">
+                    </div>
+                    <div id="board-sel">
+                        <label for="boards">Posting to </label>
+                        <select id="boards" name="boards-select">
+                            <option value="0">New Board</option>
+
+                    </div>
+
+                    </select>
+                </div>
+            </aside>
+        </div>
+
+
+    </form>
+
+</body>
+
+</html>
