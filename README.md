@@ -20,3 +20,11 @@ Work-in-progress full-stack book discovery and discussion platform where users c
 ### Database
 - MySQL
 - phpMyAdmin
+
+## Development Goals
+This project is being built to strengthen my experience in:
+- Full-stack web development
+- Database design
+- REST APIs
+- UI/UX design
+- Scalable application structure
