@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded',()=>{
 
-    fetch("get_books.php").then(results=> results.json()).then(data => {
+    fetch("php/get_books.php").then(results=> results.json()).then(data => {
         
         console.log(data);
         loadBookCards(data);

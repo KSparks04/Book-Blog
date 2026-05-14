@@ -1,11 +1,12 @@
 <?php
-    include_once("db-config.inc.php");
-    $pdo = new PDO(DBCONNSTRING, DBUSER,DBPASS);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+include_once("db-config.inc.php");
+$pdo = new PDO(DBCONNSTRING, DBUSER, DBPASS);
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+set_time_limit(0); // 5 minutes
 
-    $query = "fiction";
-    $url = "https://openlibrary.org/search.json?q=" . urlencode($query);
-function fetchData($url) {
+
+function fetchData($url)
+{
     $ch = curl_init();
 
     curl_setopt($ch, CURLOPT_URL, $url);
@@ -14,10 +15,10 @@ function fetchData($url) {
         "User-Agent: Mozilla/5.0"
     ]);
 
-    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 20);
 
     $response = curl_exec($ch);
-    
+
     if (curl_errno($ch)) {
         die("cURL error: " . curl_error($ch));
     }
@@ -31,96 +32,79 @@ function fetchData($url) {
 
     return $response;
 }
-$response = fetchData($url);
-if (!$response) {
-    die("Failed to fetch data");
-}
-$data = json_decode($response, true);
+
+
+
+$queries = ["fiction", "fantasy", "science", "history", "romance"];
 
 $count = 0;
+$maxBooks = 1000;
 
-foreach ($data['docs'] as $book) {
+foreach ($queries as $query) {
 
-    if ($count >= 20) break;
+    $url = "https://openlibrary.org/search.json?q=" . urlencode($query);
+    $response = fetchData($url);
 
-    $title = $book['title'] ?? null;
-    $author = $book['author_name'][0] ?? null;
-    $pages = $book['number_of_pages_median'] ?? null;
+    if (!$response)
+        continue;
 
-    if (!$title) continue;
+    $data = json_decode($response, true);
 
-    $cover = isset($book['cover_i']) 
-        ? "https://covers.openlibrary.org/b/id/" . $book['cover_i'] . "-L.jpg"
-        : null;
+    if (!isset($data['docs']))
+        continue;
 
-    // 🚫 Avoid duplicates
-    $stmt = $pdo->prepare("SELECT id FROM books WHERE title = ? AND author = ?");
-    $stmt->execute([$title, $author]);
+    foreach ($data['docs'] as $book) {
 
-    if ($stmt->fetch()) continue;
+        if ($count >= $maxBooks)
+            break 2;
 
-    // ✅ Insert book
-    $stmt = $pdo->prepare("
-        INSERT INTO books (title, author, cover_url, page_count)
-        VALUES (?, ?, ?, ?)
-    ");
-    $stmt->execute([$title, $author, $cover, $pages]);
+        $title = $book['title'] ?? null;
+        $author = $book['author_name'][0] ?? null;
 
-    $bookId = $pdo->lastInsertId();
+        if (!$title)
+            continue;
 
-    // 🔥 STEP 1: Fetch genres from WORK endpoint
-    $genres = [];
-    $workKey = $book['key'] ?? null;
+        // cover image
+        $cover = isset($book['cover_i'])
+            ? "https://covers.openlibrary.org/b/id/" . $book['cover_i'] . "-L.jpg"
+            : null;
 
-    if ($workKey) {
-        $workUrl = "https://openlibrary.org" . $workKey . ".json";
-        $workResponse = file_get_contents($workUrl);
+        // OPTIONAL page count from OpenLibrary (often missing)
+        $pages = $book['number_of_pages_median'] ?? null;
 
-        if ($workResponse) {
-            $workData = json_decode($workResponse, true);
 
-            if (isset($workData['subjects'])) {
-                $genres = array_slice($workData['subjects'], 0, 3);
-            }
-        }
+        // ✅ insert book
+        $stmt = $pdo->prepare("
+    INSERT IGNORE INTO books (title, author, cover_url, page_count)
+    VALUES (?, ?, ?, ?)
+");
+
+        $stmt->execute([
+            $title,
+            $author,
+            $cover,
+            $pages
+        ]);
+        $bookId = $pdo->lastInsertId();
+
+        // 🔥 STEP 1: Fetch genres from WORK endpoint
+
+
+
+
+        $count++;
+
+        // 🧠 small delay so API doesn’t freak out
+        usleep(100000); // 0.1 sec
     }
-
-    // 🔄 fallback if none found
-    if (empty($genres)) {
-        $genres = ["fiction"];
-    }
-
-    // 🔥 STEP 2: Insert genres
-    foreach ($genres as $genreName) {
-
-        $genreName = strtolower(trim($genreName));
-
-        if (strlen($genreName) > 50) continue;
-
-        // Insert genre
-        $stmt = $pdo->prepare("INSERT IGNORE INTO genres (name) VALUES (?)");
-        $stmt->execute([$genreName]);
-
-        // Get id
-        $stmt = $pdo->prepare("SELECT id FROM genres WHERE name = ?");
-        $stmt->execute([$genreName]);
-        $genreId = $stmt->fetchColumn();
-
-        if ($genreId) {
-            $stmt = $pdo->prepare("
-                INSERT IGNORE INTO book_genres (book_id, genre_id)
-                VALUES (?, ?)
-            ");
-            $stmt->execute([$bookId, $genreId]);
-        }
-    }
-
-    $count++;
 }
 
+echo "Inserted $count books!";
 
 
-echo "Imported $count books successfully!";
+
+
+
 // DELETE FROM book_genres;
 // DELETE FROM reviews;
 // DELETE FROM books;
@@ -131,4 +115,3 @@ echo "Imported $count books successfully!";
 // ALTER TABLE books AUTO_INCREMENT = 1;
 // ALTER TABLE genres AUTO_INCREMENT = 1;
 ?>
-
