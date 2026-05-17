@@ -1,53 +1,54 @@
-document.addEventListener('DOMContentLoaded',()=>{
+document.addEventListener('DOMContentLoaded', () => {
 
-    fetch("php/get_books.php").then(results=> results.json()).then(data => {
-        
-        console.log(data);
+    fetch("php/get_books.php").then(results => results.json()).then(data => {
+
+        //console.log(data);
         loadBookCards(data);
-        });
+    });
 });
 
 
-function loadBookCards(books){
+function loadBookCards(books) {
     let cardCarousel = document.querySelector(".books-carousel");
-   
-    books.forEach(book =>{
+
+    books.forEach(book => {
         //TODO: ADD RATING CHECK WITH population
-        if(book.avg_rating >= 4){
-             let card = document.createElement("div");
+        // if (book.avg_rating >= 4) {
+        let card = document.createElement("div");
         card.classList.add("card");
         card.classList.add("caro-card");
-       
+
         let content = document.createElement("div");
         content.classList.add("card-content");
-        
+
         let img = document.createElement("img");
-        if(book.cover_url == null){
-            img.setAttribute("src","images/default_image.jpg");
-        }else{
-            img.setAttribute("src",book.cover_url);
+        if (book.cover_url == null) {
+            img.setAttribute("src", "images/default_image.jpg");
+        } else {
+            img.setAttribute("src", book.cover_url);
         }
-        
+
         let title = document.createElement("p");
         title.classList.add("card-title");
         title.textContent = book.title;
         let details = document.createElement("p");
         details.classList.add("card-details");
-        details.textContent = "By "+book.author;
-        
+        details.textContent = "By " + book.author;
+
 
 
         content.appendChild(img);
         content.appendChild(title);
         content.appendChild(details);
-        
-        
+
+
         cardCarousel.appendChild(card);
         card.appendChild(content);
-        }
-       
+    }
 
-    });
+
+        //}
+    );
 }
 
 //  <div class="card caro-card">

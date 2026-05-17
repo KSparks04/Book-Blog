@@ -4,82 +4,127 @@
 
 
 
-#main-content #feature-box1{
+#main-content #feature-box1 {
     display: flex;
+    justify-content: center;
 }
-#main-content #feature-box1 div{
+
+#main-content #feature-box1 div {
     background-color: #D1EFBD;
-    margin:10px;
-    padding:50px;
+    margin: 10px;
+    padding: 50px;
+
 }
-#main-content #feature-box1 div a{
+
+#main-content #feature-box1 div a {
     background-color: #bcb4ab;
     margin: 10px;
-    padding:10px;
+    padding: 10px;
     text-align: center;
 }
-#blog-box #blog-btns{
+
+#feature-box1 .f1 {
+    width: 500px;
+}
+
+#explore-box #explore-btns {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#blog-box #blog-btns {
     display: flex;
     flex-direction: column;
 }
-#feature-box2{
+
+#feature-box2 {
     display: flex;
     flex-direction: column;
 }
-.books-carousel{
+
+.books-carousel {
     display: flex;
 
     overflow-y: hidden;
     overflow-x: scroll;
-    margin :10px;
-   
+    margin: 10px;
+
+
 
 }
-.boards-carousel{
+
+.boards-carousel {
     display: flex;
     overflow: scroll;
     overflow-y: hidden;
+    flex-shrink: 0;
 }
-.caro-card{
+
+.caro-card {
+
     padding: 10px;
     margin: 10px;
+    flex-shrink: 0;
+
 }
-.caro-card:hover{
+
+.caro-card:hover {
     transform: scale(1.05);
 }
 
-.card{
-    
+.card {
+
     padding: 10px;
     margin: 10px;
-  
-}
-.card:hover{
-    transform: scale(1.05);
-    
-}
-.card-board{
-    
-    padding: 10px;
-    margin: 10px;
-}
-.card-board:hover{
-    transform: scale(1.05);
-    
+
 }
 
-.board-text{
-    margin:5px;
+.card:hover {
+    transform: scale(1.05);
+
 }
+
+.card-board {
+
+    padding: 10px;
+    margin: 10px;
+
+}
+
+.card-board:hover {
+    transform: scale(1.05);
+
+}
+
+
+.board-text {
+    margin: 5px;
+}
+
 /* .boards-carousel .card-board{
     background-color: #a1a1f7;
 } */
-.card-content-board{
+.card-content-board {
     display: flex;
 }
-.card-content img{
+
+.card-content img {
     width: 100px;
 }
-.card-content-board img{
+
+.card-title {
+    max-width: 150px;
+}
+
+.card-content-board img {
     width: 100px;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
