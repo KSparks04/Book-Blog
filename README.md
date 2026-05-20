@@ -1,4 +1,4 @@
-# Book Blog
+# The Book Blog Club
 Work-in-progress full-stack book discovery and discussion platform where users can review books, create blog boards and posts on all things books.
 ## Current Features
 
