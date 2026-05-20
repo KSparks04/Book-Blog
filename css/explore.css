@@ -1,7 +1,58 @@
-#exp-pages{
-    list-style: none;
+#exp {
+    display: flex;
+    box-shadow: 2px 2px 1px 1px gray;
+   
+
 }
 
-.exp-card img{
+#filters {
+    width: 300px;
+     flex-shrink: 0;
+    padding:20px;
+}
+
+#main-exp {
+    margin: 10px;
+    box-shadow: 1px 1px 2px 1px gray;
+    flex-grow: 1;
+    min-width: 0;
+
+}
+
+#exp-pages {
+    list-style: none;
+    padding:0;
+    margin:0;
+    width:100%;
+    
+}
+
+
+.exp-card img {
     width: 100px;
+}
+
+
+.pagination {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    width:auto;
+}
+
+.pagination li {
+    margin: 10px;
+    padding: 5px 15px;
+    background-color: #d1efbd;
+    border-radius: 3px;
+
+
+}
+
+.pagination li:hover {
+    background-color: #bcd7aa;
+}
+
+.pagination li a {
+    text-decoration: none;
+    color: white;
 }

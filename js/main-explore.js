@@ -70,7 +70,7 @@ function createPageNav(){
         let li = document.createElement("li");
         let link = document.createElement("a");
         link.setAttribute("id",i);
-        link.setAttribute("href", "#top");
+        link.setAttribute("href", "#exp");
         link.textContent = i;
         li.appendChild(link);
         nav.appendChild(li);
