@@ -16,3 +16,4 @@ vendor/composer/platform_check.php
 vendor/composer/LICENSE
 php/db-config.inc.php
 php/db-config.inc.php
+example-template.html
