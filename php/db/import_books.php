@@ -71,9 +71,9 @@ foreach ($queries as $query) {
                 $isbn13 = $editionData['isbn_13'][0] ?? null;
                 $isbn10 = $editionData['isbn_10'][0] ?? null;
             }
-            
 
-            
+
+
 
 
             // cover image
