@@ -11,17 +11,22 @@ flex-shrink: 0;
 }
 .book-content{
     margin-left:300px;
+    width: 550px;
 }
 .book-descr-box{
     
-    width:350px;
+    width:450px;
     
 }
 .book-descr{
-    width: 300px;
+    width: 400px;
     height:200px;
     overflow: hidden;
      text-overflow: ellipsis;
    
 }
 
+.expand{
+    overflow: visible;
+
+}

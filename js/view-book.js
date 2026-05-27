@@ -8,6 +8,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }).catch(error => {
         console.error("API Error:", error); // Added error catching to help you debug
     });
+    let readExpand = document.querySelector(".toggle-btn");
+    readExpand.addEventListener("click",(e)=>{
+        if(e.target && e.target.nodeName == "BUTTON"){
+            displayDescr();
+        }
+    });
 });
 
 function displayBook(bookData) {
@@ -25,5 +31,10 @@ function displayBook(bookData) {
     document.querySelector(".book-descr").textContent = bookData.description;
     let list = document.querySelector(".genre-list");
 
+
+}
+function displayDescr(){
+    let descr = document.querySelector(".book-descr");
+    descr.classList.add("expand");
 
 }
