@@ -2,14 +2,13 @@
 include_once("db-config.inc.php");
 $sslCa = __DIR__ . "/../certs/DigiCertGlobalRootCA.crt.pem";
 $env = getenv('APP_ENV') ?: 'local';
-echo "ENV: [" . $env . "]";
-var_dump($env === 'localDB');
+
 $options = [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
 ];
 
-if ($env === 'localDB') {
+if ($env !== 'local') {
     $options[PDO::MYSQL_ATTR_SSL_CA] = $sslCa;
     $options[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = false;
 }
