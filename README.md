@@ -1,7 +1,8 @@
-# The Book Blog Club
+# The Book Blog Club ![Uploading apple-touch-icon.png…]()
+
 Work-in-progress full-stack book discovery and discussion platform where users can review books, create blog boards and posts on all things books.
 
-Deployed on Microsoft Azure: thebookblogclub-ashahjg5ccazedc8.canadaeast-01.azurewebsites.net
+Deployed on Microsoft Azure: thebookblogclub-ashahjg5ccazedc8.canadaeast-01.azurewebsites.net 
 
 ## Current Features
 
