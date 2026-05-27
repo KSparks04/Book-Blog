@@ -2,7 +2,8 @@
 include_once("db-config.inc.php");
 $sslCa = __DIR__ . "/../certs/DigiCertGlobalRootCA.crt.pem";
 $env = getenv('APP_ENV') ?: 'local';
-echo $env;
+echo "ENV: [" . $env . "]";
+var_dump($env === 'localDB');
 $options = [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,

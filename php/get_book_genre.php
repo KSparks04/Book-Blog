@@ -23,9 +23,9 @@ try {
 }
    
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql = "SELECT books.title, books.author,books.cover_url, books.description, books.series FROM books WHERE id =".$_GET["id"];
+    $sql = "SELECT genres.name FROM genres INNER JOIN book_genres ON genres.id= book_genres.genre_id WHERE book_genres.book_id =".$_GET["id"];
     // $sql = "SELECT books.title, books.author,books.cover_url, reviews.rating, reviews.content, AVG(reviews.rating) as avg_rating FROM books INNER JOIN reviews ON books.id = reviews.book_id";
     $results = $pdo->query($sql);
-    $rows = $results->fetchAll(PDO::FETCH_ASSOC);
+    $rows = $results->fetchAll(PDO::FETCH_COLUMN);
     echo json_encode($rows);
 ?>
