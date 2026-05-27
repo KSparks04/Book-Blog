@@ -11,7 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let readExpand = document.querySelector(".toggle-btn");
     readExpand.addEventListener("click",(e)=>{
         if(e.target && e.target.nodeName == "BUTTON"){
-            displayDescr();
+            displayDescr(e.target);
+            
         }
     });
 });
@@ -33,8 +34,14 @@ function displayBook(bookData) {
 
 
 }
-function displayDescr(){
+function displayDescr(btn){
     let descr = document.querySelector(".book-descr");
-    descr.classList.add("expand");
+    
+    descr.classList.toggle("line-clamp");
+    if(!descr.classList.contains("line-clamp")){
+        btn.textContent = "Read Less";
+    }else{
+        btn.textContent = "Read More";
+    }
 
 }
