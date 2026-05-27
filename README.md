@@ -1,4 +1,5 @@
-# The Book Blog Club ![Uploading apple-touch-icon.png…]()
+# The Book Blog Club <img width="180" height="180" alt="apple-touch-icon" src="https://github.com/user-attachments/assets/baf6f9a3-552d-4f6a-8faf-0a4276c875f3" />
+
 
 Work-in-progress full-stack book discovery and discussion platform where users can review books, create blog boards and posts on all things books.
 
