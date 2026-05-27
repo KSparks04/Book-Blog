@@ -21,6 +21,10 @@ function loadBookCards(books) {
         let content = document.createElement("div");
         content.classList.add("card-content");
 
+        let a  = document.createElement("a");
+        a.classList.add("book-link");
+        a.setAttribute("href","view-book.html?id="+book.id);
+
         let img = document.createElement("img");
         if (book.cover_url == null) {
             img.setAttribute("src", "images/default_image.jpg");
@@ -37,10 +41,10 @@ function loadBookCards(books) {
 
 
 
-        content.appendChild(img);
-        content.appendChild(title);
-        content.appendChild(details);
-
+        a.appendChild(img);
+        a.appendChild(title);
+        a.appendChild(details);
+        content.appendChild(a);
 
         cardCarousel.appendChild(card);
         card.appendChild(content);

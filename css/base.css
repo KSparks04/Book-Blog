@@ -1,6 +1,6 @@
-/* body{
-    background-color: #89D385;
-} */
+body{
+    background-color: #ddd3c9;
+}
  a{
     border-radius: 5px;
  }
@@ -12,9 +12,22 @@
 }
 #header{
     display: flex;
+    border-bottom: 1px solid #bcb4ab;
 }
 #header #title{
+
+    width:400px;
     margin:10px;
+}
+#title a{
+    text-align: center;
+    display: block;
+    width:fit-content;
+    
+    
+}
+#title #logo{
+    width:100px;
 }
 nav div{
     margin:5px;
@@ -56,7 +69,7 @@ nav div{
     padding: 10px;
 }
 #user-create #signup{
-    background-color: #ddd3c9;
+    background-color: #cec6bc;
 }
 #user-create #login{
     background-color: #bcb4ab;

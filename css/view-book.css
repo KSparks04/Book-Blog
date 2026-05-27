@@ -1,0 +1,27 @@
+.book-grid-container{
+    display: flex;
+}
+.book-cover{
+flex-shrink: 0;
+}
+.book-cover img{
+    width:275px;
+    height:475px;
+    
+}
+.book-content{
+    margin-left:300px;
+}
+.book-descr-box{
+    
+    width:350px;
+    
+}
+.book-descr{
+    width: 300px;
+    height:200px;
+    overflow: hidden;
+     text-overflow: ellipsis;
+   
+}
+

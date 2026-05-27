@@ -7,14 +7,19 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link href="css/base.css" rel="stylesheet">
+    <link href="css/view-book.css" rel="stylesheet">
+    <script src="js/view-book.js"></script>
     <title>The Book Blog Club</title>
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 
 <body>
     <header id="header">
 
         <div id="title">
-            <h1>The Book Blog Club</h1>
+            <a href="index.html">
+                <img id="logo" src="images/Book Blog  Club Logo Transparent.png" alt="the book blog club logo">
+            </a>
         </div>
         <nav id="nav-bar">
             <ul>
@@ -29,24 +34,39 @@
 
         </nav>
     </header>
-    <main>
-        <div class="book-cover">
-            <img src="images/default_image.jpg" alt="default_image">
-        </div>
-        <div class="book-content">
-            <p><em>Series</em><br>Title <br>Authors</p>
-            <div>
-                <p>Rating</p>
+    <main class="main-book-view">
+        <div class="book-grid-container">
+            <div class="book-cover">
+                <img src="images/default_image.jpg" alt="default_image">
             </div>
-            <p>Description -Overflow</p>
-            <div class="genres">
-                <p>Genres</p>
-                <div class="genre">
-                    <a>Romance</a>
+            <div class="book-content">
+                <div class="book-title-section">
+                    <h3 class="series title3 title3-italic"></h3>
+                    <h1 class="book-title title1"></h1>
+                    <h3 class="author title3"></h3>
                 </div>
-            </div>
 
+                <div>
+                    <a href="#reader-reviews">Rating</a>
+                </div>
+                <div class="book-descr-box">
+                    <p class="book-descr">Description -Overflow</p>
+                    <button class="toggle-btn">Read more</button>
+                </div>
+
+                <div class="genre-box">
+                    <h3>Genres</h3>
+                    <div class="genre">
+                        <ul class="genre-list">
+                            <li><a>Genre-E</a></li>
+                        </ul>
+
+                    </div>
+                </div>
+
+            </div>
         </div>
+
         <div>
             <div>
                 <h3>Reviews - Star Icon</h3>
@@ -59,13 +79,16 @@
                 </div>
             </div>
             <hr>
-            <h3>Readers Reviews</h3>
-            <p>Select Rating Level - Popout from JS</p>
-            <div class="reviews">
-                <div class="review-card">
+            <div id="reader-reviews">
+                <h3>Readers Reviews</h3>
+                <p>Select Rating Level - Popout from JS</p>
+                <div class="reviews">
+                    <div class="review-card">
 
+                    </div>
                 </div>
             </div>
+
         </div>
     </main>
 </body>

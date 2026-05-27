@@ -22,7 +22,7 @@ try {
 }
    
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql = "SELECT books.id, books.title, books.author,books.cover_url FROM books";
+    $sql = "SELECT books.title, books.author,books.cover_url, books.description, books.series FROM books WHERE id =".$_GET["id"];
     // $sql = "SELECT books.title, books.author,books.cover_url, reviews.rating, reviews.content, AVG(reviews.rating) as avg_rating FROM books INNER JOIN reviews ON books.id = reviews.book_id";
     $results = $pdo->query($sql);
     $rows = $results->fetchAll(PDO::FETCH_ASSOC);
