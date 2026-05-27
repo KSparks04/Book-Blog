@@ -8,6 +8,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }).catch(error => {
         console.error("API Error:", error); // Added error catching to help you debug
     });
+    fetch("php/get_book_genre.php?id=" + bookId).then(response => response.json()).then(data => {
+        console.log(data);
+        //displayGenres(data[0]);
+    }).catch(error => {
+        console.error("API Error:", error); // Added error catching to help you debug
+    });
     let readExpand = document.querySelector(".toggle-btn");
     readExpand.addEventListener("click",(e)=>{
         if(e.target && e.target.nodeName == "BUTTON"){
@@ -44,4 +50,7 @@ function displayDescr(btn){
         btn.textContent = "Read More";
     }
 
+}
+function displayGenres(genres){
+    console.log(genres);
 }

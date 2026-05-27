@@ -8,21 +8,10 @@ $options = [
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
 ];
 
-if ($env === 'local'){
-$options = [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-];
-
-}else{
-    $options = [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-];
-$options[PDO::MYSQL_ATTR_SSL_CA] = $sslCa;
+if ($env === 'localDB') {
+    $options[PDO::MYSQL_ATTR_SSL_CA] = $sslCa;
     $options[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = false;
 }
-
 try {
     $pdo = new PDO(DBCONNSTRING, DBUSER, DBPASS, $options);
 } catch (PDOException $e) {
