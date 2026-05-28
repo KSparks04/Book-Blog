@@ -22,6 +22,12 @@
     padding: 10px;
     text-align: center;
 }
+div.f1 {
+    border-radius: 10px;
+}
+div.f2 {
+    border-radius: 10px;
+}
 
 #feature-box1 .f1 {
     width: 500px;

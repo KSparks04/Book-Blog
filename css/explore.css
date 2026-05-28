@@ -16,7 +16,9 @@
     box-shadow: 1px 1px 2px 1px gray;
     flex-grow: 1;
     min-width: 0;
-
+    border-radius: 10px;
+    background-color: #FAFFFA;
+   
 }
 
 #exp-pages {
@@ -25,18 +27,38 @@
     margin:0;
     width:100%;
     
+    
+}
+.exp-card{
+    display: flex;
+    margin: 10px;
+    padding:5px;
+    box-shadow: 0 2px 1px 0 gray;
+   
+    background-color: #e8f4e7;
+    border-radius: 10px;
+}
+.exp-card:hover{
+    transform:scale(1.02);
 }
 
 
 .exp-card img {
     width: 100px;
+    box-shadow: 1px 1px 1px 1px gray;
+    margin-right:10px;
 }
+
+
+
 
 
 .pagination {
     overflow-x: scroll;
     overflow-y: hidden;
     width:auto;
+    border:1px solid gray;
+    border-radius: 5px;
 }
 
 .pagination li {

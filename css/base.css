@@ -1,8 +1,10 @@
 body{
-    background-color: #ddd3c9;
+    background-color: #FFF8FF;
 }
  a{
     border-radius: 5px;
+    text-decoration: none;
+    color: black;
  }
  img{
     max-width: 100%;
@@ -43,9 +45,11 @@ nav div{
 }
 #nav-bar ul{
     display: flex;
-    background-color: #a00035;
+    background-color: #670626;
     border-radius: 15px;
-    padding: 10px;
+    padding: 0px;
+    margin:0;
+    overflow: hidden;
     
 }
 #user-create{
@@ -56,11 +60,18 @@ nav div{
 
 #nav-bar ul li{
     list-style-type: none;
-    margin: 5px 10px 5px 10px;
+    margin: 0;
+    
+}
+#nav-bar ul li a:hover{
+    background-color: #900835;
 }
 #nav-bar ul li a{
+    display: block;
     text-decoration: none;
     color: white;
+    padding: 10px 15px;
+    font-size:1.05em;
 
 }
 #user-create a{
@@ -68,11 +79,18 @@ nav div{
     margin: 10px 5px 10px 5px;
     padding: 10px;
 }
+
 #user-create #signup{
     background-color: #cec6bc;
 }
+#user-create #signup:hover {
+    background-color: #c1bab1;
+}
 #user-create #login{
     background-color: #bcb4ab;
+}
+#user-create #login:hover{
+    background-color: #928c85;
 }
 .nav-button{
     margin:10px;

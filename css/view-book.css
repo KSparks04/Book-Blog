@@ -36,4 +36,12 @@ flex-shrink: 0;
 
    
 }
+.genre-list{
+    display: flex;
+}
 
+.genre-list li{
+    margin:0 5px 0 5px;
+    list-style-type: none;
+
+}

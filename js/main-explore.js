@@ -21,7 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function loadExplore(books) {
     let main = document.querySelector("#main-exp");
-    pages = books.length / 25;
+    pages = Math.ceil(books.length / 25);
+    console.log(pages);
     books_array = books.map(createExploreCards);
     createPageNav();
 }
@@ -31,9 +32,12 @@ function newPage(pageNum) {
     let start = (pageNum-1) * 25;
     let limit = start+25;
     
-    
+    console.log(books_array);
     
     for (let i = start; i < limit; i++) {
+        if(i >= books_array.length){
+            break;
+        }
         page.appendChild(books_array[i]);
     }
 }
@@ -49,17 +53,27 @@ function createExploreCards(book) {
         img.setAttribute("src", book.cover_url);
     }
     img.classList.add("exp-img");
-    let title = document.createElement("p");
+
+    let data = document.createElement('div');
+    data.classList.add("book-data");
+
+    let title = document.createElement("h2");
     title.classList.add("card-title");
+    title.classList.add("title2-exp");
     title.textContent = book.title;
-    let details = document.createElement("p");
+    let details = document.createElement("h2");
     details.classList.add("card-details");
+    details.classList.add("title3-exp");
     details.textContent = "By " + book.author;
 
     div.appendChild(img);
-    div.appendChild(title);
-    div.appendChild(details);
-    li.appendChild(div);
+    data.appendChild(title);
+    data.appendChild(details);
+    div.appendChild(data);
+    let a = document.createElement("a");
+    a.setAttribute("href","view-book.html?id="+book.id);
+    a.appendChild(div);
+    li.appendChild(a);
 
     return li;
 }

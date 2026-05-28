@@ -32,11 +32,13 @@ function loadBookCards(books) {
             img.setAttribute("src", book.cover_url);
         }
 
-        let title = document.createElement("p");
+        let title = document.createElement("h2");
         title.classList.add("card-title");
+        title.classList.add("title2");
         title.textContent = book.title;
-        let details = document.createElement("p");
+        let details = document.createElement("h2");
         details.classList.add("card-details");
+        details.classList.add("title3");
         details.textContent = "By " + book.author;
 
 

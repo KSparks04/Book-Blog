@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     fetch("php/get_book_genre.php?id=" + bookId).then(response => response.json()).then(data => {
         console.log(data);
-        //displayGenres(data[0]);
+        displayGenres(data);
     }).catch(error => {
         console.error("API Error:", error); // Added error catching to help you debug
     });
@@ -53,4 +53,14 @@ function displayDescr(btn){
 }
 function displayGenres(genres){
     console.log(genres);
+    let list = document.querySelector(".genre-list");
+    genres.forEach((genre)=>{
+        let a = document.createElement("a");
+        // ADD link to genre explore page
+        let li = document.createElement("li");
+        a.textContent = genre;
+        li.appendChild(a);
+        list.appendChild(li);
+
+    });
 }
