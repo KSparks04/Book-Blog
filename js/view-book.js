@@ -15,12 +15,31 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("API Error:", error); // Added error catching to help you debug
     });
     let readExpand = document.querySelector(".toggle-btn");
-    readExpand.addEventListener("click",(e)=>{
-        if(e.target && e.target.nodeName == "BUTTON"){
+    readExpand.addEventListener("click", (e) => {
+        if (e.target && e.target.nodeName == "BUTTON") {
             displayDescr(e.target);
-            
+
         }
     });
+    let stars = document.querySelector("#star-rating");
+    stars.addEventListener("click", (e) => {
+        if (e.target && e.target.nodeName === "SPAN") {
+            console.log(e.target.dataset.value);
+            highlightStars(e.target.dataset.value);
+        }
+    });
+    stars.addEventListener("mouseover", (e) => {
+        if (e.target && e.target.nodeName === "SPAN") {
+            hoverStars(e.target.dataset.value);
+        }
+    });
+    stars.addEventListener("mouseout", (e) => {
+        if (e.target && e.target.nodeName === "SPAN") {
+            removeStars(e.target.dataset.value);
+        }
+    });
+
+
 });
 
 function displayBook(bookData) {
@@ -28,8 +47,8 @@ function displayBook(bookData) {
     cover.setAttribute("src", bookData.cover_url);
     cover.setAttribute("alt", bookData.title);
     let content = document.querySelector(".book-title-section");
-   
-    if (bookData.series !=null) {
+
+    if (bookData.series != null) {
         document.querySelector(".series").textContent = bookData.series;
     }
 
@@ -40,21 +59,21 @@ function displayBook(bookData) {
 
 
 }
-function displayDescr(btn){
+function displayDescr(btn) {
     let descr = document.querySelector(".book-descr");
-    
+
     descr.classList.toggle("line-clamp");
-    if(!descr.classList.contains("line-clamp")){
+    if (!descr.classList.contains("line-clamp")) {
         btn.textContent = "Read Less";
-    }else{
+    } else {
         btn.textContent = "Read More";
     }
 
 }
-function displayGenres(genres){
+function displayGenres(genres) {
     console.log(genres);
     let list = document.querySelector(".genre-list");
-    genres.forEach((genre)=>{
+    genres.forEach((genre) => {
         let a = document.createElement("a");
         // ADD link to genre explore page
         let li = document.createElement("li");
@@ -62,5 +81,37 @@ function displayGenres(genres){
         li.appendChild(a);
         list.appendChild(li);
 
+    });
+}
+function hoverStars(rating) {
+    let stars = document.querySelectorAll('#star-rating span');
+    stars.forEach(star => {
+        //star.classList.remove('selected');
+        star.classList.remove('hovered');
+        if (parseInt(star.getAttribute('data-value')) <= rating) {
+            star.classList.add('hovered');
+        }
+    });
+}
+
+function removeStars(rating) {
+    let stars = document.querySelectorAll('#star-rating span');
+    stars.forEach(star => {
+        // star.classList.remove('selected');
+        // star.classList.remove('hovered');
+        if (parseInt(star.getAttribute('data-value')) >= rating && !star.classList.contains('selected')) {
+            star.classList.remove('hovered');
+            star.classList.remove('selected');
+        }
+    });
+}
+function highlightStars(rating) {
+    let stars = document.querySelectorAll('#star-rating span');
+    stars.forEach(star => {
+        star.classList.remove('selected');
+        star.classList.remove('hovered');
+        if (parseInt(star.getAttribute('data-value')) <= rating) {
+            star.classList.add('selected');
+        }
     });
 }

@@ -1,5 +1,7 @@
 .book-grid-container{
     display: flex;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgb(91, 69, 27);
 }
 .book-cover{
 flex-shrink: 0;
@@ -44,4 +46,15 @@ flex-shrink: 0;
     margin:0 5px 0 5px;
     list-style-type: none;
 
+}
+
+.hovered {
+    color: gold;
+}
+.selected{
+    color:gold;
+}
+
+#review-box2{
+    display:flex;
 }
