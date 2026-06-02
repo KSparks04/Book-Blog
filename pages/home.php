@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+include_once("php/base.inc.php");
 
+?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,7 +37,7 @@
                 <li class="nav-button hide"><a id="user-posts" href="user-posts.html">My Posts</a></li>
             </ul>
             <div id="user-create">
-                <a id="signup" href="index.php?route=/signup">Sign Up</a>
+                <a id="signup" href="<?= BASE_URL?>/signup">Sign Up</a>
                 <a id="login">Login</a>
             </div>
 

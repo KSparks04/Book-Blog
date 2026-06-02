@@ -3,9 +3,6 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
 $dotenv->load();
-
-
-include_once("google-api.inc.php");
 session_start();
 
 $state = bin2hex(random_bytes(16));

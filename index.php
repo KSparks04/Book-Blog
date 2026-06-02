@@ -10,7 +10,7 @@ $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/');
 if ($basePath !== '') {
     $route = substr($request, strlen($basePath));
 }
-$route = $_GET['route'] ?? '/';
+
 // echo __DIR__;
 // echo '<br>';
 
@@ -19,11 +19,7 @@ $route = $_GET['route'] ?? '/';
 
 switch ($route) {
     case '/':
-        require 'pages/home.php';
-        break;
     case '/index':
-        require 'pages/home.php';
-        break;
     case '/index.php':
         require 'pages/home.php';
         break;
@@ -36,7 +32,7 @@ switch ($route) {
         require 'integrations/oauth2/callback.php';
         break;
     case '/userauth':
-        require __DIR__.'/php/signup.php';
+        require __DIR__ . '/php/signup.php';
         break;
     default:
         http_response_code(404);

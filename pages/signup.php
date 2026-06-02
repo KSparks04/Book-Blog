@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+include_once("php/base.inc.php");
 
+?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,7 +38,7 @@
     </header>
     <main>
         <div>
-            <a href="index.php?route=/userauth">
+            <a href="<?= BASE_URL?>/userauth">
                 <button type="submit" id="google-signup">Sign up with Google</button>
             </a>
             <?php
