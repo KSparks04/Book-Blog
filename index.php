@@ -31,7 +31,7 @@ switch ($editRoute) {
         require 'integrations/oauth2/callback.php';
         break;
     case '/userauth':
-        require './php/signup.php';
+        require 'php/userauth.php';
         break;
     
     default:
