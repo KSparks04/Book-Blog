@@ -24,7 +24,7 @@ include_once("php/base.inc.php");
 
         <div id="title">
             <a href="./"> 
-                <img id="logo" src="images/Book Blog  Club Logo Transparent.png" alt="the book blog club logo">
+                <img id="logo" src="images/Book-Blog-Club-Logo-Transparent.png" alt="the book blog club logo">
                 <!-- <h1>The Book Blog Club</h1> -->
             </a>
 

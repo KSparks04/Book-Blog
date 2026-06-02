@@ -11,13 +11,12 @@ if ($basePath !== '') {
     $route = substr($request, strlen($basePath));
 }
 
-// echo __DIR__;
-// echo '<br>';
+// echo $route;
+$editRoute= str_replace("index.php/", "", $route);
 
-// var_dump(file_exists(__DIR__ . '/php/signup.php'));
-// exit;
+// echo "<br>".$editRoute; // Output: /signup
 
-switch ($route) {
+switch ($editRoute) {
     case '/':
     case '/index':
     case '/index.php':

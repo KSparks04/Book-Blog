@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../../vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../..');
+$dotenv->load();
 session_start();
 include_once("./php/db-config.inc.php");
 
@@ -41,7 +45,7 @@ $data = [
     "code" => $code,
     "client_id" => $_ENV['CLIENTID'],
     "client_secret" =>$_ENV['CLIENT_SECRET'],
-    "redirect_uri" => "http://127.0.0.1/book-blog/index.php?route=/callback",
+    "redirect_uri" => "http://127.0.0.1/book-blog/index.php/callback",
     "grant_type" => "authorization_code"
 ];
 
@@ -94,5 +98,5 @@ $_SESSION['email'] = $email;
 $_SESSION['logged_in'] = true;
 
 // 9. Redirect to app
-header("Location: /book-blog/index.php?route=/signup");
+header("Location: /book-blog/index.php/signup");
 exit;
