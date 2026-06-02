@@ -30,12 +30,10 @@ switch ($editRoute) {
     case '/callback':
         require 'integrations/oauth2/callback.php';
         break;
-    // case '/userauth':
-    //     require 'php/signup.php';
-    //     break;
     case '/userauth':
-        require 'php/signup.php';
+        require './php/signup.php';
         break;
+    
     default:
         http_response_code(404);
         echo "Not found";

@@ -39,6 +39,7 @@ include_once("php/base.inc.php");
     <main>
         <div>
             <a href="<?= BASE_URL?>/userauth">
+            <!-- <a href="php/signup.php"> -->
                 <button type="submit" id="google-signup">Sign up with Google</button>
             </a>
             <?php
