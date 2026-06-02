@@ -26,26 +26,45 @@ try {
 
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-// 1. Validate state (CSRF protection)
 if (!isset($_GET['state']) || $_GET['state'] !== $_SESSION['oauth_state']) {
     die("Invalid state parameter");
 }
 
-// 2. Get authorization code
+
 if (!isset($_GET['code'])) {
     die("No authorization code returned");
 }
 
 $code = $_GET['code'];
 
-// 3. Exchange code for access token
-$token_url = "https://oauth2.googleapis.com/token";
 
+$token_url = "https://oauth2.googleapis.com/token";
+function getBaseUrl(): string
+{
+    
+    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+        || $_SERVER['SERVER_PORT'] == 443
+        ? "https://"
+        : "http://";
+
+    
+    $host = $_SERVER['HTTP_HOST'];
+
+    
+    $scriptName = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME']));
+
+    $basePath = rtrim($scriptName, '/');
+
+    return $protocol . $host . $basePath;
+}
+$uri = getBaseUrl();
+
+$redirect_uri = urlencode("$uri/index.php/callback");
 $data = [
     "code" => $code,
     "client_id" => $_ENV['CLIENTID'],
     "client_secret" =>$_ENV['CLIENT_SECRET'],
-    "redirect_uri" => "http://127.0.0.1/book-blog/index.php/callback",
+    "redirect_uri" =>$redirect_uri,
     "grant_type" => "authorization_code"
 ];
 
@@ -65,21 +84,20 @@ if (!isset($token['access_token'])) {
     die("Failed to get access token");
 }
 
-// 4. Get user info from Google
 $userInfoUrl = "https://www.googleapis.com/oauth2/v2/userinfo?access_token=" . $token['access_token'];
 $userInfo = json_decode(file_get_contents($userInfoUrl), true);
 
-// 5. Extract user data
+
 $google_id = $userInfo['id'];
 $email = $userInfo['email'];
 $name = $userInfo['name'] ?? '';
 
-// 6. Check if user exists in DB
+
 $stmt = $pdo->prepare("SELECT id FROM users WHERE google_id = ?");
 $stmt->execute([$google_id]);
 $user = $stmt->fetch();
 
-// 7. Create user if not exists
+
 if (!$user) {
     $stmt = $pdo->prepare("
         INSERT INTO users (google_id, email, username, auth_provider)
@@ -92,11 +110,11 @@ if (!$user) {
     $user_id = $user['id'];
 }
 
-// 8. Log user in (session)
+
 $_SESSION['user_id'] = $user_id;
 $_SESSION['email'] = $email;
 $_SESSION['logged_in'] = true;
 
-// 9. Redirect to app
+
 header("Location: /book-blog/index.php/signup");
 exit;
