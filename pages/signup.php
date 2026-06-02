@@ -19,7 +19,7 @@ include_once("php/base.inc.php");
     <header id="header">
 
         <div id="title">
-            <a href="index.php"> 
+            <a href="../"> 
                <img id="logo" src="../images/Book-Blog-Club-Logo-Transparent.png" alt="the book blog club logo">
             </a>
         </div>
