@@ -20,7 +20,7 @@
     <header id="header">
 
         <div id="title">
-            <a href="index.html"> 
+            <a href="./"> 
                 <img id="logo" src="images/Book Blog  Club Logo Transparent.png" alt="the book blog club logo">
                 <!-- <h1>The Book Blog Club</h1> -->
             </a>
@@ -29,12 +29,12 @@
         </div>
         <nav id="nav-bar">
             <ul>
-                <li class="nav-button"><a id="home" href="index.html">Home</a></li>
+                <li class="nav-button"><a id="home" href="./">Home</a></li>
                 <li class="nav-button"><a id="explore" href="explore.html">Browse</a></li>
                 <li class="nav-button hide"><a id="user-posts" href="user-posts.html">My Posts</a></li>
             </ul>
             <div id="user-create">
-                <a id="signup" href="signup.html">Sign Up</a>
+                <a id="signup" href="/book-blog/index.php?route=/signup">Sign Up</a>
                 <a id="login">Login</a>
             </div>
 

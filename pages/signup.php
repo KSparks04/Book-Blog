@@ -16,13 +16,13 @@
     <header id="header">
 
         <div id="title">
-            <a href="index.html"> 
+            <a href="index.php"> 
                <img id="logo" src="images/Book Blog  Club Logo Transparent.png" alt="the book blog club logo">
             </a>
         </div>
         <nav id="nav-bar">
             <ul>
-                <li class="nav-button"><a id="home" href="home.html">Home</a></li>
+                <li class="nav-button"><a id="home" href="index.php">Home</a></li>
                 <li class="nav-button"><a id="explore" href="explore.html">Browse</a></li>
                 <li class="nav-button hide"><a id="user-posts" href="user-posts.html">My Posts</a></li>
             </ul>
@@ -35,7 +35,22 @@
     </header>
     <main>
         <div>
-            <button type="submit" id="google-signup">Sign up with Google</button>
+            <a href="php/signup.php">
+                <button type="submit" id="google-signup">Sign up with Google</button>
+            </a>
+            <?php
+                session_start();
+                if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true){
+                    echo $_SESSION['logged_in'];
+                    if(!isset($_SESSION['email'])){
+                    echo "failure - for now";
+                }
+                echo $_SESSION['email'];
+
+                }
+                
+            ?>
+            
         </div>
     </main>
 </body>
