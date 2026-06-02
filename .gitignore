@@ -17,4 +17,4 @@ vendor/composer/LICENSE
 php/db-config.inc.php
 php/db-config.inc.php
 example-template.html
-php/google-api.inc.php
+php/google-api.env
