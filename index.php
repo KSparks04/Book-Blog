@@ -1,4 +1,3 @@
-
 <?php
 $request = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
@@ -12,7 +11,7 @@ if ($basePath !== '') {
     $route = substr($request, strlen($basePath));
 }
 $route = $_GET['route'] ?? '/';
-
+echo $route;
 
 switch ($route) {
     case '/':
@@ -25,17 +24,16 @@ switch ($route) {
         require 'pages/home.php';
         break;
     case '/signup':
-        
+
         require 'pages/signup.php';
         break;
 
     case '/callback':
         require 'integrations/oauth2/callback.php';
         break;
-    case '/test':
-        require '/php/test.php';
+    case '/userauth':
+        require 'php/signup.php';
         break;
-
     default:
         http_response_code(404);
         echo "Not found";

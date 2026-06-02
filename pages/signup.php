@@ -35,7 +35,7 @@
     </header>
     <main>
         <div>
-            <a href="php/signup.php">
+            <a href="index.php?route=/userauth">
                 <button type="submit" id="google-signup">Sign up with Google</button>
             </a>
             <?php
