@@ -27,8 +27,8 @@
                 <li class="nav-button hide"><a id="user-posts" href="user-posts.html">My Posts</a></li>
             </ul>
             <div id="user-create">
-                <a id="signup hide">Sign Up</a>
-                <a id="login hide">Login</a>
+                <a id="signup" class="hide">Sign Up</a>
+                <a id="login" class="hide">Login</a>
             </div>
 
         </nav>
@@ -39,9 +39,11 @@
                 <button type="submit" id="google-signup">Sign up with Google</button>
             </a>
             <?php
+
                 session_start();
+                
                 if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true){
-                    echo $_SESSION['logged_in'];
+                    
                     if(!isset($_SESSION['email'])){
                     echo "failure - for now";
                 }

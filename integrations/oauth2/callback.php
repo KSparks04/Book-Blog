@@ -39,8 +39,8 @@ $token_url = "https://oauth2.googleapis.com/token";
 
 $data = [
     "code" => $code,
-    "client_id" => getenv('CLIENTID'),
-    "client_secret" => getenv('CLIENT_SECRET'),
+    "client_id" => CLIENTID,
+    "client_secret" => CLIENT_SECRET,
     "redirect_uri" => "http://127.0.0.1/book-blog/index.php?route=/callback",
     "grant_type" => "authorization_code"
 ];

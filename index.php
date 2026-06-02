@@ -18,6 +18,9 @@ switch ($route) {
     case '/index':
         require 'pages/home.php';
         break;
+    case '/index.php':
+        require 'pages/home.php';
+        break;
     case '/signup':
         
         require 'pages/signup.php';

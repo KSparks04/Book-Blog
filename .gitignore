@@ -18,3 +18,4 @@ php/db-config.inc.php
 php/db-config.inc.php
 example-template.html
 php/google-api.env
+php/google-api.inc.php
