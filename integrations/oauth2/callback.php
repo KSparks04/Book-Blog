@@ -5,7 +5,8 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 
 use Dotenv\Dotenv;
 
-if (file_exists(__DIR__ . '../../.env')) {
+if (file_exists(__DIR__ . '/../../.env')) {
+   
     $dotenv = Dotenv::createImmutable(__DIR__ . '/../..');
     $dotenv->load();
 }
@@ -121,7 +122,9 @@ if (!$user) {
 $_SESSION['user_id'] = $user_id;
 $_SESSION['email'] = $email;
 $_SESSION['logged_in'] = true;
+$scriptName = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME']));
+$basePath = rtrim($scriptName, '/');
 
 
-header("Location: /book-blog/index.php/signup");
+header("Location: $basePath/index.php/signup");
 exit;
