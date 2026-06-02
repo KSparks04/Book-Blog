@@ -34,7 +34,7 @@
                 <li class="nav-button hide"><a id="user-posts" href="user-posts.html">My Posts</a></li>
             </ul>
             <div id="user-create">
-                <a id="signup" href="/book-blog/index.php?route=/signup">Sign Up</a>
+                <a id="signup" href="index.php?route=/signup">Sign Up</a>
                 <a id="login">Login</a>
             </div>
 

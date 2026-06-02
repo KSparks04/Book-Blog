@@ -7,7 +7,10 @@ $env = getenv('APP_ENV') ?: 'local';
 $base = ($env === 'local') ? "/book-blog" : "";
 
 $route = str_replace($base, "", $request);
-
+$basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/');
+if ($basePath !== '') {
+    $route = substr($request, strlen($basePath));
+}
 $route = $_GET['route'] ?? '/';
 
 
