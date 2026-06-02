@@ -1,8 +1,13 @@
 <?php
-require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../..');
-$dotenv->load();
+
+use Dotenv\Dotenv;
+
+if (file_exists(__DIR__ . '/../.env')) {
+    $dotenv = Dotenv::createImmutable(__DIR__ . '/..');
+    $dotenv->load();
+}
 session_start();
 include_once("./php/db-config.inc.php");
 
@@ -59,7 +64,8 @@ function getBaseUrl(): string
 }
 $uri = getBaseUrl();
 
-$redirect_uri = urlencode("$uri/index.php/callback");
+$redirect_uri = "$uri/index.php/callback";
+
 $data = [
     "code" => $code,
     "client_id" => $_ENV['CLIENTID'],

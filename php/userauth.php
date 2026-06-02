@@ -1,9 +1,15 @@
 <?php
 include_once 'base.inc.php';
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
-$dotenv->load();
+
+use Dotenv\Dotenv;
+
+if (file_exists(__DIR__ . '/../.env')) {
+    $dotenv = Dotenv::createImmutable(__DIR__ . '/..');
+    $dotenv->load();
+}
 session_start();
 
 $state = bin2hex(random_bytes(16));
@@ -43,4 +49,3 @@ header("Location: https://accounts.google.com/o/oauth2/v2/auth?" .
     "&state=$state"
 );
 exit;
-?>
