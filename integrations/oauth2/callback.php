@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once("./php/db-config.inc.php");
-include_once("./php/google-api.inc.php");
+
 $sslCa = __DIR__ . "/../certs/DigiCertGlobalRootCA.crt.pem";
 $env = getenv('APP_ENV') ?: 'local';
 
@@ -39,8 +39,8 @@ $token_url = "https://oauth2.googleapis.com/token";
 
 $data = [
     "code" => $code,
-    "client_id" => CLIENTID,
-    "client_secret" => CLIENT_SECRET,
+    "client_id" => $_ENV['CLIENTID'],
+    "client_secret" =>$_ENV['CLIENT_SECRET'],
     "redirect_uri" => "http://127.0.0.1/book-blog/index.php?route=/callback",
     "grant_type" => "authorization_code"
 ];

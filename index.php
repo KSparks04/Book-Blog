@@ -11,7 +11,11 @@ if ($basePath !== '') {
     $route = substr($request, strlen($basePath));
 }
 $route = $_GET['route'] ?? '/';
-echo $route;
+// echo __DIR__;
+// echo '<br>';
+
+// var_dump(file_exists(__DIR__ . '/php/signup.php'));
+// exit;
 
 switch ($route) {
     case '/':
@@ -32,7 +36,7 @@ switch ($route) {
         require 'integrations/oauth2/callback.php';
         break;
     case '/userauth':
-        require 'php/signup.php';
+        require __DIR__.'/php/signup.php';
         break;
     default:
         http_response_code(404);
