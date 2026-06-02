@@ -34,7 +34,7 @@ switch ($editRoute) {
     //     require 'php/signup.php';
     //     break;
     case '/userauth':
-        require 'pages/signup.php';
+        require 'php/signup.php';
         break;
     default:
         http_response_code(404);
