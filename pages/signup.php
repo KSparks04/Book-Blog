@@ -1,9 +1,12 @@
+<?php
+session_start();
+include_once("php/base.inc.php");
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-<?php
-include_once("php/base.inc.php");
-session_start();
-?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -43,8 +46,6 @@ session_start();
                 <button type="submit" id="google-signup">Sign up with Google</button>
             </a>
             <?php
-
-                
                 
                 if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true){
                     

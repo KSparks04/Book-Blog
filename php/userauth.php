@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 include_once 'base.inc.php';
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -10,7 +12,6 @@ if (file_exists(__DIR__ . '/../.env')) {
     $dotenv = Dotenv::createImmutable(__DIR__ . '/..');
     $dotenv->load();
 }
-session_start();
 
 $state = bin2hex(random_bytes(16));
 $_SESSION['oauth_state'] = $state;
