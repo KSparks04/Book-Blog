@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
+session_start();
 include_once("php/base.inc.php");
 
 ?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,6 +13,8 @@ include_once("php/base.inc.php");
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
     <link href="css/base.css" rel="stylesheet">
     <link href="css/text-styles.css" rel="stylesheet">
     <link href="css/main-home.css" rel="stylesheet">
@@ -23,7 +27,7 @@ include_once("php/base.inc.php");
     <header id="header">
 
         <div id="title">
-            <a href="./"> 
+            <a href="./">
                 <img id="logo" src="images/Book-Blog-Club-Logo-Transparent.png" alt="the book blog club logo">
                 <!-- <h1>The Book Blog Club</h1> -->
             </a>
@@ -34,11 +38,18 @@ include_once("php/base.inc.php");
             <ul>
                 <li class="nav-button"><a id="home" href="./">Home</a></li>
                 <li class="nav-button"><a id="explore" href="index.php/explore">Browse</a></li>
-                <li class="nav-button hide"><a id="user-posts" href="user-posts.html">My Posts</a></li>
+                <?php 
+                    if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true){
+                        echo '<li class="nav-button"><a id="user-posts" href="user-posts.html">My Posts</a></li>';
+                    }
+                
+                ?>
+                
             </ul>
             <div id="user-create">
-                <a id="signup" href="<?= BASE_URL?>/signup">Sign Up</a>
-                <a id="login">Login</a>
+                <a id="signup" href="<?= BASE_URL ?>/signup">Login</a>
+                <a href="<?= BASE_URL ?>/profile">Profile</a>
+                
             </div>
 
         </nav>
@@ -47,14 +58,14 @@ include_once("php/base.inc.php");
         <div id="feature-box1">
             <div id="explore-box" class="f1">
                 <div id="explore-btns">
-                    <a href="explore.html">Explore</a>
+                    <a href="index.php/explore">Explore</a>
                 </div>
 
             </div>
             <div id="blog-box" class="f1">
                 <div id="blog-btns">
-                    <a>Create a new board</a>
-                    <a>Create a new post</a>
+                    <a id="crt-board" href="index.php/create-board">Create a new board</a>
+                    <a id="crt-post" href="index.php/create-post">Create a new post</a>
                 </div>
 
             </div>

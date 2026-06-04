@@ -22,18 +22,32 @@ switch ($editRoute) {
     case '/index.php':
         require 'pages/home.php';
         break;
+    case '/profile':
+        require 'pages/profile.php';
+        break;
     case '/explore':
         require 'pages/explore.php';
         break;
     case '/signup':
         require 'pages/signup.php';
         break;
-
+    case '/login':
+        require 'pages/login.php';
+        break;
     case '/callback':
         require 'integrations/oauth2/callback.php';
         break;
     case '/userauth':
         require 'php/userauth.php';
+        break;
+    case '/view-book':
+        require 'pages/view-book.php';
+        break;
+    case '/create-board':
+        require 'pages/create-board.php';
+        break;
+    case '/create-post':
+        require 'pages/create-post.php';
         break;
     
     default:

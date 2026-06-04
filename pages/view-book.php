@@ -7,26 +7,26 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link href="css/base.css" rel="stylesheet">
-    <link href="css/text-styles.css" rel="stylesheet">
-    <link href="css/view-book.css" rel="stylesheet">
-    <script src="js/view-book.js"></script>
+    <link href="../css/base.css" rel="stylesheet">
+    <link href="../css/text-styles.css" rel="stylesheet">
+    <link href="../css/view-book.css" rel="stylesheet">
+    <script src="../js/view-book.js"></script>
     <title>The Book Blog Club</title>
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 </head>
 
 <body>
     <header id="header">
 
         <div id="title">
-            <a href="index.html">
-                <img id="logo" src="images/Book Blog  Club Logo Transparent.png" alt="the book blog club logo">
+            <a href="../">
+                <img id="logo" src="../images/Book-Blog-Club-Logo-Transparent.png" alt="the book blog club logo">
             </a>
         </div>
         <nav id="nav-bar">
             <ul>
-                <li class="nav-button"><a id="home" href="index.html">Home</a></li>
-                <li class="nav-button"><a id="explore" href="explore.html">Browse</a></li>
+                <li class="nav-button"><a id="home" href="../">Home</a></li>
+                <li class="nav-button"><a id="explore" href="../index.php/explore">Browse</a></li>
                 <li class="nav-button hide"><a id="user-posts" href="user-posts.html">My Posts</a></li>
             </ul>
             <div id="user-create">
@@ -39,7 +39,7 @@
     <main class="main-book-view">
         <div class="book-grid-container">
             <div class="book-cover">
-                <img src="images/default_image.jpg" alt="default_image">
+                <img src="../images/default_image.jpg" alt="default_image">
             </div>
             <div class="book-content">
                 <div class="book-title-section">

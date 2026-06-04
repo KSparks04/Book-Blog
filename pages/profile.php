@@ -13,7 +13,8 @@ include_once("php/base.inc.php");
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link href="../css/base.css" rel="stylesheet">
-    <script src="../js/signup-login.js"></script>
+    <script src="../js/profile.js"></script>
+
     <title>The Book Blog Club</title>
     <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 </head>
@@ -41,9 +42,9 @@ include_once("php/base.inc.php");
     </header>
     <main>
         <div>
-            <a href="<?= BASE_URL?>/userauth">
+            <a href="">
             <!-- <a href="php/signup.php"> -->
-                <button type="submit" id="google-signup">Sign up with Google</button>
+                <button type="submit" id="signout">Sign out</button>
             </a>
             <?php
                 

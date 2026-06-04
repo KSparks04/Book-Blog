@@ -1,10 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    fetch("../php/get_books.php").then(results => results.json()).then(data => {
+    fetch("php/get_books.php").then(results => results.json()).then(data => {
 
         //console.log(data);
         loadBookCards(data);
     });
+   
 });
 
 
@@ -23,11 +24,11 @@ function loadBookCards(books) {
 
         let a  = document.createElement("a");
         a.classList.add("book-link");
-        a.setAttribute("href","view-book.html?id="+book.id);
+        a.setAttribute("href","index.php/view-book?id="+book.id);
 
         let img = document.createElement("img");
         if (book.cover_url == null) {
-            img.setAttribute("src", "images/default_image.jpg");
+            img.setAttribute("src", "../images/default_image.jpg");
         } else {
             img.setAttribute("src", book.cover_url);
         }
