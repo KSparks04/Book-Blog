@@ -14,7 +14,7 @@ if ($basePath !== '') {
 // echo $route;
 $editRoute= str_replace("index.php/", "", $route);
 
-// echo "<br>".$editRoute; // Output: /signup
+//echo "<br>".$editRoute; // Output: /signup
 
 switch ($editRoute) {
     case '/':
@@ -22,8 +22,10 @@ switch ($editRoute) {
     case '/index.php':
         require 'pages/home.php';
         break;
+    case '/explore':
+        require 'pages/explore.php';
+        break;
     case '/signup':
-
         require 'pages/signup.php';
         break;
 

@@ -2,7 +2,7 @@ let books_array;
 let pages;
 let currentPage = 1;
 document.addEventListener('DOMContentLoaded', () => {
-    let result = fetch('php/get_books.php');
+    let result = fetch('../php/get_books.php');
     result.then(data => { return data.json() }).then(results => { 
        
         console.log(results);

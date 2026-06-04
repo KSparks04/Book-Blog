@@ -33,7 +33,7 @@ include_once("php/base.inc.php");
         <nav id="nav-bar">
             <ul>
                 <li class="nav-button"><a id="home" href="./">Home</a></li>
-                <li class="nav-button"><a id="explore" href="explore.html">Browse</a></li>
+                <li class="nav-button"><a id="explore" href="index.php/explore">Browse</a></li>
                 <li class="nav-button hide"><a id="user-posts" href="user-posts.html">My Posts</a></li>
             </ul>
             <div id="user-create">
