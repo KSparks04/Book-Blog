@@ -6,7 +6,7 @@ Work-in-progress full-stack book discovery and discussion platform where users c
 Deployed on Microsoft Azure: thebookblogclub-ashahjg5ccazedc8.canadaeast-01.azurewebsites.net 
 
 ## Current Features
-
+- OAuth v2 Sign in enabled for users with google accounts
 ## Future Features (In Progress) 
 - Responsive UI 
 - REST API Backend
