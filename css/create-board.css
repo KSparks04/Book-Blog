@@ -31,3 +31,34 @@
 #b-tags #board-tags{
     width:300px;
 }
+#default-images{
+    display: grid;
+    gap:0px;
+    grid-template-columns: repeat(3, 250px);
+    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height:350px;
+   padding:10px;
+}
+#default-images img{
+    width:200px;
+}
+.default-img:hover{
+    transform: scale(1.05);
+    border:2px solid rgb(0, 140, 255);
+    border-radius: 5px;
+}
+.selected{
+    transform: scale(1.05);
+    border:2px solid rgb(0, 140, 255);
+    border-radius: 5px;
+}
+#file-options{
+    display: flex;
+    margin:10px;
+}
+
+#clear-file{
+    width:100px;
+}
