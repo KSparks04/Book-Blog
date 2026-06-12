@@ -1,11 +1,22 @@
 let tagSet = new Set();
 let newFile = false;
 let defaultSel = false;
+let allowedTags;
 document.addEventListener("DOMContentLoaded", () => {
     let form_btn = document.querySelector("#board-submit");
     let file_up = document.querySelector("#board-img");
     let form = document.querySelector("#cr-board");
     let default_imgs = document.querySelectorAll(".default-img");
+
+    fetch("../php/get_ids.php").then(response => response.json()).then(data => {
+        allowedTags = data;
+        console.log(allowedTags);
+
+    });
+
+
+
+
     file_up.addEventListener("change", (e) => {
         let file = e.target.files[0];
         console.log(file);
@@ -18,6 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
         newFile = true;
         defaultSel = false;
         clearDefault(default_imgs);
+        input.remove();
 
 
 
@@ -30,7 +42,11 @@ document.addEventListener("DOMContentLoaded", () => {
             e.preventDefault();
             let val = tagInput.value.trim().toLowerCase();
             if (val !== "" && !tagSet.has(val)) {
-                addTag(val);
+                if (!checkTag(val)) {
+                    alert("Tag not valid, try something else");
+                    return;
+                }
+                addTag(getTagName(val));
                 tagInput.value = "";
 
 
@@ -49,8 +65,13 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Title must be filled out");
             return;
         }
+        let desc = document.querySelector("#b-descr");
+        if(desc.value === ""){
+            alert("Description must be filled out");
+            return;
+        }
         let tags = document.querySelectorAll(".pill");
-        if(tags.length == 0){
+        if (tags.length == 0) {
             alert("At least one tag needs to be selected");
             return;
         }
@@ -63,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
             form.appendChild(randNum);
             //alert(randNum);
         }
-        if(!newFile &&  !defaultSel){
+        if (!newFile && !defaultSel) {
             alert("Background image must be selected");
             return;
         }
@@ -74,10 +95,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     let default_img_box = document.querySelector("#default-images");
+    let input = document.createElement("input");
+    input.setAttribute("type", "hidden");
+    input.setAttribute("name", "default_img");
     
+
     default_img_box.addEventListener("click", (e) => {
         if (e.target && e.target.nodeName === "IMG") {
-            
+
             e.target.classList.add("selected");
             file_up.value = "";
             newFile = false;
@@ -87,6 +112,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     image.classList.remove("selected");
                 }
             });
+            input.setAttribute("value", e.target.dataset['img']);
+            default_img_box.appendChild(input);
         }
     });
     let clear = document.querySelector("#clear-file");
@@ -96,8 +123,11 @@ document.addEventListener("DOMContentLoaded", () => {
         defaultSel = false;
         file_up.value = "";
         clearDefault(default_imgs);
+        input.remove();
 
     });
+
+
 });
 
 
@@ -107,12 +137,12 @@ function randomNumber() {
     return rand;
 
 }
-function clearDefault(default_imgs){
+function clearDefault(default_imgs) {
     default_imgs.forEach(image => {
 
-            image.classList.remove("selected");
+        image.classList.remove("selected");
 
-        });
+    });
 
 }
 
@@ -137,11 +167,38 @@ function addTag(value) {
     input.setAttribute("type", "hidden");
     input.setAttribute("name", "tags[]");
     input.setAttribute("value", value);
+
+    let tagId = document.createElement("input");
+    tagId.setAttribute("type","hidden");
+    tagId.setAttribute("name","tag_id[]");
+    tagId.setAttribute("value",getTag(value));
+
     pill.appendChild(input);
+    pill.appendChild(tagId);
+
     div.appendChild(pill);
+    
     pill.querySelector(".remove-btn").addEventListener("click", (e) => {
         tagSet.delete(value);
         pill.remove();
     });
 
+}
+function checkTag(value) {
+    return allowedTags.some(tag =>tag.name.toLowerCase() === value);
+}
+
+function getTag(value){
+  
+    let t = allowedTags.find(tag => tag.name.toLowerCase() === value.toLowerCase());
+    return t.id;
+}
+function getTagName(value){
+    let name;
+    allowedTags.forEach(tag => {
+        if (tag.name.toLowerCase() == value) {
+            name = tag.name;
+        }
+    });
+    return name;
 }

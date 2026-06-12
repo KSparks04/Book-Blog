@@ -53,12 +53,19 @@ include_once("php/base.inc.php");
     ?>
     <div>
         <h3>Create a Board</h3>
-        <form method="post" id="cr-board" action="board-created">
+        <form method="post" id="cr-board" action="board-created" enctype="multipart/form-data">
             <div id="cr-b-title-create">
-                <div id="b-title">
+                <div id="b-main">
+                    <div id="b-title">
                     <label for="board-title">Title</label>
                     <input type="text" name="board-title" id="board-title" placeholder="Create a title for your board">
                 </div>
+                <div id="b-descr">
+                    <label for="description">Description</label>
+                    <textarea name="description"></textarea>
+                </div>
+                </div>
+                
                 <div id="b-create-btn">
                     <button id="board-submit" type="submit">Create</button>
                 </div>

@@ -6,6 +6,10 @@
     margin:5px;
     margin-bottom: 20px;
 }
+#b-main{
+    display: flex;
+    flex-direction: column;
+}
 #b-title{
     display: flex;
     flex-direction: column;
@@ -13,9 +17,14 @@
     margin-right:30px;
 
 }
+#b-descr{
+    display: flex;
+    flex-direction: column;
+}
 #board-title{
     border:0px; 
     border-bottom: 1px solid black;
+
 
 }
 #background-img-b{
