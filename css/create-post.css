@@ -13,16 +13,37 @@
     border:0px;
     border-bottom:1px solid black;
 } 
+#post-details{
+    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    width:400px;
+    height: 100px;
+    resize: none;
+}
+
+
 #book-mentioned img{
     width: 100px;
 }
+
+#search-carousel{
+    display: flex;
+    width:600px;
+    overflow: scroll;
+    overflow-x:scroll;
+    overflow-y: hidden;
+   
+}
 .card-cont{
     display: flex;
+    flex-shrink: 0;
 }
 .caro-card{
     width:150px;
     max-width: 100%;
     padding: 5px;
+    flex-shrink: 0;
 }
 .card-add-btn{
     margin-top: 50px;
@@ -34,4 +55,10 @@
    
     background: none;
     border: none;
+}
+.card-title{
+    font-size:1em;
+}
+.card-details{
+    font-size: 1em;
 }

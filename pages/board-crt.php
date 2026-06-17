@@ -33,7 +33,7 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 //$target_dir = "../images/uploads/board-bckgnds/";
 $target_dir = __DIR__ . "/../images/uploads/board-bckgnds/";
 
-$fileName = $_SESSION['user_id'] . '_' . uniqid() .'_'. basename($_FILES["board-img"]["name"]);
+$fileName = $_SESSION['user_id'] . '_' . uniqid() . '_' . basename($_FILES["board-img"]["name"]);
 $target_file = $target_dir . $fileName;
 $uploadDirWeb = "../images/uploads/board-bckgnds/";
 
@@ -50,21 +50,24 @@ $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 // }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if (!empty($_FILES["board-img"]["name"])) {
 
-    $check = getimagesize($_FILES["board-img"]["tmp_name"]);
-    if ($check !== false) {
-        //echo "File is an image - " . $check["mime"] . ".";
-        $uploadOk = 1;
-        if (move_uploaded_file($_FILES["board-img"]["tmp_name"], $target_file)) {
-            $backgroundImagePath = $uploadDirWeb;
+        $check = getimagesize($_FILES["board-img"]["tmp_name"]);
+        if ($check !== false) {
+            //echo "File is an image - " . $check["mime"] . ".";
+            $uploadOk = 1;
+            if (move_uploaded_file($_FILES["board-img"]["tmp_name"], $target_file)) {
+                $backgroundImagePath = $uploadDirWeb;
+            }
+        } else {
+            echo "File is not an image.";
+            $uploadOk = 0;
         }
-    } else {
-        echo "File is not an image.";
-        $uploadOk = 0;
     }
+
 }
 if (!empty($_POST['default_img'])) {
-    $backgroundImagePath = "../images/default-board-bckgnds/".$_POST['default_img'];
+    $backgroundImagePath = "../images/default-board-bckgnds/board-bkgnd".$_POST['default_img'].".jpg";
 }
 
 $stmt = $pdo->prepare("
@@ -85,7 +88,7 @@ $stmt = $pdo->prepare("
 VALUES (?, ?);
 ");
 foreach ($_POST['tag_id'] as $tag) {
-    
+
     $stmt->execute([
         $boardId,
         $tag
@@ -142,7 +145,7 @@ foreach ($_POST['tag_id'] as $tag) {
     ?>
     <div>
         <h3>Board Created</h3>
-        <a>View Created Board</a>
+        <a href="<?= BASE_URL ?>/boards">View Boards</a>
         <a>Return to Home Page</a>
     </div>
 

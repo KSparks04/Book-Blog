@@ -1,0 +1,14 @@
+.board{
+    background-repeat: no-repeat;
+    background-size: cover;
+   
+}
+
+.post{
+    width:900px;
+    background-color: aliceblue;
+    margin-left:200px;
+}
+.post .post-mentions img{
+    width:100px;
+}

@@ -52,6 +52,13 @@ switch ($editRoute) {
     case '/board-created':
         require 'pages/board-crt.php';
         break;
+    case '/view-board':
+        require 'pages/view-board.php';
+        break;
+    case '/boards':
+        require 'pages/view-board.php';
+        break;
+    
     
     default:
         http_response_code(404);
