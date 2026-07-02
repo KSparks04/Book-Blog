@@ -21,26 +21,59 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
     });
-    let stars = document.querySelector("#star-rating");
-    stars.addEventListener("click", (e) => {
-        if (e.target && e.target.nodeName === "SPAN") {
-            console.log(e.target.dataset.value);
-            highlightStars(e.target.dataset.value);
-        }
-    });
-    stars.addEventListener("mouseover", (e) => {
-        if (e.target && e.target.nodeName === "SPAN") {
-            hoverStars(e.target.dataset.value);
-        }
-    });
-    stars.addEventListener("mouseout", (e) => {
-        if (e.target && e.target.nodeName === "SPAN") {
-            removeStars(e.target.dataset.value);
-        }
+    document.querySelector("#review").addEventListener("click", reviewBox);
+    let modal = document.getElementById("reviewModal");
+
+    // Get the button that opens the modal
+    let btn = document.querySelector("#reviewFilter");
+
+    // Get the <span> element that closes the modal
+    let span = document.getElementsByClassName("close")[0];
+
+
+    btn.addEventListener("click", () => {
+        modal.style.display = "block";
     });
 
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    let modalRatings = document.querySelector(".modal-content");
+    modalRatings.addEventListener("click",(e)=>{
+        if(e.target && e.target.nodeName == "A"){
+            
+            displayReviews(bookId,e.target.dataset["rating"]);
+        }
+    })
 
 });
+async function displayReviews(bookId, ratingLevel){
+    let response = await fetch("../php/get_reviews.php?id="+bookId + "&level="+ratingLevel);
+    let reviews  = await response.json();
+    console.log(reviews);
+    let panel = document.querySelector(".reviews");
+    for(let review of reviews){
+        console.log(review);
+        let divR = document.createElement("div");
+        divR.classList.add("review-card");
+        let content = document.createElement("p");
+        content.textContent = review.content;
+
+
+
+        divR.appendChild(content);
+        panel.appendChild(divR);
+
+    }
+}
+
 
 function displayBook(bookData) {
     let cover = document.querySelector(".book-cover img");
@@ -81,37 +114,5 @@ function displayGenres(genres) {
         li.appendChild(a);
         list.appendChild(li);
 
-    });
-}
-function hoverStars(rating) {
-    let stars = document.querySelectorAll('#star-rating span');
-    stars.forEach(star => {
-        //star.classList.remove('selected');
-        star.classList.remove('hovered');
-        if (parseInt(star.getAttribute('data-value')) <= rating) {
-            star.classList.add('hovered');
-        }
-    });
-}
-
-function removeStars(rating) {
-    let stars = document.querySelectorAll('#star-rating span');
-    stars.forEach(star => {
-        // star.classList.remove('selected');
-        // star.classList.remove('hovered');
-        if (parseInt(star.getAttribute('data-value')) >= rating && !star.classList.contains('selected')) {
-            star.classList.remove('hovered');
-            star.classList.remove('selected');
-        }
-    });
-}
-function highlightStars(rating) {
-    let stars = document.querySelectorAll('#star-rating span');
-    stars.forEach(star => {
-        star.classList.remove('selected');
-        star.classList.remove('hovered');
-        if (parseInt(star.getAttribute('data-value')) <= rating) {
-            star.classList.add('selected');
-        }
     });
 }

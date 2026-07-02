@@ -3,7 +3,7 @@ session_start();
 include_once("db-config.inc.php");
 $sslCa = __DIR__ . "/../certs/DigiCertGlobalRootCA.crt.pem";
 $env = getenv('APP_ENV') ?: 'local';
-$board_id = $_GET["board_id"];
+
 $options = [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -20,13 +20,15 @@ try {
 }
 
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$stmt = $pdo->prepare("SELECT posts.id,posts.title, posts.content, posts.created_at FROM posts where posts.board_id = ?");
+$stmt = $pdo->prepare("SELECT tags.name FROM tags INNER JOIN post_tags ON post_tags.tag_id = tags.id where post_tags.post_id = ?");
 
 
-$stmt->execute([$board_id]);
+$stmt->execute([$_GET["post_id"]]);
 
 
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
 
 echo json_encode($rows);
 ?>

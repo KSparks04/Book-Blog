@@ -52,27 +52,46 @@ include_once("php/base.inc.php");
     }
 
     ?>
-    <form method="post">
+    <form method="post" action="post-created" id="post">
+        
         <div id="post-page">
+
             <div id="post-main">
+                <div id="main">
+                    <div id="pst-title" class="post-base">
+                        <label for="post-title">Title</label>
+                        <input type="text" name="post-title" id="post-title">
+
+                        <input type="color" id="color-sel" name="color-sel">
+                    </div>
+
+                    <div class="editor-container">
+                        <div class="toolbar">
+                            <button type="button" onclick="formatDoc('bold')" title="Bold"><b>B</b></button>
+                            <button type="button" onclick="formatDoc('italic')" title="Italic"><i>I</i></button>
+                            <button type="button" onclick="formatDoc('underline')" title="Underline"><u>U</u></button>
+                            <button type="button" onclick="formatDoc('insertUnorderedList')" title="Bullet List">•
+                                List</button>
+
+                            <select onchange="formatDoc('formatBlock', this.value); this.selectedIndex=0;">
+                                <option value="" selected hidden disabled>Heading</option>
+                                <option value="H1">Heading 1</option>
+                                <option value="H2">Heading 2</option>
+                                <option value="P">Paragraph</option>
+                            </select>
+                        </div>
+
+                        <div id="editor" contenteditable="true" placeholder="Start writing your blog post here...">
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="blog_content" id="blogContent">
 
 
-                <div id="pst-title" class="post-base">
-                    <label for="post-title">Title</label>
-                    <input type="text" name="post-title" id="post-title">
-                </div>
-                <div id="post-nav">
-                    <!-- Todo: make toolbar -->
-                </div>
-                <div id="pst-details" class="post-base">
-                    <label for="post-details">Post Details</label>
-                    <textarea id="post-details" autocorrect="on" maxlength="\u0032\u0030\u0030\u0030\u0030" rows="20" cols="30" required spellcheck="true"></textarea>
-                </div>
-
-                <div id="book-mentioned">
-                    <input type="text" id="book-search" name="book-search" placeholder="Books mentioned in post">
-                    <div id="search-carousel">
-                        <!-- <div class="card caro-card">
+                    <div id="book-mentioned">
+                        <input type="text" id="book-search" name="book-search" placeholder="Books mentioned in post">
+                        <div id="search-carousel">
+                            <!-- <div class="card caro-card">
                             <div class="card-content">
                                 <img src="../images/default_image.jpg">
                                 <div class="card-cont">
@@ -91,16 +110,20 @@ include_once("php/base.inc.php");
                             </div>
 
                         </div> -->
-                    </div>
-                    <div id="added-books">
-                        <!-- <div class="add-card">
+                        </div>
+                        <div id="added-books">
+                            <!-- <div class="add-card">
                             <img src="../images/default_image.jpg" class="add-img">
                             <div class="book-data"> </div>
                         </div> -->
+                        </div>
                     </div>
                 </div>
+
+
             </div>
-            <aside>
+            <aside id="side-bar">
+                <div id="submit"><button>Submit</button></div>
                 <div id="post-setting">
                     <h4>Post Settings</h4>
                     <div id="tag-sel">
@@ -112,11 +135,11 @@ include_once("php/base.inc.php");
                         <label for="boards">Posting to </label>
                         <select id="boards" name="boards-select">
                             <option value="0">New Board</option>
-                          </select>
+                        </select>
 
                     </div>
 
-                  
+
                 </div>
             </aside>
         </div>

@@ -11,6 +11,7 @@
     <link href="../css/text-styles.css" rel="stylesheet">
     <link href="../css/view-book.css" rel="stylesheet">
     <script src="../js/view-book.js"></script>
+    <script src="../js/ratings.js"></script>
     <title>The Book Blog Club</title>
     <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 </head>
@@ -84,14 +85,12 @@
                 <div id="review-box2">
                     <div>
                         <p>Love it or Hate it?</p>
-                        <a>Leave a Review</a>
+                        <a id="review">Write a Review</a>
                     </div>
 
                     <div id="star-rating">
 
-                        <span data-value="1">★
-                            <!-- <i class="bi bi-star"></i> -->
-                        </span>
+                        <span data-value="1">★</span>
                         <span data-value="2">★</span>
                         <span data-value="3">★</span>
                         <span data-value="4">★</span>
@@ -99,12 +98,60 @@
 
                         <p>Rate this book</p>
                     </div>
+                    <div id="update-review" class="hide">
+
+                    </div>
+                </div>
+                <div id="update-review" class="hide">
+                    <form id="review-form" method="post" action="post-review">
+                        <div id="stars-place"></div>
+                        <div class="editor-container">
+                            <div class="toolbar">
+                                <button type="button" onclick="formatDoc('bold')" title="Bold"><b>B</b></button>
+                                <button type="button" onclick="formatDoc('italic')" title="Italic"><i>I</i></button>
+                                <button type="button" onclick="formatDoc('underline')"
+                                    title="Underline"><u>U</u></button>
+                                <button type="button" onclick="formatDoc('insertUnorderedList')" title="Bullet List">•
+                                    List</button>
+
+                                <select onchange="formatDoc('formatBlock', this.value); this.selectedIndex=0;">
+                                    <option value="" selected hidden disabled>Heading</option>
+                                    <option value="H1">Heading 1</option>
+                                    <option value="H2">Heading 2</option>
+                                    <option value="P">Paragraph</option>
+                                </select>
+                            </div>
+
+                            <div id="editor" contenteditable="true" placeholder="Start writing your blog post here...">
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="review_content" id="reviewContent">
+                        <button id="review-submit">Submit</button>
+                    </form>
                 </div>
             </div>
             <hr>
             <div id="reader-reviews">
                 <h3>Readers Reviews</h3>
-                <p>Select Rating Level - Popout from JS</p>
+                
+                <div>
+                    <button id="reviewFilter">Filter Reviews</button>
+
+                    <!-- The Modal -->
+                    <div id="reviewModal" class="modal">
+
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <p>Some text in the Modal..</p>
+                            <a class="ratingLevel" data-rating="4" >Rating level 4</a>
+                            <a class="ratingLevel" data-rating="1" >Rating level 1</a>
+
+                        </div>
+
+                    </div>
+                </div>
                 <div class="reviews">
                     <div class="review-card">
 

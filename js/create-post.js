@@ -90,8 +90,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
     });
+    let colorBackground = document.querySelector("#color-sel");
+    colorBackground.addEventListener("change", () => {
+        let main = document.querySelector("#post-main");
+        main.style.backgroundColor = colorBackground.value;
+    });
 
-
+    document.querySelector("#post").addEventListener("submit",saveBlogForm);
 
     // form.addEventListener("submit", (e) => {
     //     e.preventDefault();
@@ -127,6 +132,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+function formatDoc(cmd, value = null) {
+    document.execCommand(cmd, false, value);
+    document.getElementById('editor').focus();
+}
+function saveBlogForm() {
+    const rawHTML = document.getElementById('editor').innerHTML;
+    document.getElementById('blogContent').value = rawHTML;
+}
 async function requestedBooks(info) {
     let resp = await fetch("../php/get_books_search.php?info=" + info);
     let books = await resp.json();
@@ -305,7 +318,7 @@ function createAddCard(book) {
     data.appendChild(details);
     div.appendChild(data);
     div.querySelector(".remove-btn").addEventListener("click", (e) => {
-        
+
         div.remove();
     });
     return div;

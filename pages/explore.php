@@ -32,7 +32,12 @@ include_once("php/base.inc.php");
                 <ul>
                     <li class="nav-button"><a id="home" href="../">Home</a></li>
                     <li class="nav-button"><a id="explore" href="../index.php/explore">Browse</a></li>
-                    <li class="nav-button hide"><a id="user-posts" href="user-posts.html">My Posts</a></li>
+                    <?php
+                    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
+                        echo '<li class="nav-button"><a id="user-posts" href="index.php/boards">My Boards</a></li>';
+                    }
+
+                    ?>
                 </ul>
             </div>
             <div class="search">

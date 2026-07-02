@@ -1,7 +1,33 @@
+#submit{
+    margin-left:400px;
+}
+#post-page{
+    margin:10px;
+}
+#post-main{
+    width:800px;
+    border-radius: 2px;
+}
+#main{
+    width: 600px;
+   
+    margin:25px;
+    background-color: #FFF8FF;
+    padding:10px;
+    border-radius: 2px;
+}
 #post-page{
     display: flex;
 }
-
+#side-bar{
+    margin-right:50px;
+    width:450px;
+    margin-left:100px;
+}
+#post-setting{
+    width: 300px;
+    background-color: #ffedff;
+}
 .post-base{
     display: flex;
     flex-direction: column;
@@ -29,7 +55,7 @@
 
 #search-carousel{
     display: flex;
-    width:600px;
+    width:500px;
     overflow: scroll;
     overflow-x:scroll;
     overflow-y: hidden;
