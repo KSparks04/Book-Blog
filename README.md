@@ -5,21 +5,26 @@ Work-in-progress full-stack book discovery and discussion platform where users c
 
 Deployed on Microsoft Azure: thebookblogclub-ashahjg5ccazedc8.canadaeast-01.azurewebsites.net 
 
-## Currently Working on (June 22-28)
-- Creating a post
-- Creating a review
+## Currently Working on (July 06-28)
+- Updating homepage layout
+- Fixing colour scheme
+- Finishing Book Reviews and Styling
+- Changing the signup styling
 
 ## Current Features
 - OAuth v2 Sign in enabled for users with google accounts
 - Explore Books
 - Create Boards
+- Create Posts
+- Book Reviews and Ratings
+- REST API Backend
 ## Future Features (In Progress) 
 - Responsive UI 
-- REST API Backend
+
 - Search and Filtering 
 - Blog Boards and Posts
 - Themed Blog Boards
-- Book Reviews and Ratings
+  
 ## Tech Stack
 ### Frontend
 - HTML
