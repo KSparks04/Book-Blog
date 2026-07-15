@@ -21,10 +21,11 @@ try {
 
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$stmt = $pdo->prepare("SELECT content, rating, updated_at, would_recommend, user_id 
-                       FROM reviews  WHERE reviews.book_id = ? AND reviews.rating = ?");
+$stmt = $pdo->prepare("SELECT reviews.content, reviews.rating, reviews.updated_at, reviews.would_recommend, users.username 
+                       FROM reviews INNER JOIN users ON users.id = reviews.user_id WHERE reviews.book_id = ? AND reviews.rating = ?");
 
-
+// echo $_GET['id']. " HERE ".$_GET['level'];
+// exit;
 $stmt->execute([$_GET['id'],$_GET['level']]);
 
 

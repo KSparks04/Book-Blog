@@ -28,7 +28,12 @@
             <ul>
                 <li class="nav-button"><a id="home" href="../">Home</a></li>
                 <li class="nav-button"><a id="explore" href="../index.php/explore">Browse</a></li>
-                <li class="nav-button hide"><a id="user-posts" href="user-posts.html">My Posts</a></li>
+                <?php 
+                    if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true){
+                        echo '<li class="nav-button"><a id="user-posts" href="index.php/boards">My Boards</a></li>';
+                    }
+                
+                ?>
             </ul>
             <div id="user-create">
                 <a id="signup">Sign Up</a>
@@ -90,11 +95,11 @@
 
                     <div id="star-rating">
 
-                        <span data-value="1">★</span>
-                        <span data-value="2">★</span>
-                        <span data-value="3">★</span>
-                        <span data-value="4">★</span>
-                        <span data-value="5">★</span>
+                        <span data-value="1" class="icon-btn"><i class="bi bi-star-fill"></i></span>
+                        <span data-value="2" class="icon-btn"><i class="bi bi-star-fill"></i></span>
+                        <span data-value="3" class="icon-btn"><i class="bi bi-star-fill"></i></span>
+                        <span data-value="4" class="icon-btn"><i class="bi bi-star-fill"></i></span>
+                        <span data-value="5" class="icon-btn"><i class="bi bi-star-fill"></i></span>
 
                         <p>Rate this book</p>
                     </div>
@@ -134,30 +139,98 @@
             <hr>
             <div id="reader-reviews">
                 <h3>Readers Reviews</h3>
-                
-                <div>
-                    <button id="reviewFilter">Filter Reviews</button>
+                <div class="review-container">
+                    <div class="filter-stars">
+                        <a class="ratingLevel" data-rating="5">
+                            <div class="modal-stars-single">
+                                <div>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </div>
+                                <span data-rating="5">5 Stars</span>
+                            </div>
 
-                    <!-- The Modal -->
-                    <div id="reviewModal" class="modal">
+                        </a>
+                        <a class="ratingLevel" data-rating="4">
+                            <div class="modal-stars-single">
+                                <div>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star"></i>
+                                </div>
+                                <span data-rating="4">4 Stars</span>
+                            </div>
 
-                        <!-- Modal content -->
-                        <div class="modal-content">
-                            <span class="close">&times;</span>
-                            <p>Some text in the Modal..</p>
-                            <a class="ratingLevel" data-rating="4" >Rating level 4</a>
-                            <a class="ratingLevel" data-rating="1" >Rating level 1</a>
 
+                        </a>
+                        <a class="ratingLevel" data-rating="3">
+                            <div class="modal-stars-single">
+                                <div>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star"></i>
+                                    <i class="bi bi-star"></i>
+                                </div>
+                                <span data-rating="3">3 Stars</span>
+
+                            </div>
+
+                        </a>
+                        <a class="ratingLevel" data-rating="2">
+                            <div class="modal-stars-single">
+                                <div>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star"></i>
+                                    <i class="bi bi-star"></i>
+                                    <i class="bi bi-star"></i>
+                                </div>
+                                <span data-rating="2">2 Stars</span>
+
+                            </div>
+
+
+                        </a>
+                        <a class="ratingLevel" id="modal-star-1" data-rating="1">
+                            <div class="modal-stars-single">
+                                <div>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star"></i>
+                                    <i class="bi bi-star"></i>
+                                    <i class="bi bi-star"></i>
+                                    <i class="bi bi-star"></i>
+                                </div>
+                                <span data-rating="1">1 Star</span>
+
+                            </div>
+
+                        </a>
+
+
+
+
+                    </div>
+                    <div class="reviews-container">
+                        <div class="reviews">
+                            <div class="review-card">
+
+                            </div>
                         </div>
-
                     </div>
                 </div>
-                <div class="reviews">
-                    <div class="review-card">
 
-                    </div>
-                </div>
             </div>
+
+        </div>
+
+
+        </div>
 
         </div>
     </main>

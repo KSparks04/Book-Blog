@@ -64,7 +64,12 @@ switch ($editRoute) {
     case '/post-review':
         require 'pages/review-posted.php';
         break;
-    
+    case '/success-signup':
+        require 'pages/successful-signup.php';
+        break;
+    case '/success-login':
+        require 'pages/successful-login.php';
+        break;
     
     default:
         http_response_code(404);

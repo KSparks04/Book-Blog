@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
+session_start();
 include_once("php/base.inc.php");
 ?>
 
@@ -13,6 +14,7 @@ include_once("php/base.inc.php");
     <link href="../css/base.css" rel="stylesheet">
     <link href="../css/text-styles.css" rel="stylesheet">
     <link href="../css/explore.css" rel="stylesheet">
+    <script src="../js/base.js"></script>
     <script src="../js/main-explore.js"></script>
     <title>The Book Blog Club</title>
     <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
@@ -26,7 +28,7 @@ include_once("php/base.inc.php");
                 <img id="logo" src="../images/Book-Blog-Club-Logo-Transparent.png" alt="the book blog club logo">
             </a>
         </div>
-
+        
         <nav id="nav-bar">
             <div>
                 <ul>
@@ -40,6 +42,7 @@ include_once("php/base.inc.php");
                     ?>
                 </ul>
             </div>
+
             <div class="search">
                 <form class="explore-search">
                     <input type="search" name="search" id="search-box">
@@ -51,8 +54,86 @@ include_once("php/base.inc.php");
             </div>
 
             <div id="user-create">
-                <a id="signup" href="../index.php/signup">Sign Up</a>
-                <a id="login" href="../index.php/login">Login</a>
+                <?php
+                if (!isset($_SESSION['email'])) {
+                    echo "<a class=\"signup\" id=\"login-btn\"><i class=\"bi bi-person\"></i></a>";
+                }
+                ?>
+                <div id="profile-wrapper">
+                    <?php
+                    if (isset($_SESSION["logged_in"]) && isset($_SESSION["email"])) {
+                        echo "<a class = \"signup\" id=\"profile-view\"><i class=\"bi bi-person\"></i></a>";
+                    }
+                    ?>
+                    <div id="profile-modal">
+                        <div id="signout">
+                            <p>Sign out</p>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <!-- <a id="signup" href="<?= BASE_URL ?>/signup"><i class="bi bi-person"></i></a> -->
+                <div class="modal">
+                    <div class="modal-container">
+                        <span class="close">&times</span>
+                        <!-- <div>
+                            <h3>Create your account</h3>
+                            <form id="sign-up" action="success-signup" method="post">
+                                <label for="username">Displayed Username</label>
+                                <input type="text" name="username" id="username">
+                                <label for="email">Email Address</label>
+                                <input type="text" name="email" id="email">
+                                <p id="email-error"></p>
+                                <label for="password">Password</label>
+                                <input type="password" name="password" id="password">
+                                <p id="pwrd-error"></p>
+
+                                <button type="submit" id="sign-up-btn">Sign up with email</button>
+                            </form>
+                            <a href="<?= BASE_URL ?>/userauth">
+                                
+                                <button id="google-signup">Continue with Google</button>
+                            </a>
+                        </div> -->
+                        <div>
+                            <?php
+
+
+                            if (!isset($_SESSION['email'])) {
+                                echo "
+                            <div id=\"acct\">
+                            <h3>Create your account</h3>
+                            <form id=\"sign-up-form\" action=\"success-signup\" method=\"post\">
+                                <label for=\"username\">Displayed Username</label>
+                                <input type=\"text\" name=\"username\" id=\"username\">
+                                <p id=\"user-error\"></p>
+                                <label for=\"email\">Email Address</label>
+                                <input type=\"text\" name=\"email\" id=\"email\">
+                                <p id=\"email-error\"></p>
+                                <label for=\"password\">Password</label>
+                                <input type=\"password\" name=\"password\" id=\"password\">
+                                <p id=\"pwrd-error\"></p>
+
+                                <button type=\"submit\" id=\"sign-up-btn\">Sign up with email</button>
+                            </form>
+                            <p >Already have an account? <a id=\"acct-login\">Login</a></p>
+                            </div>";
+
+                            }
+
+                            ?>
+                            <a href="<?= BASE_URL ?>/userauth">
+
+                                <button id="google-signup">Continue with Google</button>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- <a href="<?= BASE_URL ?>/profile">Profile</a> -->
+
             </div>
 
 

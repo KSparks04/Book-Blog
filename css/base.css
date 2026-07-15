@@ -80,10 +80,10 @@ nav div{
     padding: 10px;
 }
 
-#user-create #signup{
+#user-create .signup{
     background-color: #cec6bc;
 }
-#user-create #signup:hover {
+#user-create .signup:hover {
     background-color: #c1bab1;
 }
 #user-create #login{
@@ -105,4 +105,63 @@ nav div{
 }
 #search-box{
     width: 350px;
+}
+.modal{
+    display:none;
+    position:fixed;
+    z-index: 1;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background-color: #e4e4e4a5;
+}
+.modal-container{
+    background-color: white;
+    padding:20px;
+    margin-top:100px;
+    border-radius:5px;
+    width: 60%;
+    justify-self: center;
+}
+.close{
+    padding:10px;
+    font-size:28px;
+    color: gray;
+   
+}
+.close:hover{
+    color: black;
+}
+#sign-up{
+    display: flex;
+    flex-direction: column;
+}
+#login-form{
+    display: flex;
+    flex-direction: column;
+}
+#profile-wrapper{
+    position: relative;
+    display: inline-block;
+}
+#profile-modal{
+    display: none;
+    background-color: white;
+    position: absolute;
+    z-index: 100;
+    width: 200px;
+    padding:20px 0px;
+    margin-top:5px;
+    right:0;
+    top:100%;
+    
+}
+#profile-modal div{
+    margin:0;
+}
+#profile-modal div:hover{
+    background-color: rgb(222, 222, 222);
+    
+    width:100%;
 }

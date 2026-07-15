@@ -1,3 +1,7 @@
+.main-book-view{
+    margin-left:20px;
+    margin-top:20px;
+}
 .book-grid-container{
     display: flex;
     padding-bottom: 10px;
@@ -63,27 +67,7 @@ flex-shrink: 0;
 }
 
 
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
 
-/* Modal Content/Box */
-.modal-content {
-  background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
-}
 
 /* The Close Button */
 .close {
@@ -91,6 +75,9 @@ flex-shrink: 0;
   float: right;
   font-size: 28px;
   font-weight: bold;
+  margin-left: auto;
+
+  
 }
 
 .close:hover,
@@ -102,4 +89,46 @@ flex-shrink: 0;
 
 #update-review{
     margin:10px;
+}
+.ratingLevel .bi-star-fill{
+    color: gold;
+}
+.modal-stars{
+    display: flex;
+    flex-direction: column;
+}
+.modal-stars-single{
+    display: flex;
+}
+.modal-stars-single span{
+    margin-left: 10px;
+    
+}
+.modal-stars-single span:hover{
+    margin-left: 10px;
+    text-decoration: underline;
+}
+
+#star-rating{
+    margin-left:10px;
+    padding:10px;
+}
+
+.icon-btn i{
+    pointer-events: none;
+}
+.reviews-container{
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: 50px;
+}
+.star-user-container{
+    display: flex;
+}
+.review-username{
+    margin-left:auto;
+}
+.review-container{
+    display: flex;
 }

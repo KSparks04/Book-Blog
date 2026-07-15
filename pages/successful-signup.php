@@ -2,9 +2,62 @@
 <html lang="en">
 <?php
 session_start();
-include_once("php/base.inc.php");
+include_once("php/db-config.inc.php");
+$sslCa = __DIR__ . "/../certs/DigiCertGlobalRootCA.crt.pem";
+$env = getenv('APP_ENV') ?: 'local';
+
+$options = [
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+];
+
+if ($env !== 'local') {
+    $options[PDO::MYSQL_ATTR_SSL_CA] = $sslCa;
+    $options[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT] = false;
+}
+try {
+    $pdo = new PDO(DBCONNSTRING, DBUSER, DBPASS, $options);
+} catch (PDOException $e) {
+    die("DB Connection failed: " . $e->getMessage());
+}
+
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+$email = trim($_POST['email']);
+
+$password = $_POST['password'];
+
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    die("Invalid email address");
+}
+if (strlen($password) < 8) {
+    die("Password must be at least 8 characters.");
+}
+$stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
+$stmt->execute([$email]);
+
+if ($stmt->fetch()) {
+    die("Email already exists.");
+}
+
+$passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
+
+$stmt = $pdo->prepare("
+    INSERT INTO users (username,email, password_hash)
+    VALUES (?,?, ?)
+");
+
+$stmt->execute([$_POST["username"], $email, $passwordHash]);
+$user_id = $pdo->lastInsertId();
+$_SESSION['user_id'] = $user_id;
+$_SESSION['email'] = $email;
+$_SESSION['logged_in'] = true;
+
+header("Location:" . BASE_URL );
 
 ?>
+
 
 <head>
     <meta charset="UTF-8">
@@ -34,7 +87,6 @@ include_once("php/base.inc.php");
 
 
         </div>
-       
         <nav id="nav-bar">
             <ul>
                 <li class="nav-button"><a id="home" href="./">Home</a></li>
@@ -48,30 +100,12 @@ include_once("php/base.inc.php");
 
             </ul>
             <div id="user-create">
-                <?php
-                if (!isset($_SESSION['email'])) {
-                    echo "<a class=\"signup\" id=\"login-btn\"><i class=\"bi bi-person\"></i></a>";
-                }
-                ?>
-                <div id="profile-wrapper">
-                    <?php
-                    if (isset($_SESSION["logged_in"]) && isset($_SESSION["email"])) {
-                        echo "<a class = \"signup\" id=\"profile-view\"><i class=\"bi bi-person\"></i></a>";
-                    }
-                    ?>
-                    <div id="profile-modal">
-                        <div id="signout">
-                            <p>Sign out</p>
-                        </div>
+                <a id="signup"><i class="bi bi-person"></i></a>
 
-                    </div>
-                </div>
-
-
-                <!-- <a id="signup" href="<?= BASE_URL ?>/signup"><i class="bi bi-person"></i></a> -->
                 <div class="modal">
                     <div class="modal-container">
                         <span class="close">&times</span>
+
                         <!-- <div>
                             <h3>Create your account</h3>
                             <form id="sign-up" action="success-signup" method="post">
@@ -87,22 +121,25 @@ include_once("php/base.inc.php");
                                 <button type="submit" id="sign-up-btn">Sign up with email</button>
                             </form>
                             <a href="<?= BASE_URL ?>/userauth">
-                                
+                              
                                 <button id="google-signup">Continue with Google</button>
                             </a>
                         </div> -->
-                        <div>
+
                         <?php
 
+                        if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
 
+
+                            echo "Logged in";
+
+                        }
                         if (!isset($_SESSION['email'])) {
-                            echo "
-                            <div id=\"acct\">
+                            echo "<div>
                             <h3>Create your account</h3>
-                            <form id=\"sign-up-form\" action=\"success-signup\" method=\"post\">
+                            <form id=\"sign-up\" action=\"success-signup\" method=\"post\">
                                 <label for=\"username\">Displayed Username</label>
                                 <input type=\"text\" name=\"username\" id=\"username\">
-                                <p id=\"user-error\"></p>
                                 <label for=\"email\">Email Address</label>
                                 <input type=\"text\" name=\"email\" id=\"email\">
                                 <p id=\"email-error\"></p>
@@ -112,78 +149,28 @@ include_once("php/base.inc.php");
 
                                 <button type=\"submit\" id=\"sign-up-btn\">Sign up with email</button>
                             </form>
-                            <p >Already have an account? <a id=\"acct-login\">Login</a></p>
-                            </div>";
-
+                            <a href=\"<?= BASE_URL ?>/userauth\">
+                                
+                                <button id=\"google-signup\">Continue with Google</button>
+                            </a>
+                        </div>;";
                         }
 
                         ?>
-                        <a href="<?= BASE_URL ?>/userauth">
-                                
-                                <button id="google-signup">Continue with Google</button>
-                            </a>
-                        </div>
-
                     </div>
                 </div>
-                <!-- <a href="<?= BASE_URL ?>/profile">Profile</a> -->
+                <a href="<?= BASE_URL ?>/profile">Profile</a>
 
             </div>
 
         </nav>
     </header>
     <div id="main-content">
-        <div id="feature-box1">
-            <div id="blog-box" class="f1">
-                <div id="blog-btns">
-                    <a id="crt-board" href="index.php/create-board">Create a new board</a>
-                    <a id="crt-post" href="index.php/create-post">Create a new post</a>
-                </div>
-
-            </div>
-        </div>
-        <div id="feature-box2">
-            <div class="f2">
-                <h2>Popular Books</h2>
-                <div id="home-books" class="books-carousel">
-                    <!--Register event listener for carousel-->
-                    <div class="card caro-card hide">
-                        <div class="card-content">
-                            <img src="images/default_image.jpg">
-                            <p class="card-title">Book Example</p>
-                            <p class="card-details">By Author</p>
-
-                        </div>
-
-                    </div>
 
 
 
 
-                </div>
-            </div>
 
-            <div class="f2">
-                <h2>Popular Boards</h2>
-                <div id="home-boards" class="boards-carousel">
-
-                    <div class="card card-board caro-card">
-                        <div class="card-content-board">
-                            <div class="board-img-card"><img src="images/default_image.jpg"></div>
-                            <div class="board-text">
-                                <p class="card-title">Board Example</p>
-                                <p class="card-details">By User</p>
-
-                            </div>
-
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
 
     </div>
 

@@ -7,11 +7,16 @@ document.addEventListener("DOMContentLoaded",()=>{
         }
     });
     stars.addEventListener("mouseover", (e) => {
-        if (e.target && e.target.nodeName === "SPAN") {
+        if (e.target && e.target.nodeName === "SPAN" ) {
             hoverStars(e.target.dataset.value);
         }
     });
     stars.addEventListener("mouseout", (e) => {
+        if (e.target && e.target.nodeName === "SPAN") {
+            removeStars(e.target.dataset.value);
+        }
+    });
+    stars.addEventListener("dblclick",(e)=>{
         if (e.target && e.target.nodeName === "SPAN") {
             removeStars(e.target.dataset.value);
         }
@@ -34,7 +39,7 @@ function removeStars(rating) {
     let stars = document.querySelectorAll('#star-rating span');
     stars.forEach(star => {
         // star.classList.remove('selected');
-        // star.classList.remove('hovered');
+         star.classList.remove('hovered');
         if (parseInt(star.getAttribute('data-value')) >= rating && !star.classList.contains('selected')) {
             star.classList.remove('hovered');
             star.classList.remove('selected');

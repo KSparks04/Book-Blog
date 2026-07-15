@@ -126,5 +126,5 @@ $scriptName = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME']));
 $basePath = rtrim($scriptName, '/');
 
 
-header("Location: $basePath/index.php/signup");
+header("Location: $basePath/");
 exit;

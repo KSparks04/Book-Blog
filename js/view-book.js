@@ -22,34 +22,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
     document.querySelector("#review").addEventListener("click", reviewBox);
-    let modal = document.getElementById("reviewModal");
-
-    // Get the button that opens the modal
-    let btn = document.querySelector("#reviewFilter");
-
-    // Get the <span> element that closes the modal
-    let span = document.getElementsByClassName("close")[0];
-
-
-    btn.addEventListener("click", () => {
-        modal.style.display = "block";
-    });
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function () {
-        modal.style.display = "none";
-    }
-
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-    let modalRatings = document.querySelector(".modal-content");
+   
+    let modalRatings = document.querySelector(".filter-stars");
     modalRatings.addEventListener("click",(e)=>{
-        if(e.target && e.target.nodeName == "A"){
+        if(e.target && e.target.nodeName == "SPAN"){
             
             displayReviews(bookId,e.target.dataset["rating"]);
+            modal.style.display = "none";
         }
     })
 
@@ -59,12 +38,42 @@ async function displayReviews(bookId, ratingLevel){
     let reviews  = await response.json();
     console.log(reviews);
     let panel = document.querySelector(".reviews");
+    panel.innerHTML = "";
     for(let review of reviews){
         console.log(review);
         let divR = document.createElement("div");
         divR.classList.add("review-card");
+        let divReview = document.createElement("div");
+        divReview.classList.add("star-user-container");
+        let divStars = document.createElement("div");
+        divStars.classList.add("card-stars");
+        for(let i =1;i<=review.rating;i++){
+            let ic = document.createElement("i");
+            ic.classList.add("bi")
+            ic.classList.add("bi-star-fill");
+            divStars.appendChild(ic);
+        }
+        for(let i =(1);i<= (5-review.rating);i++){
+            let ic = document.createElement("i");
+            ic.classList.add("bi")
+            ic.classList.add("bi-star");
+            divStars.appendChild(ic);
+        }
+        divReview.appendChild(divStars);
+        
+        let divUser = document.createElement("div");
+        divUser.classList.add("review-username");
+        let spUser = document.createElement("span");
+        spUser.textContent = review.username;
+        divUser.appendChild(spUser);
+
+        divReview.appendChild(divUser);
+        divR.appendChild(divReview);
+
         let content = document.createElement("p");
         content.textContent = review.content;
+
+
 
 
 
