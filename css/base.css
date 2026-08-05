@@ -1,167 +1,221 @@
-body{
-    background-color: #FFF8FF;
+:root {
+    --body-font-family: "Noto Serif Ahom", "Georgia";
+    --border-outline-1: #670626;
+    --button-colour-bg: #f4f0f4;
+    --content-border-green: #8bbd6a;
+    --content-bg-offwhite: #f7f3e5;
+
+
+    --fc-gray:#515151;
+    --fs-sm: 0.875rem;/* 14px */
+    --fs-base: 1rem;/* 16px */
+    --fs-lg: 1.25rem;/* 20px */
+    --fs-xl: 1.75rem;/* 28px */
+
+    --fw-normal: 400;
+    --fw-medium: 500;
+    --fw-bold: 700;
+
 }
- a{
+
+body {
+    background-color: #FFF8FF;
+    font-family: var(--body-font-family);
+    margin: 0 10px;
+}
+
+a {
     border-radius: 5px;
     text-decoration: none;
     color: black;
- }
- img{
-    max-width: 100%;
- }
-.hide{
-    display:none;
 }
-#header{
+
+img {
+    max-width: 100%;
+}
+
+.hide {
+    display: none;
+}
+
+#header {
     display: flex;
     border-bottom: 1px solid #bcb4ab;
 }
-#header #title{
 
-    width:400px;
-    margin:10px;
+#header #title {
+
+    width: 150px;
+    margin: 10px;
 }
-#title a{
+
+#title a {
     text-align: center;
     display: block;
-    width:fit-content;
-    
-    
+    width: fit-content;
+
+
 }
-#title #logo{
-    width:100px;
+
+#title #logo {
+    width: 100px;
 }
-nav div{
-    margin:5px;
+
+nav div {
+    margin: 5px;
 }
-#nav-bar{
+
+#nav-bar {
     display: flex;
     flex-wrap: nowrap;
-    width:100%;
+    width: 100%;
     margin: 5px 20px;
     align-items: center;
-    
-   
+
+
 }
-#nav-bar ul{
+
+#nav-bar ul {
     display: flex;
-    background-color: #670626;
-    border-radius: 15px;
-    padding: 0px;
-    margin:0;
-    overflow: hidden;
     
+    border-radius: 15px;
+    
+    padding: 0px;
+    margin: 0;
+    overflow: hidden;
+
 }
-#user-create{
+
+#user-create {
     display: flex;
     margin-left: auto;
-    margin-bottom:15px;
+    margin-bottom: 15px;
 }
 
-#nav-bar ul li{
+#nav-bar ul li {
     list-style-type: none;
     margin: 0;
-    
-}
-#nav-bar ul li a:hover{
-    background-color: #900835;
-}
-#nav-bar ul li a{
-    display: block;
-    text-decoration: none;
-    color: white;
-    padding: 10px 15px;
-    font-size:1.05em;
 
 }
-#user-create a{
+
+#nav-bar ul li a:hover {
+   
+    color: white;
+}
+
+#nav-bar ul li a {
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    padding: 10px 15px;
+    font-size: 1.05em;
+
+}
+
+#user-create a {
     border-radius: 5px;
     margin: 10px 5px 10px 5px;
     padding: 10px;
 }
 
-#user-create .signup{
+#user-create .signup {
     background-color: #cec6bc;
 }
+
 #user-create .signup:hover {
     background-color: #c1bab1;
 }
-#user-create #login{
+
+#user-create #login {
     background-color: #bcb4ab;
 }
-#user-create #login:hover{
+
+#user-create #login:hover {
     background-color: #928c85;
 }
-.nav-button{
-    margin:10px;
+
+.nav-button {
+    margin: 10px;
 }
-.search{
+
+.search {
     margin-left: auto;
 }
 
-.explore-search{
+.explore-search {
     display: flex;
     width: 350px;
 }
-#search-box{
+
+#search-box {
     width: 350px;
 }
-.modal{
-    display:none;
-    position:fixed;
+
+.modal {
+    display: none;
+    position: fixed;
     z-index: 1;
-    left:0;
-    top:0;
-    width:100%;
-    height:100%;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
     background-color: #e4e4e4a5;
 }
-.modal-container{
+
+.modal-container {
     background-color: white;
-    padding:20px;
-    margin-top:100px;
-    border-radius:5px;
+    padding: 20px;
+    margin-top: 100px;
+    border-radius: 5px;
     width: 60%;
     justify-self: center;
 }
-.close{
-    padding:10px;
-    font-size:28px;
+
+.close {
+    padding: 10px;
+    font-size: 28px;
     color: gray;
-   
+
 }
-.close:hover{
+
+.close:hover {
     color: black;
 }
-#sign-up{
+
+#sign-up {
     display: flex;
     flex-direction: column;
 }
-#login-form{
+
+#login-form {
     display: flex;
     flex-direction: column;
 }
-#profile-wrapper{
+
+#profile-wrapper {
     position: relative;
     display: inline-block;
 }
-#profile-modal{
+
+#profile-modal {
     display: none;
     background-color: white;
     position: absolute;
     z-index: 100;
     width: 200px;
-    padding:20px 0px;
-    margin-top:5px;
-    right:0;
-    top:100%;
-    
+    padding: 20px 0px;
+    margin-top: 5px;
+    right: 0;
+    top: 100%;
+
 }
-#profile-modal div{
-    margin:0;
+
+#profile-modal div {
+    margin: 0;
 }
-#profile-modal div:hover{
+
+#profile-modal div:hover {
     background-color: rgb(222, 222, 222);
-    
-    width:100%;
+
+    width: 100%;
 }

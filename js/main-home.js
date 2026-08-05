@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    fetch("php/get_books.php").then(results => results.json()).then(data => {
+    fetch("php/get_books_reviews.php").then(results => results.json()).then(data => {
 
         //console.log(data);
         loadBookCards(data);
@@ -23,22 +23,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     let loggedModal = document.querySelector("#profile-modal");
-    document.querySelector("#profile-view")?.addEventListener("click",()=>{
+    document.querySelector("#profile-view")?.addEventListener("click", () => {
         loggedModal.style.display = "block";
     })
-    document.querySelector("#profile-view")?.addEventListener("mouseover",()=>{
+    document.querySelector("#profile-view")?.addEventListener("mouseover", () => {
         loggedModal.style.display = "block";
     })
-    document.querySelector("#profile-view")?.addEventListener("mouseout",()=>{
+    document.querySelector("#profile-view")?.addEventListener("mouseout", () => {
         loggedModal.style.display = "none";
     })
-   document.querySelector("#profile-wrapper")?.addEventListener("mouseover",()=>{
+    document.querySelector("#profile-wrapper")?.addEventListener("mouseover", () => {
         loggedModal.style.display = "block";
     })
-    document.querySelector("#profile-wrapper")?.addEventListener("mouseout",()=>{
+    document.querySelector("#profile-wrapper")?.addEventListener("mouseout", () => {
         loggedModal.style.display = "none";
     })
-    
+
     document.querySelector("#sign-up-form")?.addEventListener("submit", (e) => {
 
         const errors = [];
@@ -104,18 +104,18 @@ document.addEventListener('DOMContentLoaded', () => {
             //alert(errors.join("\n"));
         }
     });
-    document.querySelector("#signout").addEventListener("click",(e)=>{
-        fetch("php/profile_signout.php").then(response =>{
-            if(response.ok){
+    document.querySelector("#signout").addEventListener("click", (e) => {
+        fetch("php/profile_signout.php").then(response => {
+            if (response.ok) {
                 console.log("okay");
                 window.location.reload();
-            }else{
+            } else {
                 console.log("BAD");
             }
-        }).catch(error=> console.error("Network error:",error));
+        }).catch(error => console.error("Network error:", error));
     });
-   
-   document.querySelector("#acct-login")?.addEventListener("click",createLoginForm);
+
+    document.querySelector("#acct-login")?.addEventListener("click", createLoginForm);
 });
 function createLoginForm() {
     let mainDiv = document.querySelector("#acct");
@@ -163,7 +163,7 @@ function createLoginForm() {
     let signup = document.createElement("a");
     signup.setAttribute("id", "acct-login");
     signup.textContent = "Sign up";
-    signup.addEventListener("click",createSignupForm);
+    signup.addEventListener("click", createSignupForm);
     accountCheck.appendChild(signup);
 
     mainDiv.appendChild(accountCheck);
@@ -175,14 +175,14 @@ function createSignupForm() {
     let header = document.createElement("h3");
     header.textContent = "Create your account";
     mainDiv.appendChild(header);
-    
+
 
     const form = document.createElement("form");
     form.id = "sign-up-form";
     form.action = "success-signup";
     form.method = "post";
 
-   
+
     let usernameLabel = document.createElement("label");
     usernameLabel.htmlFor = "username";
     usernameLabel.textContent = "Displayed Username";
@@ -195,7 +195,7 @@ function createSignupForm() {
     let usernameError = document.createElement("p");
     usernameError.id = "user-error";
 
-    
+
     let emailLabel = document.createElement("label");
     emailLabel.htmlFor = "email";
     emailLabel.textContent = "Email Address";
@@ -208,7 +208,7 @@ function createSignupForm() {
     let emailError = document.createElement("p");
     emailError.id = "email-error";
 
-    
+
     let passwordLabel = document.createElement("label");
     passwordLabel.htmlFor = "password";
     passwordLabel.textContent = "Password";
@@ -221,13 +221,13 @@ function createSignupForm() {
     let passwordError = document.createElement("p");
     passwordError.id = "pwrd-error";
 
-    
+
     let submit = document.createElement("button");
     submit.type = "submit";
     submit.id = "sign-up-btn";
     submit.textContent = "Sign up with email";
 
-    
+
     form.appendChild(usernameLabel);
     form.appendChild(usernameInput);
     form.appendChild(usernameError);
@@ -242,23 +242,23 @@ function createSignupForm() {
 
     form.appendChild(submit);
 
-    
+
     const footer = document.createElement("p");
     footer.append("Already have an account? ");
 
     const loginLink = document.createElement("a");
     loginLink.id = "acct-login";
     loginLink.textContent = "Login";
-    loginLink.addEventListener("click",createLoginForm);
+    loginLink.addEventListener("click", createLoginForm);
 
     footer.appendChild(loginLink);
 
-    
+
     mainDiv.appendChild(header);
     mainDiv.appendChild(form);
     mainDiv.appendChild(footer);
 
-    
+
 }
 function loadBookCards(books) {
     let cardCarousel = document.querySelector(".books-carousel");
@@ -269,6 +269,7 @@ function loadBookCards(books) {
         let card = document.createElement("div");
         card.classList.add("card");
         card.classList.add("caro-card");
+        card.classList.add("card-book");
 
         let content = document.createElement("div");
         content.classList.add("card-content");
@@ -283,21 +284,44 @@ function loadBookCards(books) {
         } else {
             img.setAttribute("src", book.cover_url);
         }
-
+        let bookContent = document.createElement("div");
+        bookContent.classList.add("book-text");
+        bookContent.classList.add("hide");
         let title = document.createElement("h2");
         title.classList.add("card-title");
+
         title.classList.add("title2");
         title.textContent = book.title;
         let details = document.createElement("h2");
         details.classList.add("card-details");
+
         details.classList.add("title3");
         details.textContent = "By " + book.author;
+        bookContent.appendChild(title);
+        bookContent.appendChild(details);
 
-
+        console.log(book.avg_rating);
+        let star = document.createElement("i");
+        star.classList.add("bi");
+        star.classList.add("bi-star-fill");
+        let divSt = document.createElement("div");
+        divSt.classList.add("book-star");
+        divSt.appendChild(star);
+        if (book.avg_rating != null) {
+            let rate = document.createElement("p");
+            rate.textContent = Math.round(book.avg_rating);
+            divSt.appendChild(rate);
+        }
 
         a.appendChild(img);
-        a.appendChild(title);
-        a.appendChild(details);
+        a.appendChild(divSt);
+        a.appendChild(bookContent);
+        card.addEventListener("mouseover", () => {
+            bookContent.classList.remove("hide");
+        })
+        card.addEventListener("mouseout", () => {
+            bookContent.classList.add("hide");
+        })
         content.appendChild(a);
 
         cardCarousel.appendChild(card);
@@ -349,10 +373,10 @@ function loadBoards(boards) {
             let details = document.createElement("h2");
             details.classList.add("card-details");
             details.classList.add("title3");
-            details.textContent = "By " + user[0].username;
-
-            textDiv.appendChild(title);
+            details.textContent = user[0].username;
             textDiv.appendChild(details);
+            textDiv.appendChild(title);
+
 
 
 
@@ -382,3 +406,14 @@ function loadBoards(boards) {
 //                         </div>
 
 //                     </div>
+// const elements = document.querySelectorAll('.animate-on-scroll');
+
+//     const observer = new IntersectionObserver(entries => {
+//         entries.forEach(entry => {
+//             if (entry.isIntersecting) {
+//                 entry.target.classList.add('visible');
+//             }
+//         });
+//     }, { threshold: 0.2 });
+
+//     elements.forEach(el => observer.observe(el));

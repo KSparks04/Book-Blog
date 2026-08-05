@@ -53,7 +53,7 @@ VALUES (?, ?);
     INSERT INTO post_books (post_id, book_id)
 VALUES (?, ?);
 ");
-    foreach ($_POST['book_id'] as $book) {
+    foreach ($_POST['books'] as $book) {
 
         $stmt->execute([
             $postId,

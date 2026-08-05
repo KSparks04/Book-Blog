@@ -1,19 +1,35 @@
 /* body{
     background-color: #89D385;
 } */
+h2 {
+    font-weight: var(--fw-bold);
+    text-align: center;
+}
 
+.title2 {
+    font-weight: 600;
+    text-align: left;
+}
 
 
 #main-content #feature-box1 {
-    display: flex;
-    justify-content: center;
+    position: relative;
 }
 
-#main-content #feature-box1 div {
-    background-color: #D1EFBD;
+#main-content #feature-box1 svg {
+    position: block;
+    width: 100%;
+}
+
+#main-content #feature-box1 #blog-box {
+    border: 1px var(--content-border-green) solid;
+    background-color: var(--content-bg-offwhite);
     margin: 10px;
     padding: 50px;
-
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-100%, -50%);
 }
 
 #main-content #feature-box1 div a {
@@ -22,11 +38,18 @@
     padding: 10px;
     text-align: center;
 }
+
 div.f1 {
     border-radius: 10px;
 }
+
 div.f2 {
     border-radius: 10px;
+}
+
+.f2 h2,
+.f1 h2 {
+    text-align: left;
 }
 
 #feature-box1 .f1 {
@@ -55,6 +78,7 @@ div.f2 {
     overflow-y: hidden;
     overflow-x: scroll;
     margin: 10px;
+    /* min-height:300px; */
 
 
 
@@ -72,24 +96,53 @@ div.f2 {
     padding: 10px;
     margin: 10px;
     flex-shrink: 0;
-
+    background-color: transparent;
+    border: none;
+    width:170px;
 }
 
-.caro-card:hover {
-    transform: scale(1.05);
-}
-
-.card {
-
+.card-book {
     padding: 10px;
     margin: 10px;
-
+    flex-shrink: 0;
+    background-color: transparent;
+    border: none;
+    transition: width 0.5s ease-in-out 0.3s;
+    height:350px;
 }
-
-.card:hover {
+.card-book:hover{
+    width:150px;
+    padding: 10px;
+    margin: 10px;
+    flex-shrink: 0;
+    background-color: white;
+    border: 1px #bcb4ab solid;
     transform: scale(1.05);
-
 }
+.card-book .card-content img{
+    width:200px;
+    transition: width 0.3s ease;
+}
+.card-book:hover .card-content img{
+    transform: scale(0.85);
+    margin-top:5px;
+}
+
+
+.card-book:hover .card-content  .book-star{
+ position: absolute;
+    top: 5px;
+    right: 15px;
+    color: gold;
+    display: flex;
+    background-color: transparent;
+    height: 20px;
+}
+.card-book:hover .card-content  .book-star p{
+ color:black;
+}
+
+
 
 .card-board {
 
@@ -103,9 +156,31 @@ div.f2 {
 
 }
 
+.book-text {
+    margin: 10px 5px;
+}
+
+.book-star {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: gold;
+    display: flex;
+    background-color: #bcb4abe1;
+    height: 20px;
+    border-radius: 2px;
+}
+
+.book-star p {
+    color: white;
+}
+
+.book-star i {
+    height: fit-content;
+}
 
 .board-text {
-    margin: 5px;
+    margin: 10px 5px;
 }
 
 /* .boards-carousel .card-board{
@@ -115,16 +190,31 @@ div.f2 {
     display: flex;
 }
 
+.caro-board {
+    background-color: transparent;
+    border: none;
+    max-width: 250px;
+    width: 100%;
+}
+
 .card-content img {
     width: 100px;
 }
 
 .card-title {
     max-width: 150px;
+    text-align: left;
+    font-size: var(--fs-base);
 }
 
-.card-content-board img {
-    width: 100px;
+.card-details {
+    text-align: left;
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-normal);
+}
+
+.board-img-card {
+    width: 100%;
 }
 
 .card-content {
@@ -134,62 +224,72 @@ div.f2 {
     justify-content: center;
     text-align: center;
 }
-.modal{
-    display:none;
-    position:fixed;
+
+.modal {
+    display: none;
+    position: fixed;
     z-index: 1;
-    left:0;
-    top:0;
-    width:100%;
-    height:100%;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
     background-color: #e4e4e4a5;
 }
-.modal-container{
+
+.modal-container {
     background-color: white;
-    padding:20px;
-    margin-top:100px;
-    border-radius:5px;
+    padding: 20px;
+    margin-top: 100px;
+    border-radius: 5px;
     width: 60%;
     justify-self: center;
 }
-.close{
-    padding:10px;
-    font-size:28px;
+
+.close {
+    padding: 10px;
+    font-size: 28px;
     color: gray;
-   
+
 }
-.close:hover{
+
+.close:hover {
     color: black;
 }
-#sign-up{
+
+#sign-up {
     display: flex;
     flex-direction: column;
 }
-#login-form{
+
+#login-form {
     display: flex;
     flex-direction: column;
 }
-#profile-wrapper{
+
+#profile-wrapper {
     position: relative;
     display: inline-block;
 }
-#profile-modal{
+
+#profile-modal {
     display: none;
     background-color: white;
     position: absolute;
     z-index: 100;
     width: 200px;
-    padding:20px 0px;
-    margin-top:5px;
-    right:0;
-    top:100%;
-    
+    padding: 20px 0px;
+    margin-top: 5px;
+    right: 0;
+    top: 100%;
+
 }
-#profile-modal div{
-    margin:0;
+
+#profile-modal div {
+    margin: 0;
 }
-#profile-modal div:hover{
+
+#profile-modal div:hover {
     background-color: rgb(222, 222, 222);
-    
-    width:100%;
+
+    width: 100%;
 }

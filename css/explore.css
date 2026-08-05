@@ -35,7 +35,7 @@
     padding:5px;
     box-shadow: 0 2px 1px 0 gray;
    
-    background-color: #e8f4e7;
+    background-color: var(--content-bg-offwhite);
     border-radius: 10px;
 }
 .exp-card:hover{

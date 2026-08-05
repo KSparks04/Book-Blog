@@ -1,77 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
     let urlParams = new URLSearchParams(window.location.search);
-    let boardId = urlParams.get("id");
-    console.log(boardId);
-    fetch("../php/get_board.php?id=" + boardId).then(response => response.json()).then(data => {
+    let postId = urlParams.get("id");
+    console.log(postId);
+    fetch("../php/get_post.php?id=" + postId).then(response => response.json()).then(data => {
         console.log(data);
-        let board = document.querySelector(".board");
-        console.log(data[0].background_image);
+        //let board = document.querySelector(".board");
+        //console.log(data[0].background_image);
         //board.style.backgroundImage = "url(" + data[0].background_image + ")";
-        updateBoards(data);
+        //updateBoards(data);
+        let postCont = document.querySelector(".post-bckgnd");
+        postCont.style.backgroundColor = data[0].colour;
+        createPost(data[0],postCont)
 
     });
 });
-
-
-async function updateBoards(data) {
-
-
-    //let board = document.querySelector(".board");
-    //console.log(data[0].background_image);
-    //board.style.backgroundImage = "url(" + data[0].background_image + ")";
-    for (let boardInfo of data) {
-        let postsResponse = await fetch("../php/get_posts.php?board_id=" + boardInfo.id);
-        let posts = await postsResponse.json();
-
-        let tagsResponse = await fetch("../php/get_board_tags.php?board_id=" + boardInfo.id);
-        let tagsFetch = await tagsResponse.json();
-
-        let board = document.createElement("div");
-        board.classList.add("board");
-        board.style.backgroundImage = "url(" + boardInfo.background_image + ")";
-
-        let head = document.createElement("div");
-        head.classList.add("board-title")
-        head.innerHTML = " <h2 >" + boardInfo.name + "</h2>";
-
-
-        let tags = document.createElement("div");
-        tags.classList.add("board-tags");
-
-        tagsFetch.forEach(tag => {
-            let tg = document.createElement("a");
-            tg.classList.add("tag");
-            let sp = document.createElement("span");
-            sp.textContent = tag.name;
-            tg.appendChild(sp);
-            tags.appendChild(tg);
-        });
-        head.appendChild(tags);
-        board.appendChild(head);
-
-        let allPosts = document.createElement("div");
-        allPosts.classList.add("all-posts");
-        for (let post of posts) {
-            let pst = await createPost(post)
-
-            allPosts.appendChild(pst);
-        }
-
-
-        board.appendChild(allPosts);
-        document.querySelector(".page").appendChild(board);
-
-
-        //Post 
-
-
-
-
-
-    }
-}
-
-async function createPost(posted) {
+async function createPost(posted, container) {
     console.log(posted);
     let postsTags = await fetch("../php/get_post_tags.php?post_id=" + posted.id);
     let tagged = await postsTags.json();
@@ -81,6 +24,14 @@ async function createPost(posted) {
     h3.classList.add("post-title");
     h3.textContent = posted.title;
     post.appendChild(h3);
+
+    let user = document.createElement("p");
+    let username = await fetch("../php/get_post_user.php?id="+posted.user_id);
+    let name = await username.json();
+    console.log(name);
+    user.textContent = name[0].username;
+    post.appendChild(user);
+    //NEED USER NAME GRAB FOR POST
     //TODO: DYNAMIC loading content and grabbing it
 
 
@@ -114,13 +65,11 @@ async function createPost(posted) {
     extraOps.classList.add("e-ops");
     let postRef = document.createElement("a");
     postRef.innerHTML = "<i class=\"bi bi-chat\"></i>Post a comment";
-    let readRef = document.createElement("a");
-    readRef.textContent = "Read more";
-    readRef.setAttribute("href","view-post?id="+posted.id);
+
 
 
     content.appendChild(postContent);
-    extraOps.appendChild(readRef);
+    
     extraOps.appendChild(postRef);
 
 
@@ -129,24 +78,17 @@ async function createPost(posted) {
     mentionsHeader.classList.add("m-header");
     let h4 = document.createElement("h4");
     h4.textContent = "Books mentioned";
-    let btn = document.createElement("button");
-    btn.classList.add("mention-btn");
-    btn.innerHTML = "<i class=\"bi bi-chevron-down\"></i>";
+    
 
     let carosel = document.createElement("div");
     carosel.classList.add("book-carousel");
-    carosel.classList.add("hide");
+   
 
     loadBooks(carosel, posted.id);
 
 
     mentionsHeader.appendChild(h4);
-    mentionsHeader.appendChild(btn);
-    btn.addEventListener("click", (e) => {
-
-        carosel.classList.toggle("hide");
-
-    });
+   
     mentions.appendChild(mentionsHeader);
     mentions.appendChild(carosel);
 
@@ -155,12 +97,11 @@ async function createPost(posted) {
     post.appendChild(content);
     post.appendChild(extraOps);
     post.appendChild(mentions);
-    return post;
+    container.appendChild(post);
 
 
 
 }
-
 async function loadBooks(cardCarousel, id) {
     let postsBooks = await fetch("../php/get_posts_book.php?post_id=" + id);
     let books = await postsBooks.json();

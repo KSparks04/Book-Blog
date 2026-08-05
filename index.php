@@ -12,7 +12,7 @@ if ($basePath !== '') {
 }
 
 // echo $route;
-$editRoute= str_replace("index.php/", "", $route);
+$editRoute = str_replace("index.php/", "", $route);
 
 //echo "<br>".$editRoute; // Output: /signup
 
@@ -55,6 +55,9 @@ switch ($editRoute) {
     case '/view-board':
         require 'pages/board.php';
         break;
+    case '/view-post':
+        require 'pages/post.php';
+        break;
     case '/boards':
         require 'pages/view-board.php';
         break;
@@ -70,7 +73,7 @@ switch ($editRoute) {
     case '/success-login':
         require 'pages/successful-login.php';
         break;
-    
+
     default:
         http_response_code(404);
         echo "Not found";
