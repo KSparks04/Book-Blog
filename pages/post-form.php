@@ -21,6 +21,11 @@ try {
 }
 
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+if($_POST['color-sel'] === "#000000"){
+    $_POST['color-sel'] = "#f3e3fa";
+}
+
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $stmt = $pdo->prepare("

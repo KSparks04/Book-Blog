@@ -39,14 +39,89 @@ include_once("php/db-config.inc.php");
                 <li class="nav-button"><a id="explore" href="../index.php/explore">Browse</a></li>
                 <?php
                 if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
-                    echo '<li class="nav-button"><a id="user-posts" href="index.php/boards">My Boards</a></li>';
+                    echo '<li class="nav-button"><a id="user-posts" href="boards">My Boards</a></li>';
                 }
 
                 ?>
             </ul>
-            <div id="user-create">
-                <a id="signup" href="<?= BASE_URL ?>/signup">Login</a>
-            </div>
+             <div id="user-create">
+                <?php
+                if (!isset($_SESSION['email'])) {
+                    echo "<a class=\"signup\" id=\"login-btn\"><i class=\"bi bi-person\"></i></a>";
+                }
+                ?>
+                <div id="profile-wrapper">
+                    <?php
+                    if (isset($_SESSION["logged_in"]) && isset($_SESSION["email"])) {
+                        echo "<a class = \"signup\" id=\"profile-view\"><i class=\"bi bi-person\"></i></a>";
+                    }
+                    ?>
+                    <div id="profile-modal">
+                        <div id="signout">
+                            <p>Sign out</p>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <!-- <a id="signup" href="<?= BASE_URL ?>/signup"><i class="bi bi-person"></i></a> -->
+                <div class="modal">
+                    <div class="modal-container">
+                        <span class="close">&times</span>
+                        <!-- <div>
+                            <h3>Create your account</h3>
+                            <form id="sign-up" action="success-signup" method="post">
+                                <label for="username">Displayed Username</label>
+                                <input type="text" name="username" id="username">
+                                <label for="email">Email Address</label>
+                                <input type="text" name="email" id="email">
+                                <p id="email-error"></p>
+                                <label for="password">Password</label>
+                                <input type="password" name="password" id="password">
+                                <p id="pwrd-error"></p>
+
+                                <button type="submit" id="sign-up-btn">Sign up with email</button>
+                            </form>
+                            <a href="<?= BASE_URL ?>/userauth">
+                                
+                                <button id="google-signup">Continue with Google</button>
+                            </a>
+                        </div> -->
+                        <div>
+                            <?php
+
+
+                            if (!isset($_SESSION['email'])) {
+                                echo "
+                            <div id=\"acct\">
+                            <h3>Create your account</h3>
+                            <form id=\"sign-up-form\" action=\"success-signup\" method=\"post\">
+                                <label for=\"username\">Displayed Username</label>
+                                <input type=\"text\" name=\"username\" id=\"username\">
+                                <p id=\"user-error\"></p>
+                                <label for=\"email\">Email Address</label>
+                                <input type=\"text\" name=\"email\" id=\"email\">
+                                <p id=\"email-error\"></p>
+                                <label for=\"password\">Password</label>
+                                <input type=\"password\" name=\"password\" id=\"password\">
+                                <p id=\"pwrd-error\"></p>
+
+                                <button type=\"submit\" id=\"sign-up-btn\">Sign up with email</button>
+                            </form>
+                            <p >Already have an account? <a id=\"acct-login\">Login</a></p>
+                            </div>";
+
+                            }
+
+                            ?>
+                            <a href="<?= BASE_URL ?>/userauth">
+
+                                <button id="google-signup">Continue with Google</button>
+                            </a>
+                        </div>
+
+                    </div>
 
         </nav>
     </header>
@@ -89,7 +164,11 @@ include_once("php/db-config.inc.php");
 
                             </div>
                         </div>
-                        <div id="comments">
+
+                        
+                    </div>
+                    
+                    <div id="comments">
                             <div class="comment">
                                 <p>User name</p>
                                 <p>Comment</p>
@@ -100,10 +179,32 @@ include_once("php/db-config.inc.php");
                                 <h3>Another Post from User</h3>
                             </div>
                         </div>
-                    </div>
                 </div>
             </div> -->
+            <div class="post">
+                <div class="post-cont">
+
+                </div>
+                <div class="cmt-form">
+                    <form class="hide" id="comment-form" method="post" action="comment-created">
+                        <input type="text" id="details" name="details">
+                        <?php
+                        echo "<input type=hidden id=\"user-id\" value=" . $_SESSION['user_id'] . ">";
+                        ?>
+                        <button id="comment-submit">Post</button>
+                    </form>
+                </div>
+            </div>
+            <div id="comments">
+
+            </div>
+            <div id="more-posts">
+                <div class="post-card">
+                    <h3>Another Post from User</h3>
+                </div>
+            </div>
         </div>
+
 
     </div>
 </body>

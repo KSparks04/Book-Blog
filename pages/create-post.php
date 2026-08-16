@@ -14,6 +14,7 @@ include_once("php/base.inc.php");
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="../css/base.css" rel="stylesheet">
     <link href="../css/create-post.css" rel="stylesheet">
+    <script src="../js/base.js"></script>
     <script src="../js/create-post.js"></script>
     <title>The Book Blog Club</title>
     <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
@@ -40,18 +41,96 @@ include_once("php/base.inc.php");
                 ?>
             </ul>
             <div id="user-create">
+                <?php
+                if (!isset($_SESSION['email'])) {
+                    echo "<a class=\"signup\" id=\"login-btn\"><i class=\"bi bi-person\"></i></a>";
+                }
+                ?>
+                <div id="profile-wrapper">
+                    <?php
+                    if (isset($_SESSION["logged_in"]) && isset($_SESSION["email"])) {
+                        echo "<a class = \"signup\" id=\"profile-view\"><i class=\"bi bi-person\"></i></a>";
+                    }
+                    ?>
+                    <div id="profile-modal">
+                        <div id="signout">
+                            <p>Sign out</p>
+                        </div>
 
-                <a id="signup" href="<?= BASE_URL ?>/signup">Login</a>
+                    </div>
+                </div>
+
+
+                <!-- <a id="signup" href="<?= BASE_URL ?>/signup"><i class="bi bi-person"></i></a> -->
+                <div class="modal">
+                    <div class="modal-container">
+                        <span class="close">&times</span>
+                        <!-- <div>
+                            <h3>Create your account</h3>
+                            <form id="sign-up" action="success-signup" method="post">
+                                <label for="username">Displayed Username</label>
+                                <input type="text" name="username" id="username">
+                                <label for="email">Email Address</label>
+                                <input type="text" name="email" id="email">
+                                <p id="email-error"></p>
+                                <label for="password">Password</label>
+                                <input type="password" name="password" id="password">
+                                <p id="pwrd-error"></p>
+
+                                <button type="submit" id="sign-up-btn">Sign up with email</button>
+                            </form>
+                            <a href="<?= BASE_URL ?>/userauth">
+                                
+                                <button id="google-signup">Continue with Google</button>
+                            </a>
+                        </div> -->
+                        <div>
+                            <?php
+
+
+                            if (!isset($_SESSION['email'])) {
+                                echo "
+                            <div id=\"acct\">
+                            <h3>Create your account</h3>
+                            <form id=\"sign-up-form\" action=\"success-signup\" method=\"post\">
+                                <label for=\"username\">Displayed Username</label>
+                                <input type=\"text\" name=\"username\" id=\"username\">
+                                <p id=\"user-error\"></p>
+                                <label for=\"email\">Email Address</label>
+                                <input type=\"text\" name=\"email\" id=\"email\">
+                                <p id=\"email-error\"></p>
+                                <label for=\"password\">Password</label>
+                                <input type=\"password\" name=\"password\" id=\"password\">
+                                <p id=\"pwrd-error\"></p>
+
+                                <button type=\"submit\" id=\"sign-up-btn\">Sign up with email</button>
+                            </form>
+                            <p >Already have an account? <a id=\"acct-login\">Login</a></p>
+                            </div>";
+
+                            }
+
+                            ?>
+                            <a href="<?= BASE_URL ?>/userauth">
+
+                                <button id="google-signup">Continue with Google</button>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
             </div>
 
         </nav>
     </header>
     <?php
     if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true) {
-        header("Location:" . BASE_URL . "/signup");
+        echo "<h2> Haven't Signed up or logged in yet? Click below to get started blogging! </h2>";
+        echo "<buuton id=\"not-logged\">Log in</button>";
     }
 
     ?>
+    <?php if (!empty($_SESSION['logged_in'])): ?>
     <form method="post" action="post-created" id="post">
         
         <div id="post-page">
@@ -146,6 +225,7 @@ include_once("php/base.inc.php");
 
 
     </form>
+    <?php endif;?>
 
 </body>
 

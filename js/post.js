@@ -10,16 +10,16 @@ document.addEventListener("DOMContentLoaded", () => {
         //updateBoards(data);
         let postCont = document.querySelector(".post-bckgnd");
         postCont.style.backgroundColor = data[0].colour;
-        createPost(data[0],postCont)
+        let post = document.querySelector(".post-cont");
+        createPost(data[0],postCont, post);
 
     });
 });
-async function createPost(posted, container) {
+async function createPost(posted, container, post) {
     console.log(posted);
     let postsTags = await fetch("../php/get_post_tags.php?post_id=" + posted.id);
     let tagged = await postsTags.json();
-    let post = document.createElement("div");
-    post.classList.add("post");
+    
     let h3 = document.createElement("h3");
     h3.classList.add("post-title");
     h3.textContent = posted.title;
@@ -64,6 +64,7 @@ async function createPost(posted, container) {
     let extraOps = document.createElement("div");
     extraOps.classList.add("e-ops");
     let postRef = document.createElement("a");
+    postRef.href="#comment-form";
     postRef.innerHTML = "<i class=\"bi bi-chat\"></i>Post a comment";
 
 
@@ -92,12 +93,58 @@ async function createPost(posted, container) {
     mentions.appendChild(mentionsHeader);
     mentions.appendChild(carosel);
 
+
+   
+    let commentForm = document.querySelector("#comment-form");
+   
+    postRef.addEventListener("click",()=>{
+        commentForm.style.display = "block";
+    });
+    let postId = document.createElement("input");
+    postId.type = "hidden";
+    postId.name = "post-id";
+    postId.value = posted.id;
+    commentForm.appendChild(postId);
+  
+
+
+
+
     // content.appendChild(mentions);
 
     post.appendChild(content);
     post.appendChild(extraOps);
     post.appendChild(mentions);
-    container.appendChild(post);
+    
+
+    let commentsSection = document.querySelector("#comments");
+    
+    let commentsB = await fetch("../php/get_comments.php?id="+posted.id);
+    let retrievedComments = await commentsB.json();
+    console.log(retrievedComments);
+    for( let c of retrievedComments){
+        let userComment = await fetch("../php/get_post_user.php?id="+c.user_id);
+        let resp = await userComment.json();
+        let cBox = document.createElement("div");
+        cBox.classList.add("comment");
+        let bookmark = document.createElement("div");
+        bookmark.classList.add("bookmark");
+        
+        let userComm = document.createElement("h3");
+        userComm.textContent = resp[0].username;
+        let pC = document.createElement("p");
+        pC.classList.add("comment-p");
+        pC.textContent = c.content;
+        
+        bookmark.appendChild(userComm);
+        bookmark.appendChild(pC);
+        cBox.appendChild(bookmark);
+        commentsSection.appendChild(cBox);
+    }
+    
+
+    //container.appendChild(post);
+    //container.appendChild(commentsSection)
 
 
 

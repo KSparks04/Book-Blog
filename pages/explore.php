@@ -36,7 +36,7 @@ include_once("php/base.inc.php");
                     <li class="nav-button"><a id="explore" href="../index.php/explore">Browse</a></li>
                     <?php
                     if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
-                        echo '<li class="nav-button"><a id="user-posts" href="index.php/boards">My Boards</a></li>';
+                        echo '<li class="nav-button"><a id="user-posts" href="boards">My Boards</a></li>';
                     }
 
                     ?>
