@@ -177,7 +177,7 @@ async function loadBooks(cardCarousel, id) {
 
         let a = document.createElement("a");
         a.classList.add("book-link");
-        a.setAttribute("href", "index.php/view-book?id=" + book.id);
+        a.setAttribute("href", "view-book?id=" + book.id);
 
         let img = document.createElement("img");
         if (book.cover_url == null) {

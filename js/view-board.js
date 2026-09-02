@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let board = document.querySelector(".board");
         console.log(data[0].background_image);
         //board.style.backgroundImage = "url(" + data[0].background_image + ")";
+        document.querySelector(".page").innerHTML ="";
         updateBoards(data);
 
     });
@@ -25,10 +26,12 @@ async function updateBoards(data) {
         let board = document.createElement("div");
         board.classList.add("board");
         board.style.backgroundImage = "url(" + boardInfo.background_image + ")";
+        let boardTitleContent = document.createElement("div");
+        boardTitleContent.classList.add("board-title");
 
-        let head = document.createElement("header");
-        head.innerHTML = " <h2 class=\"board-title\">" + boardInfo.name + "</h2>";
-        board.appendChild(head);
+        let head = document.createElement("h2");
+        head.textContent =  boardInfo.name;
+        boardTitleContent.appendChild(head);
 
         let tags = document.createElement("div");
         tags.classList.add("board-tags");
@@ -41,16 +44,30 @@ async function updateBoards(data) {
             tg.appendChild(sp);
             tags.appendChild(tg);
         });
-        board.appendChild(tags);
+        boardTitleContent.appendChild(tags);
+        board.appendChild(boardTitleContent);
 
-
+        let postsDiv = document.createElement("div");
+        postsDiv.classList.add("posts");
 
        
 
-
-        posts.forEach(post => {
-            board.appendChild(createPost(post));
-        });
+        console.log(posts.length);
+        let postCreated = 1;
+        let postsMore = document.createElement("a");
+        postsMore.classList.add("posts-more");
+        postsMore.textContent = "See more";
+        for(let post of posts){
+            if(postCreated >2){
+                postsDiv.appendChild(postsMore);
+                break;
+            }
+            postCreated++;
+            let postCreate = await createPost(post);
+            postsDiv.appendChild(postCreate);
+        }
+        
+        board.appendChild(postsDiv);
         document.querySelector(".page").appendChild(board);
 
 
@@ -63,26 +80,27 @@ async function updateBoards(data) {
     }
 }
 
-function createPost(posted) {
+async function createPost(posted) {
     let post = document.createElement("div");
     post.classList.add("post");
     let h3 = document.createElement("h3");
     h3.classList.add("post-title");
     h3.textContent = posted.title;
     //TODO: DYNAMIC loading content and grabbing it
-
+    post.appendChild(h3);
+     let postsTags = await fetch("../php/get_post_tags.php?post_id=" + posted.id);
+    let tagged = await postsTags.json();
 
     let tags = document.createElement("div");
-    tags.classList.add("tags")
-    let tag = document.createElement("div");
-    tag.classList.add("tag");
-
-
-    let ref = document.createElement("a");
-    ref.textContent = "Placeholder";
-
-    tag.appendChild(ref);
-    tags.appendChild(tag);
+    tags.classList.add("tags");
+    tagged.forEach(tag => {
+        let tg = document.createElement("a");
+        tg.classList.add("tag");
+        let sp = document.createElement("span");
+        sp.textContent = tag.name;
+        tg.appendChild(sp);
+        tags.appendChild(tg);
+    });
 
     post.appendChild(tags);
 
@@ -90,32 +108,16 @@ function createPost(posted) {
     content.classList.add("post-content");
 
     let p = document.createElement("p");
-    p.textContent = "Placeholder"
-    let postRef = document.createElement("a");
-    postRef.innerHTML = "<i class=\"bi bi-chat\"></i>Post a comment";
+    p.innerHTML = posted.content;
+   
     let readRef = document.createElement("a");
     readRef.textContent = "Read more";
 
     content.appendChild(p);
-    content.appendChild(postRef);
+    
     content.appendChild(readRef);
 
-    let mentions = document.createElement("div");
-    let h4 = document.createElement("h4");
-    h4.textContent = "Books mentioned";
-    let btn = document.createElement("button");
-    btn.classList.add("mention-btn");
-    btn.innerHTML = "<i class=\"bi bi-chevron-down\"></i>";
-
-    let carosel = document.createElement("div");
-    carosel.classList.add("book-carousel");
-    //loadBook(books,carosel);
-
-    mentions.appendChild(h4);
-    mentions.appendChild(btn);
-    mentions.appendChild(carosel);
-
-    content.appendChild(mentions);
+   
 
     post.appendChild(content);
     return post;

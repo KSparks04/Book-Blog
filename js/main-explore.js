@@ -47,6 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
         newPage(currentPage);
 
     });
+    
+
 
 });
 async function requestedBooks(info) {

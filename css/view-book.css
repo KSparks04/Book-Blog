@@ -44,11 +44,14 @@ flex-shrink: 0;
 }
 .genre-list{
     display: flex;
+    flex-wrap: wrap;
 }
 
 .genre-list li{
     margin:0 5px 0 5px;
     list-style-type: none;
+    background-color:var(--button-colour-bg);
+    border-radius: 5px;
 
 }
 

@@ -16,6 +16,7 @@ include_once("php/base.inc.php");
     <link href="../css/explore.css" rel="stylesheet">
     <script src="../js/base.js"></script>
     <script src="../js/main-explore.js"></script>
+    <script src="../js/explore-filters.js"></script>
     <title>The Book Blog Club</title>
     <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 </head>
@@ -28,7 +29,7 @@ include_once("php/base.inc.php");
                 <img id="logo" src="../images/Book-Blog-Club-Logo-Transparent.png" alt="the book blog club logo">
             </a>
         </div>
-        
+
         <nav id="nav-bar">
             <div>
                 <ul>
@@ -142,9 +143,28 @@ include_once("php/base.inc.php");
     <div id="exp">
         <aside id="filters">
             <h3>Filters</h3>
-            <form>
+            <button id="filter-update">Update</button>
+            <div id="filters-container">
+                <div class="filter-container" id="filter-genres-container">
+                    <div>
+                        <p>Genres</p>
+                        <a id="g-search"><i class="bi bi-search"></i></a>
+                        <form class="hide" id="genre-search">
+                            <input type="text" id="genre-search-text" name="genre-search">
+                        </form>
+                    </div>
+                    
+                    <div class="filter-buttons-container" id="filter-genres">
+                        <a class="genre filter-btn">Romance</a>
+                    </div>
+                    <a id="see-more"></a>
 
-            </form>
+                </div>
+                <div class="hide filter-container" id="filter-tags">
+                    <p>Tags</p>
+                    <a class="tags filter-btn">Romance</a>
+                </div>
+            </div>
         </aside>
         <div id="main-exp">
 
