@@ -1,19 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
     let urlParams = new URLSearchParams(window.location.search);
     let bookId = urlParams.get("id");
+    let workKey = formatWorkKey( urlParams.get("key"));
     console.log(bookId);
-    fetch("../php/get_book.php?id=" + bookId).then(response => response.json()).then(data => {
+    fetch("../php/get_book.php?id=" + bookId+"&key="+workKey).then(response => response.json()).then(data => {
         console.log(data);
-        displayBook(data[0]);
-    }).catch(error => {
-        console.error("API Error:", error); // Added error catching to help you debug
-    });
-    fetch("../php/get_book_genre.php?id=" + bookId).then(response => response.json()).then(data => {
+        displayBook(data);
+        fetch("../php/get_book_genre.php?id=" + bookId).then(response => response.json()).then(data => {
         console.log(data);
         displayGenres(data);
     }).catch(error => {
         console.error("API Error:", error); // Added error catching to help you debug
     });
+    }).catch(error => {
+        console.error("API Error:", error); // Added error catching to help you debug
+    });
+    
     let readExpand = document.querySelector(".toggle-btn");
     readExpand.addEventListener("click", (e) => {
         if (e.target && e.target.nodeName == "BUTTON") {
@@ -33,6 +35,13 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 
 });
+
+function formatWorkKey(key) {
+    if (!key) return '';
+    return key.startsWith('/works/') ? key : `/works/${key.replace(/^\/+/, '')}`;
+}
+
+
 async function displayReviews(bookId, ratingLevel){
     let response = await fetch("../php/get_reviews.php?id="+bookId + "&level="+ratingLevel);
     let reviews  = await response.json();

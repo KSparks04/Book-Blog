@@ -17,22 +17,127 @@ try {
 } catch (PDOException $e) {
     die("DB Connection failed: " . $e->getMessage());
 }
-// Trim invisible whitespace from the edges of the input
+
 $searchTerm = trim($_GET['info']);
 
-// Optional: Limit the length so they don't send a 10,000-character string
+
 $searchTerm = substr($searchTerm, 0, 100);
 
 
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$sql = "SELECT books.id, books.title, books.author,books.cover_url FROM books WHERE books.title LIKE ? OR books.author LIKE ?";
-$stmt = $pdo->prepare($sql);
-
-$likeParameter = "%".$searchTerm."%";
-$stmt->execute([$likeParameter,$likeParameter]);
 
 
+$page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 
-$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$limit = 25;
+$offset = ($page - 1) * $limit;
+$limitNum = max(1, (int) $limit);
+$offsetNum = max(0, (int) $offset);
+
+// $sql = "
+//     SELECT DISTINCT
+//         books.id,
+//         books.title,
+//         books.cover_url
+//     FROM books
+//     LEFT JOIN book_authors
+//         ON books.id = book_authors.book_id
+//     LEFT JOIN authors
+//         ON book_authors.author_id = authors.id
+//     WHERE books.title LIKE ?
+//        OR authors.name LIKE ?
+//     ORDER BY books.id
+//     LIMIT $limitNum OFFSET $offsetNum
+// ";
+
+
+
+
+
+// // $sql = "SELECT books.id, books.title, books.author,books.cover_url FROM books WHERE books.title LIKE ? OR books.author LIKE ? ";
+// $stmt = $pdo->prepare($sql);
+
+// $likeParameter = $searchTerm . "%";
+
+
+// $stmt->execute([$likeParameter, $likeParameter]);
+
+
+
+// $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+function searchTitles($searchTerm)
+{
+    global $limitNum, $offsetNum, $pdo;
+    $titleSql = "
+        SELECT
+            books.id,
+            books.title,
+            books.cover_url,
+            books.work_key,
+            GROUP_CONCAT(DISTINCT authors.name SEPARATOR ', ') AS author
+        FROM books
+        LEFT JOIN book_authors
+            ON books.id = book_authors.book_id
+        LEFT JOIN authors
+            ON book_authors.author_id = authors.id
+        WHERE books.title LIKE ?
+        GROUP BY books.id, books.title, books.cover_url
+        ORDER BY books.id
+        LIMIT $limitNum OFFSET $offsetNum
+    ";
+
+    $stmt = $pdo->prepare($titleSql);
+    $stmt->execute([$searchTerm . "%"]);
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($rows as &$row) {
+        $row['source'] = 'local';
+    }
+
+    return $rows;
+
+}
+function searchAuthors($searchTerm)
+{
+    global $limitNum, $offsetNum, $pdo;
+    $authorSql = "
+        SELECT
+            books.id,
+            books.title,
+            books.cover_url,
+            books.work_key,
+            GROUP_CONCAT(DISTINCT authors.name SEPARATOR ', ') AS author
+        FROM authors
+        INNER JOIN book_authors
+            ON authors.id = book_authors.author_id
+        INNER JOIN books
+            ON books.id = book_authors.book_id
+        WHERE authors.name LIKE ?
+        GROUP BY books.id, books.title, books.cover_url
+        ORDER BY books.id
+        LIMIT $limitNum OFFSET $offsetNum
+    ";
+
+    $stmt = $pdo->prepare($authorSql);
+    $stmt->execute([$searchTerm . "%"]);
+  
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($rows as &$row) {
+        $row['source'] = 'local';
+    }
+
+    return $rows;
+}
+
+$rows = searchTitles($searchTerm);
+
+if (empty($rows)) {
+    $rows = searchAuthors($searchTerm);
+}
+
+if (empty($rows)) {
+    $rows = searchOpenLibrary($searchTerm);
+}
+
+header('Content-Type: application/json');
 echo json_encode($rows);
 ?>

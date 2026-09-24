@@ -18,6 +18,9 @@ include_once("php/base.inc.php");
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Ahom&family=Nova+Square&display=swap"
         rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap" rel="stylesheet">
+
     <link href="css/base.css" rel="stylesheet">
     <link href="css/text-styles.css" rel="stylesheet">
     <link href="css/main-home.css" rel="stylesheet">
@@ -29,17 +32,15 @@ include_once("php/base.inc.php");
 <body>
     <header id="header">
 
-        
+
 
         <nav id="nav-bar">
-            <div id="title">
-            <a href="./">
-                <img id="logo" src="images/Book-Blog-Club-Logo-Transparent.png" alt="the book blog club logo">
-                <!-- <h1>The Book Blog Club</h1> -->
-            </a>
-
-
-        </div>
+           
+                <a href="./" class="cinzel" id="title" >
+                    <!-- <img id="logo" src="images/Book-Blog-Club-Logo-Transparent.png" alt="the book blog club logo"> -->
+                    The Book Blog Club
+                </a>
+           
             <ul>
                 <li class="nav-button"><a id="home" href="./">Home</a></li>
                 <li class="nav-button"><a id="explore" href="index.php/explore">Browse</a></li>

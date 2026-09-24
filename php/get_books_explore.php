@@ -18,10 +18,27 @@ try {
     die("DB Connection failed: " . $e->getMessage());
 }
 
+
+
+
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$sql = "SELECT books.id, books.title, books.author,books.cover_url,AVG(reviews.rating) as avg_rating FROM books INNER JOIN reviews ON books.id = reviews.book_id GROUP BY books.id, books.title, books.author, books.cover_url";
-// $sql = "SELECT books.title, books.author,books.cover_url, reviews.rating, reviews.content, AVG(reviews.rating) as avg_rating FROM books INNER JOIN reviews ON books.id = reviews.book_id";
-$results = $pdo->query($sql);
-$rows = $results->fetchAll(PDO::FETCH_ASSOC);
-echo json_encode($rows);
+
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+$limit = 25;
+$offset = ($page - 1) * $limit;
+
+$sql = "SELECT id, title, author, cover_url
+        FROM books
+        ORDER BY id
+        LIMIT $limit OFFSET $offset";
+
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+
+$books = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+
+echo json_encode($books);
 ?>

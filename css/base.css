@@ -1,18 +1,25 @@
 :root {
+    --theme-chiffon: #e4e9d8;
+    --theme-field: #bfd59e;
+    --nav-font: "Cinzel";
     --body-font-family: "Noto Serif Ahom", "Georgia";
     --border-outline-1: #670626;
     --button-colour-bg: #f4f0f4;
     --button-colour-bg-hover: #e4e4e4e2;
     --content-border-green: #8bbd6a;
     --content-bg-offwhite: #f7f3e5;
-    --board-title-colour-bg:#f3f0f4;
+    --board-title-colour-bg: #f3f0f4;
 
 
-    --fc-gray:#515151;
-    --fs-sm: 0.875rem;/* 14px */
-    --fs-base: 1rem;/* 16px */
-    --fs-lg: 1.25rem;/* 20px */
-    --fs-xl: 1.75rem;/* 28px */
+    --fc-gray: #515151;
+    --fs-sm: 0.875rem;
+    /* 14px */
+    --fs-base: 1rem;
+    /* 16px */
+    --fs-lg: 1.25rem;
+    /* 20px */
+    --fs-xl: 1.75rem;
+    /* 28px */
 
     --fw-normal: 400;
     --fw-medium: 500;
@@ -21,7 +28,7 @@
 }
 
 body {
-    background-color: #FFF8FF;
+    background-color: var(--theme-chiffon);
     font-family: var(--body-font-family);
     margin: 0 10px;
 }
@@ -40,21 +47,34 @@ img {
     display: none;
 }
 
+.cinzel {
+    font-family: "Cinzel", serif;
+    font-optical-sizing: auto;
+
+    font-style: normal;
+}
+
 #header {
     display: flex;
+    align-items: center;
     border-bottom: 1px solid #bcb4ab;
 }
 
 #header #title {
-
-    width: 150px;
+    max-width: 350px;
+    width: 100%;
     margin: 10px;
+   font-size: var(--fs-xl);
+   font-weight: var(--fw-medium);
 }
 
 #title a {
-    text-align: center;
+
+    max-width: 350px;
+    width: 100%;
     display: block;
-    width: fit-content;
+    font-size: var(--fs-lg);
+
 
 
 }
@@ -79,12 +99,15 @@ nav div {
 
 #nav-bar ul {
     display: flex;
-    
+
     border-radius: 15px;
-    
+
     padding: 0px;
     margin: 0;
     overflow: hidden;
+    font-size: var(--fs-lg);
+    
+    font-family: var(--nav-font);
 
 }
 
@@ -92,6 +115,7 @@ nav div {
     display: flex;
     margin-left: auto;
     margin-bottom: 15px;
+    
 }
 
 #nav-bar ul li {
@@ -101,7 +125,7 @@ nav div {
 }
 
 #nav-bar ul li a:hover {
-   
+
     color: white;
 }
 
@@ -138,6 +162,10 @@ nav div {
 
 .nav-button {
     margin: 10px;
+    padding:5px;
+}
+.nav-button:hover{
+    background-color: var(--theme-field) ;
 }
 
 .search {

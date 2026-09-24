@@ -23,10 +23,13 @@ try {
 
 
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-$sql = "SELECT * FROM books JOIN book_genres on books.id = book_genres.book_id WHERE 1=1";
+ $sql = "SELECT * FROM books";
+ $params = [];
+if ($_GET['format'] == "books"){
+    $sql = "SELECT * FROM books JOIN book_genres on books.id = book_genres.book_id WHERE 1=1";
 $params = [];
 $genres = $_GET['genres'] ?? [];
+$tags = $_GET['tags'] ?? [];
 
 if (!empty($genres)) {
      $placeholders = implode(',', array_fill(0, count($genres), '?'));
@@ -38,6 +41,21 @@ if (!empty($genres)) {
     }
     
 }
+}else if($_GET['format'] === "posts"){
+    $sql = "SELECT * FROM posts JOIN post_tags on posts.id = post_tags.post_id WHERE 1=1";
+    if (!empty($tags)) {
+     $placeholders = implode(',', array_fill(0, count($tags), '?'));
+
+    $sql .= " AND post_tags.tag_id IN ($placeholders)";
+
+    foreach ($tags as $tag) {
+        $params[] = $tag;
+    }
+    
+}
+}
+
+
 $stmt = $pdo->prepare($sql);
 
 

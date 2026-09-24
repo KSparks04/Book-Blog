@@ -1,5 +1,6 @@
 <?php
 include_once("db-config.inc.php");
+include_once("search-book.php");
 $sslCa = __DIR__ . "/../certs/DigiCertGlobalRootCA.crt.pem";
 $env = getenv('APP_ENV') ?: 'local';
 
@@ -19,6 +20,7 @@ try {
 }
 
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 $sql = "SELECT books.id, books.title, books.author,books.cover_url FROM books";
 // $sql = "SELECT books.title, books.author,books.cover_url, reviews.rating, reviews.content, AVG(reviews.rating) as avg_rating FROM books INNER JOIN reviews ON books.id = reviews.book_id";
 $results = $pdo->query($sql);

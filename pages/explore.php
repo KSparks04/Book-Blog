@@ -11,6 +11,9 @@ include_once("php/base.inc.php");
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="../css/base.css" rel="stylesheet">
     <link href="../css/text-styles.css" rel="stylesheet">
     <link href="../css/explore.css" rel="stylesheet">
@@ -24,11 +27,10 @@ include_once("php/base.inc.php");
 <body>
     <header id="header">
 
-        <div id="title">
-            <a href="<?= BASE ?>">
-                <img id="logo" src="../images/Book-Blog-Club-Logo-Transparent.png" alt="the book blog club logo">
-            </a>
-        </div>
+        <a href="../" class="cinzel" id="title">
+            <!-- <img id="logo" src="images/Book-Blog-Club-Logo-Transparent.png" alt="the book blog club logo"> -->
+            The Book Blog Club
+        </a>
 
         <nav id="nav-bar">
             <div>
@@ -145,6 +147,16 @@ include_once("php/base.inc.php");
             <h3>Filters</h3>
             <button id="filter-update">Update</button>
             <div id="filters-container">
+                <div class="filter-container" id="filter-format-container">
+                    <div>
+                        <p>Format</p>
+                        <form id="format-select">
+                            <label><input type="radio" name="format" value="books" checked>Books</label>
+                            <label><input type="radio" name="format" value="posts">Posts</label>
+                            <label><input type="radio" name="format" value="blogs">Blogs</label>
+                        </form>
+                    </div>
+                </div>
                 <div class="filter-container" id="filter-genres-container">
                     <div>
                         <p>Genres</p>
@@ -153,7 +165,7 @@ include_once("php/base.inc.php");
                             <input type="text" id="genre-search-text" name="genre-search">
                         </form>
                     </div>
-                    
+
                     <div class="filter-buttons-container" id="filter-genres">
                         <a class="genre filter-btn">Romance</a>
                     </div>
@@ -162,27 +174,30 @@ include_once("php/base.inc.php");
                 </div>
                 <div class="hide filter-container" id="filter-tags">
                     <p>Tags</p>
-                    <a class="tags filter-btn">Romance</a>
+                    <div class="filter-buttons-container" id="filter-tag">
+
+                    </div>
+                    <a id="see-more-tags"></a>
                 </div>
             </div>
         </aside>
         <div id="main-exp">
 
             <ul id="exp-pages">
-                <li>
+                <!-- <li>
                     <div class="exp-card">
                         <img src="../images/default_image.jpg" class="exp-img">
                         <div class="book-data"> </div>
                     </div>
-                </li>
+                </li> -->
             </ul>
 
 
 
-            <ul class="pagination">
+            <div class="pagination">
 
 
-            </ul>
+            </div>
 
 
 
