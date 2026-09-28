@@ -1,15 +1,14 @@
-# The Book Blog Club <img width="180" height="180" alt="apple-touch-icon" src="https://github.com/user-attachments/assets/baf6f9a3-552d-4f6a-8faf-0a4276c875f3" />
+# The Book Blog Club
 
 
 Work-in-progress full-stack book discovery and discussion platform where users can review books, create blog boards and posts on all things books.
 
 Deployed on Microsoft Azure: thebookblogclub-ashahjg5ccazedc8.canadaeast-01.azurewebsites.net 
 
-## Currently Working on (July 06-28)
-- Updating homepage layout
-- Fixing colour scheme
-- Finishing Book Reviews and Styling
-- Changing the signup styling
+## Currently Working on (Sept 28 - Oct 4)
+- Updating NavBar Styline
+- Colour Scheme Update
+- Book Mentions DB Query Update
 
 ## Current Features
 - OAuth v2 Sign in enabled for users with google accounts
