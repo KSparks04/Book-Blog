@@ -17,11 +17,10 @@ Deployed on Microsoft Azure: thebookblogclub-ashahjg5ccazedc8.canadaeast-01.azur
 - Create Posts
 - Book Reviews and Ratings
 - REST API Backend
-## Future Features (In Progress) 
-- Responsive UI 
-
 - Search and Filtering 
 - Blog Boards and Posts
+## Future Features (In Progress) 
+- Responsive UI 
 - Themed Blog Boards
   
 ## Tech Stack
