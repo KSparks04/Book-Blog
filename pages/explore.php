@@ -11,9 +11,11 @@ include_once("php/base.inc.php");
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Ahom&family=Nova+Square&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap" rel="stylesheet">
     <link href="../css/base.css" rel="stylesheet">
     <link href="../css/text-styles.css" rel="stylesheet">
     <link href="../css/explore.css" rel="stylesheet">
@@ -39,7 +41,7 @@ include_once("php/base.inc.php");
                     <li class="nav-button"><a id="explore" href="../index.php/explore">Browse</a></li>
                     <?php
                     if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true) {
-                        echo '<li class="nav-button"><a id="user-posts" href="boards">My Boards</a></li>';
+                        echo '<li class="nav-button"><a id="user-posts" href="index.php/my-boards">My Boards</a></li>';
                     }
 
                     ?>

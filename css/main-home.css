@@ -19,6 +19,7 @@ h2 {
 #main-content #feature-box1 svg {
     position: block;
     width: 100%;
+    height: auto;
 }
 
 #main-content #feature-box1 #blog-box {
@@ -98,7 +99,7 @@ div.f2 {
     flex-shrink: 0;
     background-color: transparent;
     border: none;
-    width:170px;
+    width: 170px;
 }
 
 .card-book {
@@ -108,10 +109,11 @@ div.f2 {
     background-color: transparent;
     border: none;
     transition: width 0.5s ease-in-out 0.3s;
-    height:350px;
+    height: 350px;
 }
-.card-book:hover{
-    width:150px;
+
+.card-book:hover {
+    width: 150px;
     padding: 10px;
     margin: 10px;
     flex-shrink: 0;
@@ -119,18 +121,20 @@ div.f2 {
     border: 1px #bcb4ab solid;
     transform: scale(1.05);
 }
-.card-book .card-content img{
-    width:200px;
+
+.card-book .card-content img {
+    width: 200px;
     transition: width 0.3s ease;
 }
-.card-book:hover .card-content img{
+
+.card-book:hover .card-content img {
     transform: scale(0.85);
-    margin-top:5px;
+    margin-top: 5px;
 }
 
 
-.card-book:hover .card-content  .book-star{
- position: absolute;
+.card-book:hover .card-content .book-star {
+    position: absolute;
     top: 5px;
     right: 15px;
     color: gold;
@@ -138,8 +142,9 @@ div.f2 {
     background-color: transparent;
     height: 20px;
 }
-.card-book:hover .card-content  .book-star p{
- color:black;
+
+.card-book:hover .card-content .book-star p {
+    color: black;
 }
 
 
@@ -292,4 +297,20 @@ div.f2 {
     background-color: rgb(222, 222, 222);
 
     width: 100%;
+}
+
+/* Tablets and Smaller */
+@media (max-width: 768px) {
+    #feature-box1{
+      height:600px;  
+    }
+    #main-content #feature-box1 #blog-box {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        margin: 20px;
+        padding: 30px;
+        transform: translate(0%,-160%);
+    }
 }

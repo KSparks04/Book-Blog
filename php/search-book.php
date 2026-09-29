@@ -291,33 +291,5 @@ function saveBookAuthors($bookId, $bookData)
         );
     }
 }
-// $book = findOrCreateBook("Dune");
 
-// if ($book === null) {
-//     echo "Book not found.";
-// } else {
-//     print_r($book);
-// }
-// $data = searchOpenLibrary("Dune");
-
-// // print_r($data);
-
-// if ($data === null) {
-//     echo "Open Library request failed.";
-//     exit;
-// }
-
-// if (empty($data['docs'])) {
-//     echo "No books found.";
-//     exit;
-// }
-
-// $book = $data['docs'][0];
-
-// echo "Title: " . ($book['title'] ?? 'N/A') . PHP_EOL;
-// echo "Author: " . ($book['author_name'][0] ?? 'N/A') . PHP_EOL;
-// echo "Work: " . ($book['key'] ?? 'N/A') . PHP_EOL;
-// echo "ISBN: " . ($book['isbn'][0] ?? 'N/A') . PHP_EOL;
-// echo "Pages: " . ($book['number_of_pages_median'] ?? 'N/A') . PHP_EOL;
-// echo "Subject: " . print_r($book['subject'] ?? 'N/A') . PHP_EOL;
 ?>

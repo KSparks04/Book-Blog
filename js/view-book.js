@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch("../php/get_book.php?id=" + bookId+"&key="+workKey).then(response => response.json()).then(data => {
         console.log(data);
         displayBook(data);
-        fetch("../php/get_book_genre.php?id=" + bookId).then(response => response.json()).then(data => {
+        fetch("../php/get_book_genre.php?id=" + data.id).then(response => response.json()).then(data => {
         console.log(data);
         displayGenres(data);
     }).catch(error => {

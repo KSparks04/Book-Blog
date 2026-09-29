@@ -1,6 +1,7 @@
 let tagSet = new Set();
 let allowedTags;
 let returnedBooks;
+let searchTimeout;
 document.addEventListener("DOMContentLoaded", () => {
     let form_btn = document.querySelector("#board-submit");
 
@@ -43,12 +44,18 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
 
         }
-        let book = search.value.trim().toLowerCase();
-        books = await requestedBooks(book);
-        console.log(books);
-        loadBooks(books);
-        returnedBooks = books;
-        console.log(returnedBooks);
+        clearTimeout(searchTimeout);
+
+        searchTimeout = setTimeout(async () => {
+            let book = search.value.trim().toLowerCase();
+            books = await requestedBooks(book);
+            console.log(books);
+            loadBooks(books);
+            returnedBooks = books;
+            console.log(returnedBooks);
+
+        }, 300);
+
 
     });
     let caro = document.querySelector("#search-carousel");
@@ -58,13 +65,21 @@ document.addEventListener("DOMContentLoaded", () => {
         if (e.target && (e.target.nodeName === "BUTTON" || e.target.nodeName === "I")) {
             e.preventDefault();
             let addedBooks = document.querySelector("#added-books");
-            let book;
-            for (check of returnedBooks) {
-                console.log(check);
-                if (check.id == e.target.dataset["id"]) {
-                    addedBooks.appendChild(createAddCard(check));
-                }
-            }
+            // let book;
+            // for (check of returnedBooks) {
+            //     console.log(check);
+            //     if (check.id == e.target.dataset["id"]) {
+
+            //     }
+            // }
+           
+            fetch("../php/get_book.php?id=" + e.target.dataset["id"] + "&key=" + formatWorkKey(e.target.dataset["work_key"])).then(response => response.json()).then(data => {
+                console.log(data);
+                 addedBooks.appendChild(createAddCard(data));
+
+            }).catch(error => {
+                console.error("API Error:", error); // Added error catching to help you debug
+            });
 
         }
     });
@@ -96,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
         main.style.backgroundColor = colorBackground.value;
     });
 
-    document.querySelector("#post").addEventListener("submit",saveBlogForm);
+    document.querySelector("#post").addEventListener("submit", saveBlogForm);
 
     // form.addEventListener("submit", (e) => {
     //     e.preventDefault();
@@ -131,7 +146,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 });
-
+function formatWorkKey(key) {
+    if (!key) return '';
+    return key.startsWith('/works/') ? key : `/works/${key.replace(/^\/+/, '')}`;
+}
 function formatDoc(cmd, value = null) {
     document.execCommand(cmd, false, value);
     document.getElementById('editor').focus();
@@ -141,7 +159,7 @@ function saveBlogForm() {
     document.getElementById('blogContent').value = rawHTML;
 }
 async function requestedBooks(info) {
-    let resp = await fetch("../php/get_books_search.php?info=" + info);
+    let resp = await fetch("../php/get_books_search.php?info=" + info + "&page=1");
     let books = await resp.json();
     return books;
 
@@ -255,6 +273,7 @@ function loadBooks(books) {
         let btn = document.createElement("button");
         btn.classList.add("add-btn");
         btn.setAttribute("data-id", book.id);
+        btn.setAttribute("data-work-key",book.work_key);
         let i = document.createElement("i");
         i.classList.add("bi");
         i.classList.add("bi-plus-circle-fill");

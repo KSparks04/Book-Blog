@@ -61,8 +61,8 @@ switch ($editRoute) {
     case '/comment-created':
         require 'pages/post-crt.php';
         break;
-    case '/boards':
-        require 'pages/view-board.php';
+    case '/my-boards':
+        require 'pages/view-boards.php';
         break;
     case '/post-created':
         require 'pages/post-form.php';

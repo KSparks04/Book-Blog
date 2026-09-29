@@ -1,5 +1,6 @@
 <?php
 include_once("db-config.inc.php");
+include_once("search-book.php");
 $sslCa = __DIR__ . "/../certs/DigiCertGlobalRootCA.crt.pem";
 $env = getenv('APP_ENV') ?: 'local';
 

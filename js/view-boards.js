@@ -112,6 +112,7 @@ async function createPost(posted) {
    
     let readRef = document.createElement("a");
     readRef.textContent = "Read more";
+    readRef.href = "view-post?id="+posted.id;
 
     content.appendChild(p);
     

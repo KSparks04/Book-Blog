@@ -64,8 +64,8 @@ img {
     max-width: 350px;
     width: 100%;
     margin: 10px;
-   font-size: var(--fs-xl);
-   font-weight: var(--fw-medium);
+    font-size: var(--fs-xl);
+    font-weight: var(--fw-medium);
 }
 
 #title a {
@@ -80,7 +80,8 @@ img {
 }
 
 #title #logo {
-    width: 100px;
+    max-width: 100px;
+    width: 100%;
 }
 
 nav div {
@@ -106,7 +107,7 @@ nav div {
     margin: 0;
     overflow: hidden;
     font-size: var(--fs-lg);
-    
+
     font-family: var(--nav-font);
 
 }
@@ -115,7 +116,8 @@ nav div {
     display: flex;
     margin-left: auto;
     margin-bottom: 15px;
-    
+
+
 }
 
 #nav-bar ul li {
@@ -162,10 +164,11 @@ nav div {
 
 .nav-button {
     margin: 10px;
-    padding:5px;
+    padding: 5px;
 }
-.nav-button:hover{
-    background-color: var(--theme-field) ;
+
+.nav-button:hover {
+    background-color: var(--theme-field);
 }
 
 .search {
@@ -174,11 +177,13 @@ nav div {
 
 .explore-search {
     display: flex;
-    width: 350px;
+    max-width: 350px;
+    width: 100%;
 }
 
 #search-box {
-    width: 350px;
+    max-width: 350px;
+    width: 100%;
 }
 
 .modal {
@@ -244,8 +249,40 @@ nav div {
     margin: 0;
 }
 
+#profile-modal div p {
+    margin-left: 1rem;
+}
+
 #profile-modal div:hover {
     background-color: rgb(222, 222, 222);
 
     width: 100%;
+}
+
+
+/* Tablets and Smaller */
+@media (max-width: 768px) {
+
+    /* #nav-bar{
+        
+    } */
+    #title a {
+
+        max-width: 200px;
+        width: 100%;
+        display: block;
+        font-size: var(--fs-lg);
+
+
+
+    }
+
+    #nav-bar ul li a {
+        display: block;
+        text-decoration: none;
+        text-align: center;
+        padding: 10px 15px;
+        font-size: var(--fs-base);
+
+    }
 }

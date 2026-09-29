@@ -192,7 +192,13 @@ function createExploreCards(book) {
     data.appendChild(details);
     div.appendChild(data);
     let a = document.createElement("a");
+    if(book.id){
+
     a.setAttribute("href", "../index.php/view-book?id=" + book.id+"&key="+book.work_key);
+    }else{
+        
+    a.setAttribute("href", "../index.php/view-book?id=" +"&key="+book.work_key);
+    }
     a.appendChild(div);
     li.appendChild(a);
 

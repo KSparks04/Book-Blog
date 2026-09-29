@@ -25,19 +25,35 @@ function getBook($bookId)
 {
     global $pdo;
 
-    $sql = "
-        SELECT
-            id,
-            title,
-            description,
-            page_count,
-            cover_url,
-            work_key,
-            metadata_fetched,
-            series
+    // $sql = "
+    //     SELECT
+    //         id,
+    //         title,
+    //         description,
+    //         page_count,
+    //         cover_url,
+    //         work_key,
+    //         metadata_fetched,
+    //         series
+    //     FROM books
+    //     WHERE id = ?
+    // ";
+    $sql = "SELECT
+            books.id,
+            books.title,
+            books.description,
+            books.page_count,
+            books.cover_url,
+            books.work_key,
+            books.metadata_fetched,
+            books.series,
+            GROUP_CONCAT(DISTINCT authors.name SEPARATOR ', ') AS author
         FROM books
-        WHERE id = ?
-    ";
+        LEFT JOIN book_authors
+            ON books.id = book_authors.book_id
+        LEFT JOIN authors
+            ON book_authors.author_id = authors.id WHERE books.id = ?";
+    
 
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$bookId]);
@@ -49,7 +65,7 @@ function getBook($bookId)
     }
     $needsMetaUpdate = bookNeedsMetadata($book);
 
-    if (!$book['metadata_fetched'] && !$needsMetaUpdate) {
+    if (!$book['metadata_fetched'] || !$needsMetaUpdate) {
 
         $data = searchOpenLibrary($book['title']);
 
