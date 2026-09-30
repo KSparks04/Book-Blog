@@ -68,7 +68,7 @@ function bookHasEditions($workKey)
 }
 function bookNeedsMetadata($book)
 {
-     if (empty($book['description'])) {
+    if (empty($book['description'])) {
         return true;
     }
 
@@ -79,12 +79,13 @@ function bookNeedsMetadata($book)
     if (!bookHasAuthors($book['id'])) {
         return true;
     }
-     if (!bookHasGenres($book['id'])) {
+    if (!bookHasGenres($book['id'])) {
         return true;
     }
     if (!bookHasEditions($book['work_key'])) {
-    return true;
-}
+        return true;
+    }
+
 
     return false;
 }
@@ -236,6 +237,32 @@ function extractEditionInfo($edition, $workKey)
         'has_english_edition' => 1
     ];
 }
+function getEditionsWorks($workKey)
+{
+    // $workKey = "/works/OL54151713M";
+    $workKey = str_replace('/works/', '/books/', $workKey);
+    // echo $workKey;
+    $url = "https://openlibrary.org" . $workKey . ".json";
+
+    $context = stream_context_create([
+        'http' => [
+            'method' => 'GET',
+            'header' =>
+                "User-Agent: TheBookBlogClub/1.0 (kaiyadancer@hotmail.com)\r\n" .
+                "Accept: application/json\r\n"
+        ]
+    ]);
+
+    $response = file_get_contents($url, false, $context);
+
+    if ($response === false) {
+        return null;
+    }
+
+    $work = json_decode($response, true);
+
+    return $work;
+}
 function saveEdition($editionData)
 {
     global $pdo;
@@ -275,6 +302,7 @@ function saveEdition($editionData)
 }
 function extractBookInfo($book)
 {
+    
     return [
         'work_key' => $book['key'] ?? null,
         'title' => $book['title'] ?? null,
@@ -294,6 +322,7 @@ function extractBookInfo($book)
 function updateBookMetadata($bookId, $data)
 {
     global $pdo;
+    // var_dump($data);
 
     $sql = "
         UPDATE books
@@ -368,7 +397,11 @@ function importBook($workKey)
         $title = $work['title'] ?? null;
 
         $description = null;
-
+        //         var_dump($work);
+//         echo '<pre>';
+// var_dump($work['description'] ?? 'NO DESCRIPTION');
+// echo '</pre>';
+// exit;
         if (isset($work['description'])) {
             if (is_array($work['description'])) {
                 $description = $work['description']['value'] ?? null;
@@ -377,6 +410,7 @@ function importBook($workKey)
             }
         }
         // var_dump($work);
+        // var_dump($description);
         $coverUrl = null;
 
         if (!empty($work['covers'])) {
@@ -417,9 +451,7 @@ function importBook($workKey)
         description = ?,
         cover_url = ?,
         series = ?,
-        metadata_fetched = 1
-    WHERE id = ?
-";
+        metadata_fetched = 1 WHERE id = ?";
 
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute([
@@ -430,15 +462,10 @@ function importBook($workKey)
                     $bookId
                 ]);
             } else {
-                $sql = "
-    UPDATE books
-    SET
-        title = ?,
+                $sql = "UPDATE books SET title = ?,
         description = ?,
         series = ?,
-        metadata_fetched = 1
-    WHERE id = ?
-";
+        metadata_fetched = 1 WHERE id = ?";
 
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute([
@@ -456,19 +483,13 @@ function importBook($workKey)
 
 
 
-            $sql = "
-           INSERT INTO books
-(
-    title,
+            $sql = "INSERT INTO books(title,
     description,
     cover_url,
     work_key,
     series,
     metadata_fetched
-)
-VALUES
-(?, ?, ?, ?, ?, ?)
-        ";
+)VALUES(?, ?, ?, ?, ?, ?)";
 
             $stmt = $pdo->prepare($sql);
 
@@ -483,7 +504,17 @@ VALUES
 
             $bookId = $pdo->lastInsertId();
         }
+//         var_dump($stmt->rowCount());
+//         $stmt = $pdo->prepare("
+//     SELECT description
+//     FROM books
+//     WHERE id = ?
+// ");
 
+// $stmt->execute([$bookId]);
+
+// var_dump($stmt->fetchColumn());
+// exit;
         // AUTHORS IMPORT
         $authors = [];
 
@@ -567,13 +598,28 @@ VALUES
         $editions = getWorkEditions($workKey);
 
         $editionCoverUrl = null;
-
+        
         foreach ($editions as $edition) {
 
             $editionData = extractEditionInfo(
                 $edition,
                 $workKey
             );
+            if (empty($description)) {
+                $workEdition = getEditionsWorks($editionData['edition_key']);
+                // var_dump($workEdition);
+                // $editionsDesc[] = $workEdition['description'];
+
+                if (isset($workEdition['description'])) {
+                    if (is_array($workEdition['description'])) {
+                        $description = $workEdition['description']['value'] ?? null;
+                    } else {
+                        $description = $workEdition['description'];
+                    }
+                }
+            }
+
+
 
             if (!$editionData['edition_key']) {
                 continue;
@@ -587,19 +633,25 @@ VALUES
         }
         if (!$coverUrl && $editionCoverUrl) {
             $coverUrl = $editionCoverUrl;
-
-            $sql = "
-        UPDATE books
-        SET cover_url = ?
-        WHERE id = ?
-    ";
-
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute([
-                $coverUrl,
-                $bookId
-            ]);
         }
+        // var_dump($description);
+        $sql = "UPDATE books SET cover_url = ?, description = ? WHERE id = ?";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([
+            $coverUrl,
+            $description,
+            $bookId
+        ]);
+//           $stmt = $pdo->prepare("
+//     SELECT description
+//      FROM books
+//     WHERE id = ?");
+
+// $stmt->execute([$bookId]);
+
+// var_dump($stmt->fetchColumn());
+// exit;
         $pdo->commit();
 
         return $bookId;

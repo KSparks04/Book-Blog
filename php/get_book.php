@@ -64,25 +64,26 @@ function getBook($bookId)
         return null;
     }
     $needsMetaUpdate = bookNeedsMetadata($book);
+    // var_dump($book);
+    // var_dump($needsMetaUpdate);
+    // if (!$book['metadata_fetched'] || $needsMetaUpdate) {
 
-    if (!$book['metadata_fetched'] || !$needsMetaUpdate) {
+    //     $data = searchOpenLibrary($book['title']);
 
-        $data = searchOpenLibrary($book['title']);
+    //     if ($data && !empty($data['docs'])) {
 
-        if ($data && !empty($data['docs'])) {
+    //         $bookData = extractBookInfo($data['docs'][0]);
 
-            $bookData = extractBookInfo($data['docs'][0]);
+    //         updateBookMetadata(
+    //             $book['id'],
+    //             $bookData
+    //         );
 
-            updateBookMetadata(
-                $book['id'],
-                $bookData
-            );
-
-            // Reload the book so we return the updated data
-            $stmt->execute([$bookId]);
-            $book = $stmt->fetch(PDO::FETCH_ASSOC);
-        }
-    }
+    //         // Reload the book so we return the updated data
+    //         $stmt->execute([$bookId]);
+    //         $book = $stmt->fetch(PDO::FETCH_ASSOC);
+    //     }
+    // }
 
     return $book;
 }
