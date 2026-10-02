@@ -138,16 +138,18 @@ include_once("php/base.inc.php");
     ?>
     <?php if (!empty($_SESSION['logged_in'])): ?>
     <form method="post" action="post-created" id="post">
-        
+         <h2>Start Posting your Bookish Thoughts</h2>
         <div id="post-page">
-
+           
             <div id="post-main">
                 <div id="main">
                     <div id="pst-title" class="post-base">
-                        <label for="post-title">Title</label>
+                        <label for="post-title">Post Title</label>
                         <input type="text" name="post-title" id="post-title">
-
-                        <input type="color" id="color-sel" name="color-sel">
+                        <label for="color-sel" id="color-label">Colour Theme Select
+                           <input type="color" id="color-sel" name="color-sel"> 
+                        </label>
+                        
                     </div>
 
                     <div class="editor-container">
@@ -172,7 +174,7 @@ include_once("php/base.inc.php");
 
                     <input type="hidden" name="blog_content" id="blogContent">
 
-
+                    <hr>
                     <div id="book-mentioned">
                         <input type="text" id="book-search" name="book-search" placeholder="Books mentioned in post">
                         <div id="search-carousel">
@@ -208,7 +210,7 @@ include_once("php/base.inc.php");
 
             </div>
             <aside id="side-bar">
-                <div id="submit"><button>Submit</button></div>
+                <div id="submit"><button>Post</button></div>
                 <div id="post-setting">
                     <h4>Post Settings</h4>
                     <div id="tag-sel">
@@ -218,8 +220,8 @@ include_once("php/base.inc.php");
                     </div>
                     <div id="board-sel">
                         <label for="boards">Posting to </label>
-                        <select id="boards" name="boards-select">
-                            <option value="0">New Board</option>
+                        <select id="boards" name="boards">
+                            <option value="0">New Board ... Coming soon</option>
                         </select>
 
                     </div>

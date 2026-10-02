@@ -5,7 +5,7 @@ let searchTimeout;
 document.addEventListener("DOMContentLoaded", () => {
     let form_btn = document.querySelector("#board-submit");
 
-    let form = document.querySelector("#cr-board");
+    let form = document.querySelector("#post");
 
 
     fetch("../php/get_ids.php").then(response => response.json()).then(data => {
@@ -113,30 +113,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.querySelector("#post").addEventListener("submit", saveBlogForm);
 
-    // form.addEventListener("submit", (e) => {
-    //     e.preventDefault();
-    //     console.log("hit");
-    //     let title = document.querySelector("#board-title");
-    //     if (title.value === "") {
-    //         alert("Title must be filled out");
-    //         return;
-    //     }
-    //     let desc = document.querySelector("#b-descr");
-    //     if(desc.value === ""){
-    //         alert("Description must be filled out");
-    //         return;
-    //     }
-    //     let tags = document.querySelectorAll(".pill");
-    //     if (tags.length == 0) {
-    //         alert("At least one tag needs to be selected");
-    //         return;
-    //     }
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        console.log("hit");
+        let title = document.querySelector("#post-title");
+        if (title.value === "") {
+            alert("Title must be filled out");
+            return;
+        }
+        let desc = document.querySelector("#blog-content");
+        if(desc.value === ""){
+            alert("Post Content must be filled out");
+            return;
+        }
+        let tags = document.querySelectorAll(".pill");
+        if (tags.length == 0) {
+            alert("At least one tag needs to be selected");
+            return;
+        }
+        let boardSelected = document.querySelector("#boards");
+        if(boardSelected.value == "0"){
+            alert("Feature currently unavailable");
+            return;
+        }
+        form.submit();
 
-    //     form.submit();
 
 
-
-    // });
+    });
 
 
 

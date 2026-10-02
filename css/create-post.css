@@ -1,90 +1,211 @@
-#submit{
-    margin-left:400px;
+#submit button {
+    margin-left: 300px;
+    padding: 1.2em 2em;
+    font-size: var(--fs-sm);
+
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: #fff;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
 }
-#post-page{
-    margin:10px;
+#submit button:hover{
+    background-color: #ffedff;
+  box-shadow: 0px 15px 20px #FFF8FF;
+  color: black;
+  transform: translateY(-7px);
 }
-#post-main{
-    width:800px;
+#submit button:active{
+    transform: translateY(-1px);
+}
+#post-page {
+    margin: 10px;
+}
+
+#post-main {
+    width: 800px;
     border-radius: 2px;
 }
-#main{
-    width: 600px;
-   
-    margin:25px;
+
+#main {
+    max-width: 600px;
+    width: 100%;
+
+    margin: 25px;
     background-color: #FFF8FF;
-    padding:10px;
+    padding: 10px;
     border-radius: 2px;
 }
-#post-page{
+
+#post h2 {
+    font-family: var(--body-font-family);
+    margin:25px;
+}
+
+#post-page {
     display: flex;
 }
-#side-bar{
-    margin-right:50px;
-    width:450px;
-    margin-left:100px;
+
+#side-bar {
+    margin-right: 50px;
+    max-width: 450px;
+    width: 100%;
+    margin-left: 100px;
 }
-#post-setting{
-    width: 300px;
+
+#post-setting {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
     background-color: #ffedff;
 }
-.post-base{
+
+#post-setting h4 {
+    font-size: var(--fs-lg);
+}
+
+#board-sel {
+    margin-top: 5px;
+}
+
+#pst-title label {
+    font-family: var(--body-font-family);
+
+}
+
+#pst-title label:first-child {
+    font-size: var(--fs-lg);
+}
+
+#pst-title #color-label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+
+}
+
+.post-base {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
 }
 
-.post-base #post-title{
-    width:300px;
-    border:0px;
-    border-bottom:1px solid black;
-} 
-#post-details{
+.post-base #post-title {
+    width: 300px;
+    border: 0px;
+    border-bottom: 1px solid black;
+}
+
+#post-details {
     overflow: scroll;
     overflow-x: hidden;
     overflow-y: scroll;
-    width:400px;
+    width: 400px;
     height: 100px;
     resize: none;
 }
 
 
-#book-mentioned img{
+#book-mentioned img {
     width: 100px;
 }
 
-#search-carousel{
+#search-carousel {
     display: flex;
-    width:500px;
+    width: 500px;
     overflow: scroll;
-    overflow-x:scroll;
+    overflow-x: scroll;
     overflow-y: hidden;
-   
+
 }
-.card-cont{
+
+.card-cont {
     display: flex;
     flex-shrink: 0;
 }
-.caro-card{
-    width:150px;
+
+.caro-card {
+    width: 150px;
     max-width: 100%;
     padding: 5px;
     flex-shrink: 0;
 }
-.card-add-btn{
+
+.card-add-btn {
     margin-top: 50px;
     margin-left: 10px;
 }
 
-.card-content .add-btn{
-    color:#EDD9BE;
-   
+.card-content .add-btn {
+    color: #EDD9BE;
+
     background: none;
     border: none;
 }
-.card-title{
-    font-size:1em;
-}
-.card-details{
+
+.card-title {
     font-size: 1em;
+}
+
+.card-details {
+    font-size: 1em;
+}
+
+.editor-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid var(--border-gray); */
+    border-radius: var(--border-radius-2);
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    padding: 10px;
+    /* margin-bottom:10px; */
+
+}
+
+.toolbar {
+    margin-top: 5px;
+    margin-left: 10px;
+    align-self: flex-start;
+    margin-bottom: 10px;
+
+}
+
+.toolbar button {
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    background-color: var(--button-bg);
+    border: 0;
+    border-radius: var(--border-radius-2);
+}
+
+#editor {
+    background-color: white;
+    min-height: 300px;
+    max-width: 550px;
+    width: 100%;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+#book-mentioned {
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    gap: 5px;
+
+}
+
+#book-mentioned #book-search {
+    margin: 5px 0 0 5px;
+
+    align-self: flex-start;
+    border: 0;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+
 }
