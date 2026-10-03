@@ -114,6 +114,7 @@ async function createPost(posted) {
     extraOps.classList.add("e-ops");
     let postRef = document.createElement("a");
     postRef.innerHTML = "<i class=\"bi bi-chat\"></i>Post a comment";
+    postRef.classList.add("comment");
     let readRef = document.createElement("a");
     readRef.textContent = "Read more";
     readRef.setAttribute("href","view-post?id="+posted.id);
