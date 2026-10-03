@@ -145,7 +145,7 @@ include_once("php/base.inc.php");
                 <div id="main">
                     <div id="pst-title" class="post-base">
                         <label for="post-title">Post Title</label>
-                        <input type="text" name="post-title" id="post-title">
+                        <input type="text" name="post-title" id="post-title" placeholder="Create a post title">
                         <label for="color-sel" id="color-label">Colour Theme Select
                            <input type="color" id="color-sel" name="color-sel"> 
                         </label>

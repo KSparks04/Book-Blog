@@ -137,7 +137,7 @@ include_once("php/base.inc.php");
 
     ?>
     <?php if (!empty($_SESSION['logged_in'])): ?>
-    <div>
+    <div id="board-div">
         <h3>Create a Board</h3>
         <form method="post" id="cr-board" action="board-created" enctype="multipart/form-data">
             <div id="cr-b-title-create">
@@ -148,7 +148,7 @@ include_once("php/base.inc.php");
                 </div>
                 <div id="b-descr">
                     <label for="description">Description</label>
-                    <textarea name="description"></textarea>
+                    <textarea name="description" id="description" cols="50" row="30"></textarea>
                 </div>
                 </div>
                 
