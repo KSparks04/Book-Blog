@@ -26,17 +26,18 @@ async function updateBoards(data) {
         let tagsResponse = await fetch("../php/get_board_tags.php?board_id=" + boardInfo.id);
         let tagsFetch = await tagsResponse.json();
 
-        let board = document.createElement("div");
-        board.classList.add("board");
+        let board = document.querySelector(".board");
+        // board.classList.add("board");
         board.style.backgroundImage = "url(" + boardInfo.background_image + ")";
 
-        let head = document.createElement("div");
-        head.classList.add("board-title")
-        head.innerHTML = " <h2 >" + boardInfo.name + "</h2>";
+        let head = document.querySelector(".board-title");
+        // head.classList.add("board-title")
+        let title = document.querySelector(".board-title h2");
+        title.textContent = boardInfo.name;
 
 
-        let tags = document.createElement("div");
-        tags.classList.add("board-tags");
+        let tags = document.querySelector(".board-tags");
+        // tags.classList.add("board-tags");
 
         tagsFetch.forEach(tag => {
             let tg = document.createElement("a");
@@ -49,8 +50,9 @@ async function updateBoards(data) {
         head.appendChild(tags);
         board.appendChild(head);
 
-        let allPosts = document.createElement("div");
-        allPosts.classList.add("all-posts");
+        let allPosts = document.querySelector(".all-posts");
+
+
         for (let post of posts) {
             let pst = await createPost(post)
 
@@ -113,11 +115,33 @@ async function createPost(posted) {
     let extraOps = document.createElement("div");
     extraOps.classList.add("e-ops");
     let postRef = document.createElement("a");
-    postRef.innerHTML = "<i class=\"bi bi-chat\"></i>Post a comment";
+    let postRefText = document.createElement("p");
+    postRefText.textContent = "Post a comment";
+    let commentIcon = document.createElement("i");
+    commentIcon.classList.add("bi");
+    commentIcon.classList.add("bi-chat");
+    postRef.appendChild(commentIcon);
+    postRef.appendChild(postRefText);
+    let fillCommentIcon = document.createElement("i");
+    fillCommentIcon.classList.add("bi");
+    fillCommentIcon.classList.add("bi-chat-fill");
+    postRef.addEventListener("mouseover", () => {
+        postRef.innerHTML = "";
+        postRef.appendChild(fillCommentIcon);
+        postRef.appendChild(postRefText);
+
+    })
+     postRef.addEventListener("mouseout", () => {
+        postRef.innerHTML = "";
+        postRef.appendChild(commentIcon);
+        postRef.appendChild(postRefText);
+
+    })
+    
     postRef.classList.add("comment");
     let readRef = document.createElement("a");
     readRef.textContent = "Read more";
-    readRef.setAttribute("href","view-post?id="+posted.id);
+    readRef.setAttribute("href", "view-post?id=" + posted.id);
 
 
     content.appendChild(postContent);
@@ -133,6 +157,8 @@ async function createPost(posted) {
     let btn = document.createElement("button");
     btn.classList.add("mention-btn");
     btn.innerHTML = "<i class=\"bi bi-chevron-down\"></i>";
+    let btnDown = true;
+
 
     let carosel = document.createElement("div");
     carosel.classList.add("book-carousel");
@@ -144,7 +170,13 @@ async function createPost(posted) {
     mentionsHeader.appendChild(h4);
     mentionsHeader.appendChild(btn);
     btn.addEventListener("click", (e) => {
-
+        if (btnDown == true) {
+            btn.innerHTML = "<i class=\"bi bi-chevron-up\"></i>";
+            btnDown = false;
+        } else {
+            btn.innerHTML = "<i class=\"bi bi-chevron-down\"></i>";
+            btnDown = true;
+        }
         carosel.classList.toggle("hide");
 
     });

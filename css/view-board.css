@@ -2,10 +2,14 @@
     background-repeat: no-repeat;
     background-size: cover;
     padding-bottom: 100px;
-    border-radius: 5px;
+    /* border-radius: 5px; */
     margin-top: 5px;
+    padding:5px;
 
 
+}
+.page{
+    padding:5px;
 }
 
 
@@ -13,6 +17,7 @@
 .board .posts,
 .board-title {
     margin: 0 250px;
+
 }
 
 .board-title {
@@ -20,6 +25,10 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
+    background-color: var(--board-title-colour-bg);
+    border-radius: 10px;
+    margin: 0 5px;
+    padding:5px;
 
 }
 
@@ -27,16 +36,13 @@
 
 
     color: black;
-    background-color: var(--board-title-colour-bg);
-    padding: 5px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    border-radius: 5px;
+
+
 }
 
 .board-tags .tag {
     color: black;
-    background-color: var(--button-colour-bg);
+
     padding: 2px 5px;
 }
 
@@ -56,9 +62,9 @@
 }
 
 .post {
-    display:flex;
+    display: flex;
     flex-direction: column;
-    gap:10px;
+    gap: 10px;
     max-width: 900px;
     width: 100%;
     background-color: aliceblue;
@@ -89,7 +95,7 @@
     height: 100%;
     max-height: 300px;
     overflow: hidden;
-    
+
 }
 
 .posts-more {
@@ -99,20 +105,39 @@
     width: 100%;
     text-align: center;
 }
+.mention-btn{
+    font-size: var(--fs-sm);
+
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: #fff;
+    border: none;
+    border-radius: 25px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
 
 .m-header {
     display: flex;
+    gap:5px;
 }
-.e-ops{
+
+.e-ops {
     display: flex;
 }
+
 .e-ops a {
     margin: 0 10px;
 }
-.comment{
-    display:flex;
-    gap:2px;
+
+.comment {
+    display: flex;
+    gap: 2px;
 }
+
 .card {
     width: 200px;
 }
@@ -124,4 +149,7 @@
 .card-title,
 .card-details {
     font-size: var(--fs-sm);
+}
+.card-content{
+    padding:10px;
 }

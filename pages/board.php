@@ -34,13 +34,13 @@ include_once("php/db-config.inc.php");
 <body>
     <header id="header">
 
-         <nav id="nav-bar">
-           
-                <a href="../" class="cinzel" id="title" >
-                    <!-- <img id="logo" src="images/Book-Blog-Club-Logo-Transparent.png" alt="the book blog club logo"> -->
-                    The Book Blog Club
-                </a>
-           
+        <nav id="nav-bar">
+
+            <a href="../" class="cinzel" id="title">
+                <!-- <img id="logo" src="images/Book-Blog-Club-Logo-Transparent.png" alt="the book blog club logo"> -->
+                The Book Blog Club
+            </a>
+
             <ul>
                 <li class="nav-button"><a id="home" href="../">Home</a></li>
                 <li class="nav-button"><a id="explore" href="index.php/explore">Browse</a></li>
@@ -135,59 +135,19 @@ include_once("php/db-config.inc.php");
     </header>
 
     <div class="page">
-        <!-- <div class="board">
-            <header>
-                <h2 class="board-title">Board Title</h2>
-            </header>
-            <div class="board-tags">
-                    <div class="tag">
-                        <a>Example T</a>
-                    </div>
-                </div>
-            <div class="post">
-                <h3 class="post-title">Example Post Title</h3>
-                -TODO: Date Posted
-                <div class="tags">
-                    <div class="tag">
-                        <a>Example T</a>
-                    </div>
-                </div>
-                <div class="post-content">
-                    Overflow on it
-                    <p>Example Post Information</p>
-                    <a><i class="bi bi-chat"></i>Post a comment</a>
-                    <a>Read more</a>
-                    <div class="post-mentions">
-                        <h4>Books mentioned</h4>
-                        <button class="mention-btn">
-                            <i class="bi bi-chevron-down"></i>
-
-                        </button>
-                        <div id="book-carousel">
-                            <div class="card caro-card">
-                                <div class="card-content">
-                                    <img src="../images/default_image.jpg">
-                                    <div class="card-cont">
-                                        <div class="card-text">
-                                            <p class="card-title">Book Example</p>
-                                            <p class="card-details">By Author</p>
-
-                                        </div>
-
-                                    </div>
-
-
-
-
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="board">
+            <div class="board-title">
+                <h2></h2>
+                <div class="board-tags"></div>
+            </div>
+            <!-- Date Posted -->
+            <div class="all-posts">
 
             </div>
-        </div>-->
+            
+
+        </div>
+    </div>
     </div>
 </body>
 
