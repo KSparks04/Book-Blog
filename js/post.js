@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let postCont = document.querySelector(".post-bckgnd");
         postCont.style.backgroundColor = data[0].colour;
         let post = document.querySelector(".post-cont");
-        createPost(data[0],postCont, post);
+        createPost(data[0], postCont, post);
 
     });
 });
@@ -19,14 +19,14 @@ async function createPost(posted, container, post) {
     console.log(posted);
     let postsTags = await fetch("../php/get_post_tags.php?post_id=" + posted.id);
     let tagged = await postsTags.json();
-    
+
     let h3 = document.createElement("h3");
     h3.classList.add("post-title");
     h3.textContent = posted.title;
     post.appendChild(h3);
 
     let user = document.createElement("p");
-    let username = await fetch("../php/get_post_user.php?id="+posted.user_id);
+    let username = await fetch("../php/get_post_user.php?id=" + posted.user_id);
     let name = await username.json();
     console.log(name);
     user.textContent = name[0].username;
@@ -63,14 +63,38 @@ async function createPost(posted, container, post) {
     // p.textContent = posted.content;
     let extraOps = document.createElement("div");
     extraOps.classList.add("e-ops");
+    // let postRef = document.createElement("a");
+    // postRef.href="#comment-form";
+    // postRef.innerHTML = "<i class=\"bi bi-chat\"></i>Post a comment";
     let postRef = document.createElement("a");
-    postRef.href="#comment-form";
-    postRef.innerHTML = "<i class=\"bi bi-chat\"></i>Post a comment";
+    postRef.href = "#comment-form";
+    let postRefText = document.createElement("p");
+    postRefText.textContent = "Post a comment";
+    let commentIcon = document.createElement("i");
+    commentIcon.classList.add("bi");
+    commentIcon.classList.add("bi-chat");
+    postRef.appendChild(commentIcon);
+    postRef.appendChild(postRefText);
+    let fillCommentIcon = document.createElement("i");
+    fillCommentIcon.classList.add("bi");
+    fillCommentIcon.classList.add("bi-chat-fill");
+    commentIcon.addEventListener("mouseover", () => {
+        postRef.innerHTML = "";
+        postRef.appendChild(fillCommentIcon);
+        postRef.appendChild(postRefText);
 
+    })
+    fillCommentIcon.addEventListener("mouseout", () => {
+        postRef.innerHTML = "";
+        postRef.appendChild(commentIcon);
+        postRef.appendChild(postRefText);
 
+    })
+
+    postRef.classList.add("comment-link");
 
     content.appendChild(postContent);
-    
+
     extraOps.appendChild(postRef);
 
 
@@ -79,25 +103,25 @@ async function createPost(posted, container, post) {
     mentionsHeader.classList.add("m-header");
     let h4 = document.createElement("h4");
     h4.textContent = "Books mentioned";
-    
+
 
     let carosel = document.createElement("div");
     carosel.classList.add("book-carousel");
-   
+
 
     loadBooks(carosel, posted.id);
 
 
     mentionsHeader.appendChild(h4);
-   
+
     mentions.appendChild(mentionsHeader);
     mentions.appendChild(carosel);
 
 
-   
+
     let commentForm = document.querySelector("#comment-form");
-   
-    postRef.addEventListener("click",()=>{
+
+    postRef.addEventListener("click", () => {
         commentForm.style.display = "block";
     });
     let postId = document.createElement("input");
@@ -105,7 +129,7 @@ async function createPost(posted, container, post) {
     postId.name = "post-id";
     postId.value = posted.id;
     commentForm.appendChild(postId);
-  
+
 
 
 
@@ -115,33 +139,33 @@ async function createPost(posted, container, post) {
     post.appendChild(content);
     post.appendChild(extraOps);
     post.appendChild(mentions);
-    
+
 
     let commentsSection = document.querySelector("#comments");
-    
-    let commentsB = await fetch("../php/get_comments.php?id="+posted.id);
+
+    let commentsB = await fetch("../php/get_comments.php?id=" + posted.id);
     let retrievedComments = await commentsB.json();
     console.log(retrievedComments);
-    for( let c of retrievedComments){
-        let userComment = await fetch("../php/get_post_user.php?id="+c.user_id);
+    for (let c of retrievedComments) {
+        let userComment = await fetch("../php/get_post_user.php?id=" + c.user_id);
         let resp = await userComment.json();
         let cBox = document.createElement("div");
         cBox.classList.add("comment");
         let bookmark = document.createElement("div");
         bookmark.classList.add("bookmark");
-        
+
         let userComm = document.createElement("h3");
         userComm.textContent = resp[0].username;
         let pC = document.createElement("p");
         pC.classList.add("comment-p");
         pC.textContent = c.content;
-        
+
         bookmark.appendChild(userComm);
         bookmark.appendChild(pC);
         cBox.appendChild(bookmark);
         commentsSection.appendChild(cBox);
     }
-    
+    await loadOtherPosts(posted.id,posted.user_id);
 
     //container.appendChild(post);
     //container.appendChild(commentsSection)
@@ -193,4 +217,28 @@ async function loadBooks(cardCarousel, id) {
         cardCarousel.appendChild(card);
 
     });
+}
+async function loadOtherPosts(currentPostId, userId) {
+    let morePostsBox = document.querySelector("#more-posts");
+    let postsJson = await fetch("../php/get_user_posts.php?user_id=" + userId);
+    let morePosts = await postsJson.json();
+    for (post of morePosts) {
+        if (post.id == currentPostId) {
+            continue;
+        }
+        morePostsBox.appendChild(createPostCard(post));
+    }
+
+
+}
+function createPostCard(post) {
+    let postBox = document.createElement("div")
+    postBox.classList.add("post-card");
+    let refBox = document.createElement("a");
+    refBox.href = "view-post?id=" + post.id;
+    let title = document.createElement("h3");
+    title.textContent = post.title;
+    refBox.appendChild(title);
+    postBox.appendChild(refBox);
+    return postBox;
 }

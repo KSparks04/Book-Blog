@@ -9,6 +9,7 @@
 
 }
 .page{
+   
     padding:5px;
 }
 
@@ -19,6 +20,12 @@
     margin: 0 250px;
 
 }
+.board-title-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
 .board-title {
     display: flex;
@@ -26,8 +33,10 @@
     align-items: flex-start;
     justify-content: center;
     background-color: var(--board-title-colour-bg);
+    max-width: 900px;
+    width:100%;
     border-radius: 10px;
-    margin: 0 5px;
+    margin: 0;
     padding:5px;
 
 }

@@ -136,19 +136,22 @@ include_once("php/db-config.inc.php");
 
     <div class="page">
         <div class="board">
-            <div class="board-title">
-                <h2></h2>
-                <div class="board-tags"></div>
+            <div class="board-title-box">
+                <div class="board-title">
+                    <h2></h2>
+                    <div class="board-tags"></div>
+                </div>
+
             </div>
             <!-- Date Posted -->
             <div class="all-posts">
 
             </div>
-            
+
 
         </div>
     </div>
-    </div>
+    
 </body>
 
 </html>

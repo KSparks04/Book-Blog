@@ -48,7 +48,7 @@ async function updateBoards(data) {
             tags.appendChild(tg);
         });
         head.appendChild(tags);
-        board.appendChild(head);
+        // board.appendChild(head);
 
         let allPosts = document.querySelector(".all-posts");
 
@@ -115,6 +115,7 @@ async function createPost(posted) {
     let extraOps = document.createElement("div");
     extraOps.classList.add("e-ops");
     let postRef = document.createElement("a");
+   
     let postRefText = document.createElement("p");
     postRefText.textContent = "Post a comment";
     let commentIcon = document.createElement("i");
@@ -125,13 +126,13 @@ async function createPost(posted) {
     let fillCommentIcon = document.createElement("i");
     fillCommentIcon.classList.add("bi");
     fillCommentIcon.classList.add("bi-chat-fill");
-    postRef.addEventListener("mouseover", () => {
+    commentIcon.addEventListener("mouseover", () => {
         postRef.innerHTML = "";
         postRef.appendChild(fillCommentIcon);
         postRef.appendChild(postRefText);
 
     })
-     postRef.addEventListener("mouseout", () => {
+     fillCommentIcon.addEventListener("mouseout", () => {
         postRef.innerHTML = "";
         postRef.appendChild(commentIcon);
         postRef.appendChild(postRefText);

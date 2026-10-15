@@ -1,7 +1,8 @@
-.page{
+.page {
     border-radius: 5px;
-    margin-top:10px;
+    margin-top: 10px;
 }
+
 .post-bckgnd {
     display: flex;
     justify-content: center;
@@ -18,13 +19,17 @@
     margin-top: 20px;
     border-radius: 5px;
     padding: 10px;
-    
+
 }
 
 .post-content {
-
-    box-shadow: 1px 1px 1px 1px var(--border-outline-1);
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
     padding: 10px;
+}
+
+.comment-link {
+    display: flex;
+    gap: 2px;
 }
 
 .card {
@@ -36,45 +41,50 @@
     margin: 10px;
 
 }
-.book-link{
+
+.book-link {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
+
 .book-link img {
     max-width: 100px;
     width: 100%;
 }
 
-.title2{
+.title2 {
     font-size: var(--fs-lg);
     font-weight: var(--fw-bold);
 }
-.title3{
-    font-size:var(--fs-base);
+
+.title3 {
+    font-size: var(--fs-base);
 }
 
 
 #comments {
     max-width: 900px;
     width: 100%;
+    margin-top: 10px;
 }
 
 .comment {
     background-color: white;
     max-width: 900px;
-    width:100%;
+    width: 100%;
     border-radius: 5px;
-    position:relative;
+    position: relative;
     margin-bottom: 10px;
 
 }
-.comment::after{
-    content:"";
+
+.comment::after {
+    content: "";
     position: absolute;
     right: 0;
-    top:0px;
+    top: 0px;
     bottom: -30px;
 
     width: 20%;
@@ -82,14 +92,41 @@
 
     background: rgb(77, 68, 68);
 
-    clip-path: polygon(
-        0 0,
-        100% 0,
-        80% 100%,
-        50% 50%,
-        20% 100%
-    );
+    clip-path: polygon(0 0,
+            100% 0,
+            80% 100%,
+            50% 50%,
+            20% 100%);
 }
-.bookmark{
+
+.bookmark {
+    padding: 10px;
+}
+
+.e-ops {
+    margin: 5px;
+}
+
+#more-posts {
+    display: flex;
+    gap:5px;
+    max-width:900px;
+    width:100%;
+   padding:10px;
+    overflow: scroll;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+.post-card{
+    max-width:200px;
+    width: 100%;
+    
     padding:10px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+
+}
+.post-card:hover{
+box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+transform: scale(1.05);
 }
